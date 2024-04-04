@@ -1,0 +1,117 @@
+body{
+    margin: 0;
+    background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login{
+    background-color: #001B26;
+    color: #ffffff;
+    display: flex;
+    width: 660px;
+    min-width: 300px;
+    margin: 10px;
+    justify-content: center;
+}
+
+.login__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 450px;
+    min-width: 300px;
+    padding: 80px 30px;
+}
+
+.login__title{
+    margin: 0 0 36px 0;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.login__group{
+    display: flex;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.login__input{
+    padding: 14px 24px;
+    border: 1px solid #086482;
+    border-radius: 17px;
+    background-color: #086482;
+    color: #ffffff;
+    width: 100%;
+    outline: none;
+    
+}
+
+.login__input::placeholder{
+    opacity: 0.8;
+}
+
+.login__input:hover{
+    border: 1px solid #009EC9;
+}
+
+.login__input:focus{
+    background-color: #ffffff;
+    color: #001B26;
+}
+
+.login__goForgotPassword{
+    align-self: flex-end;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.login__goForgotPassword:hover{
+    color: #009EC9;
+}
+
+.login__button{
+    width: 100%;
+    background-color: #009EC9;
+    border: none;
+    border-radius: 17px;
+    padding: 14px 24px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.login__button:hover{
+    background-color: #00b9de;
+}
+.login__button:active{
+    background-color: #18d6f8;
+}
+
+.login__registerText{
+    align-self: flex-start;
+    margin-top: 80px;
+}
+
+.login__goRegister{
+    width: 100%;
+    text-align: center;
+    padding: 14px 24px;
+    border: 2px solid #009EC9;
+    border-radius: 17px;
+    color: #009EC9;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login__goRegister:hover{
+    background-color: #009EC9;
+    color: #ffffff;
+}
+.login__goRegister:active{
+    background-color: #087496;
+    color: #ffffff;
+}
