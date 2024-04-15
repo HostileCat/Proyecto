@@ -1,0 +1,150 @@
+body{
+    margin: 0;
+    background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.header{
+    width: 100vw;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #001B26;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.header__navigation{
+    display: flex;
+
+}
+
+.navigation__logo{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo__name{
+    white-space: nowrap;
+    font-size: 24px;
+}
+
+.navigation__navbar{
+    display: flex;
+    align-items: center;
+}
+
+.navbar__list{
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    padding: 0;
+}
+
+.header__actions{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 40px;
+}
+
+.actions__login{
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #001B26;
+    padding: 14px 24px;
+    white-space: nowrap;
+    border-radius: 17px;
+}
+
+.actions__login:hover{
+    background-color: #0C526D;
+}
+
+.actions__login:active{
+    background-color: #086482;
+}
+
+.actions__register{
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #086482;
+    padding: 14px 24px;
+    border-radius: 17px;
+}
+
+.actions__register:hover{
+    background-color: #007DA2;
+}
+
+.actions__register:active{
+    background-color: #009EC9;
+}
+
+
+.main{
+    margin-top: 50px;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 40vh;
+    gap: 30px;
+}
+
+.main__selectCategory{
+    align-self: self-end;
+    grid-row: 1/2;
+    grid-column: 1/2;
+}
+
+.main__selectDish{
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+
+.main__list{
+    list-style-type: none;
+    padding: 0;
+    
+}
+
+.main__item{
+    width: 200px;
+    padding: 14px 24px;
+    color: #ffffff;
+    background-color: #086482;
+}
+
+.main__item--title{
+    background-color: #001B26;
+    font-size: 24px;
+}
+
+.main__section{
+    background-color: #001B26;
+    color: #ffffff;
+}
+
+.section__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section__title{
+    font-size: 24px;
+    margin-bottom: 80px;
+
+}
+
+.section__addDish{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.addDish__input{
+    
+}

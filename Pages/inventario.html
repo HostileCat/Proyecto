@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Assets/css/inventario.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__navigation">
+            <figure class="navigation__logo">
+                <img src="/Assets/img/logo.png" alt="Descripción de la imagen" width="64" height="64">
+                <figcaption class="logo__name">Bocado Escencial</figcaption>
+            </figure>
+            <nav class="navigation__navbar">
+                <ul class="navbar__list">
+                    <li class="navbar__item">Inicio</li>
+                    <li class="navbar__item">Nosotros</li>
+                    <li class="navbar__item">Productos</li> 
+                    <li class="navbar__item">Contacto</li> 
+                </ul>
+            </nav>
+        </div>
+        <div class="header__actions">
+            <a href="Pages/iniciarSesion.html" class="actions__login">Iniciar Sesión</a>
+            <a href="Pages/registro.html" class="actions__register">Registrarse</a>
+        </div>        
+    </header>
+    <main class="main">
+        <section class="main__selectCategory">
+            <ul class="main__list">
+                <li class="main__item main__item--title">Categorias</li>
+                <li class="main__item">Añadir</li>
+                <li class="main__item">Eliminar</li>
+                <li class="main__item">Editar</li>
+            </ul>
+        </section>
+        <section class="main__selectDish">
+            <ul class="main__list">
+                <li class="main__item main__item--title">Platos</li>
+                <li class="main__item">Añadir</li>
+                <li class="main__item">Eliminar</li>
+                <li class="main__item">Editar</li>
+            </ul>
+        </section>
+        <section class="main__section">
+            <form action="#" class="section__form">
+                <h1 class="section__title">Añadir Plato</h1>
+                <div class="section__addDish">
+                    <input type="text" placeholder="Nombre" class="addDish__input">
+                    <input type="text" placeholder="Categoria" class="addDish__input">
+                    <input type="text" placeholder="Descripción" class="addDish__input">
+                    <input type="text" placeholder="Precio" class="addDish__input">
+                    <input type="file" accept="image/*" class="addDish__img">
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
