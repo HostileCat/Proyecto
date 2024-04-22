@@ -117,9 +117,20 @@ body{
     background-color: #086482;
 }
 
+.main__item:hover{
+    background-color: #007DA2;
+}
+
+.main__item:active{
+    background-color: #009EC9;
+}
+
 .main__item--title{
-    background-color: #001B26;
+    background-color: #001B26; 
     font-size: 24px;
+    width: 200px;
+    padding: 14px 24px;
+    color: #ffffff;
 }
 
 .main__section{
@@ -205,11 +216,12 @@ body{
     width:fit-content;
 }
 
-.view__imgFigure{
+.view__img{
     width: 300px;
     height: 200px;
     margin: 0;
     background-color: #001B26;
+    
 }
 
 .view__dishName{
@@ -236,7 +248,11 @@ body{
     border-radius: 17px;
 }
 
-.section__addButton{
+.section__addButton:hover{
+    background-color: #007DA2;
+}
 
+.section__addButton:active{
+    background-color: #009EC9;
 }
 
