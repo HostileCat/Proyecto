@@ -8,9 +8,22 @@
 </head>
 <body>
     <header class="header">
+        <div class="hamburger-menu" id="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+            <ul class="mobile-nav__list">
+                <li class="mobile-nav__item">Inicio</li>
+                <li class="mobile-nav__item">Nosotros</li>
+                <li class="mobile-nav__item">Servicios</li>
+                <li class="mobile-nav__item">Contacto</li>
+            </ul>
+        </div>
         <div class="header__navigation">
             <figure class="navigation__logo">
-                <img src="img/logo.png" alt="Descripción de la imagen" width="64" height="64">
+                <img src="img/logo.png" alt="Descripción de la imagen" width="44" height="44">
                 <figcaption class="logo__name">Bocado Escencial</figcaption>
             </figure>
             <nav class="navigation__navbar">
@@ -25,7 +38,14 @@
         <div class="header__actions">
             <a href="login/login.html" class="actions__login">Iniciar Sesión</a>
             <a href="login/register.html" class="actions__register">Registrarse</a>
-        </div>        
+            <div class="circle" id="circle"></div>
+            <div class="hidden__actions" id="hidden__actions">
+                <a href="login/login.html" class="hidden__login">Iniciar Sesión</a>
+                <a href="login/register.html" class="hidden__register">Registrarse</a>
+            </div>
+        </div> 
+        
+        
     </header>
     <main class="main">
         <section class="main__intro">
@@ -40,5 +60,7 @@
         </section>
 
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

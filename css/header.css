@@ -6,17 +6,20 @@
     background-color: #001B26;
     color: #ffffff;
     font-size: 16px;
+    align-items: center;
 }
 
 .header__navigation{
     display: flex;
-
+    align-items: center;
 }
 
 .navigation__logo{
     display: flex;
     align-items: center;
     gap: 24px;
+    margin: 0;
+    padding: 0 40px;
 }
 
 .logo__name{
@@ -39,8 +42,8 @@
 .header__actions{
     display: flex;
     align-items: center;
-    gap: 24px;
-    padding: 0 40px;
+    gap: 10px;
+    padding-right: 20px;
 }
 
 .actions__login{
@@ -86,8 +89,164 @@
     padding: 0;
     z-index: 1;
     background-color: #086482;
+    right: 0;
+    display: none;
+    flex-direction: column;
 }
 
 .user__item{
     padding: 5px;
+    width: 105px;
+    text-align: center;
+}
+
+
+/* hamburger menu */
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    height: 44px;
+    width: 44px;
+    padding-left: 20px;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+}
+
+/* Menú móvil */
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 64px;
+    width: 102px;
+}
+
+.mobile-nav__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #086482;
+}
+
+.mobile-nav__item {
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* circle */
+
+.circle{
+    width: 44px;
+    height: 44px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: none;
+}
+
+.hidden__actions{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    right: 0px;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.hidden__login{
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #001B26;
+    padding: 14px 24px;
+    white-space: nowrap;
+    border-radius: 17px;
+}
+
+.hidden__login:hover{
+    background-color: #0C526D;
+}
+
+.hidden__login:active{
+    background-color: #086482;
+}
+
+.hidden__register{
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #086482;
+    padding: 14px 24px;
+    border-radius: 17px;
+}
+
+.hidden__register:hover{
+    background-color: #007DA2;
+}
+
+.hidden__register:active{
+    background-color: #009EC9;
+}
+
+
+
+/* Media Queries */
+@media (max-width: 1045px) {
+    .navigation__navbar {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .mobile-nav {
+        display: none;
+    }
+
+    .mobile-nav.show {
+        display: flex;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .actions__login{
+        display: none;
+    }
+    .actions__register{
+        display: none;
+    }
+    .circle{
+        display: block;
+    }
+
+    .hidden__actions{
+        display: none;
+    }
+
+    .hidden__actions.show{
+        display: flex;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .logo__name{
+        display: none;
+    }
+
+
+
 }
