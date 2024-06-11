@@ -19,6 +19,7 @@
     margin: 0 auto 20px;
     background-color: #001B26;
     border-radius: 8px;
+    background-image: url(../img/dish.png);
 }
 
 .view__dishName {
