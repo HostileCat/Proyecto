@@ -22,6 +22,11 @@
     padding: 0 40px;
 }
 
+.navigation__logo img{
+  width: 44px;
+  height: 44px;
+}
+
 .logo__name{
     white-space: nowrap;
     font-size: 24px;
@@ -112,10 +117,9 @@
     padding-left: 20px;
 }
 
-.hamburger-menu .bar {
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
+.hamburger-menu svg{
+    height: 38px;
+    fill: #fff;
     margin: 4px 0;
 }
 
@@ -123,31 +127,37 @@
 .mobile-nav {
     display: none;
     flex-direction: column;
-    background-color: #333;
     position: absolute;
     top: 64px;
     width: 102px;
+    z-index: 30;
 }
 
 .mobile-nav__list {
     list-style: none;
+    display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 0;
-    background-color: #086482;
+    gap: 15px;
+    padding: 10px 0;
 }
 
 .mobile-nav__item {
     padding: 10px;
     color: #fff;
     cursor: pointer;
+    background-color: #086482;
+    border-radius: 17px;
+    text-align: center;
 }
 
 /* circle */
 
-.circle{
-    width: 44px;
-    height: 44px;
-    background-color: #fff;
+.user__icon{
+    height: 38px;
+    width: 38px;
+    fill: #fff;
     border-radius: 50%;
     display: none;
 }
@@ -204,10 +214,7 @@
     }
 
     .hamburger-menu {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
+        display: block
     }
 
     .mobile-nav {
@@ -228,7 +235,7 @@
     .actions__register{
         display: none;
     }
-    .circle{
+    .user__icon{
         display: block;
     }
 
@@ -238,6 +245,7 @@
 
     .hidden__actions.show{
         display: flex;
+        z-index: 30;
     }
 }
 
@@ -246,7 +254,4 @@
     .logo__name{
         display: none;
     }
-
-
-
 }
