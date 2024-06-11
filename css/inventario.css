@@ -165,7 +165,7 @@ body{
 /* flecha */
 
 .arrow{
-  fill: #007DA2;
+  fill: #ffffff;
   width: 24px;
   height: 48px;
   grid-row: 1/3;
@@ -217,7 +217,7 @@ body{
   }
 
   .main__menu.show{
-    background-color: #001b2674;
+    backdrop-filter: blur(10px);
     transition: 1s;
   }
 

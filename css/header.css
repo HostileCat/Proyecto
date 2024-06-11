@@ -25,6 +25,7 @@
 .navigation__logo img{
   width: 44px;
   height: 44px;
+  border-radius: 12px;
 }
 
 .logo__name{
@@ -129,7 +130,7 @@
     flex-direction: column;
     position: absolute;
     top: 64px;
-    width: 102px;
+    width: 150px;
     z-index: 30;
 }
 
@@ -140,7 +141,9 @@
     padding: 0;
     margin: 0;
     gap: 15px;
-    padding: 10px 0;
+    padding: 10px 20px 10px 20px;
+    background-color: #001B26;
+    box-shadow: 10px 4px 10px #086482; 
 }
 
 .mobile-nav__item {
