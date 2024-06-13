@@ -10,8 +10,8 @@ body{
 
 
 .menu{
-    background-color: #001B26;
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     display: flex;
     margin: 80px 20px 0 20px;
     flex-direction: column;
@@ -43,6 +43,59 @@ body{
     margin-bottom: 20px;
     text-align: center;
 }
+
+.menu__banner{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 0 30px;
+  
+}
+
+.search__form{
+  display: flex;
+  align-items: center;
+}
+
+.search__input{
+  background-color: var(--secondary-color);
+  border: none;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search__input::placeholder{
+  color: var(--text-color);
+  opacity: 1;
+}
+
+.search__button{
+  fill: var(--text-color);
+  background-color: transparent;
+  border: none;
+}
+
+.search__button svg{
+  height: 24px;
+  width: 24px;
+}
+
+
+
+.select__category{
+  background-color: var(--tertiary-color);
+  color: var(--text-color);
+  border: none;
+  outline: none;
+  padding: 0 8px;
+  height: 34px;
+  border-radius: 50px;
+}
+
+
 
 /* cards */
 

@@ -1,10 +1,12 @@
+@import url("customProp.css");
+
 .header{
     width: 100vw;
     height: 64px;
     display: flex;
     justify-content: space-between;
-    background-color: #001B26;
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     font-size: 16px;
     align-items: center;
 }
@@ -54,39 +56,39 @@
 
 .actions__login{
     text-decoration: none;
-    color: #ffffff;
-    background-color: #001B26;
+    color: var(--text-color);
+    background-color: var(--primary-color);
     padding: 14px 24px;
     white-space: nowrap;
     border-radius: 17px;
 }
 
 .actions__login:hover{
-    background-color: #0C526D;
+    background-color: var(--dark-hover);
 }
 
 .actions__login:active{
-    background-color: #086482;
+    background-color: var(--secondary-color);
 }
 
 .actions__register{
     text-decoration: none;
-    color: #ffffff;
-    background-color: #086482;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
     padding: 14px 24px;
     border-radius: 17px;
 }
 
 .actions__register:hover{
-    background-color: #007DA2;
+    background-color: var(--normal-hover);
 }
 
 .actions__register:active{
-    background-color: #009EC9;
+    background-color: var(--tertiary-color);
 }
 
 .header__userIcon{
-    color: #ffffff;
+    color: var(--text-color);
 }
 
 .subitem{
@@ -94,7 +96,7 @@
     list-style-type: none;
     padding: 0;
     z-index: 1;
-    background-color: #086482;
+    background-color: var(--secondary-color);
     right: 0;
     display: none;
     flex-direction: column;
@@ -120,7 +122,7 @@
 
 .hamburger-menu svg{
     height: 38px;
-    fill: #fff;
+    fill: var(--text-color);
     margin: 4px 0;
 }
 
@@ -142,17 +144,19 @@
     margin: 0;
     gap: 15px;
     padding: 10px 20px 10px 20px;
-    background-color: #001B26;
-    box-shadow: 10px 4px 10px #086482; 
+    /* background-color: #001B26; */
+    /* box-shadow: 10px 4px 10px #086482;  */
 }
 
 .mobile-nav__item {
     padding: 10px;
-    color: #fff;
+    color: var(--text-color);
     cursor: pointer;
-    background-color: #086482;
+    background-color: var(--secondary-color);
     border-radius: 17px;
     text-align: center;
+    box-shadow: 10px 4px 10px #000000; 
+
 }
 
 /* circle */
@@ -160,7 +164,7 @@
 .user__icon{
     height: 38px;
     width: 38px;
-    fill: #fff;
+    fill: var(--text-color);
     border-radius: 50%;
     display: none;
 }
@@ -172,40 +176,43 @@
     top: 64px;
     right: 0px;
     gap: 15px;
-    padding: 10px 0;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
 }
 
 .hidden__login{
     text-decoration: none;
-    color: #ffffff;
-    background-color: #001B26;
+    color: var(--text-color);
+    background-color: var(--primary-color);
     padding: 14px 24px;
     white-space: nowrap;
     border-radius: 17px;
+    box-shadow: 10px 4px 10px #000000; 
 }
 
 .hidden__login:hover{
-    background-color: #0C526D;
+    background-color: var(--dark-hover);
 }
 
 .hidden__login:active{
-    background-color: #086482;
+    background-color: var(--secondary-color);
 }
 
 .hidden__register{
     text-decoration: none;
-    color: #ffffff;
-    background-color: #086482;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
     padding: 14px 24px;
     border-radius: 17px;
+    box-shadow: 10px 4px 10px #000000; 
 }
 
 .hidden__register:hover{
-    background-color: #007DA2;
+    background-color: var(--normal-hover);
 }
 
 .hidden__register:active{
-    background-color: #009EC9;
+    background-color: var(--tertiary-color);
 }
 
 

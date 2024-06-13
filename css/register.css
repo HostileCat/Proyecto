@@ -1,3 +1,5 @@
+@import url("customProp.css");
+
 body{
     margin: 0;
     background-color: #ffffff;
@@ -10,8 +12,8 @@ body{
 }
 
 .register{
-    background-color: #001B26;
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     display: flex;
     width: 660px;
     min-width: 300px;
@@ -47,10 +49,10 @@ body{
 
 .register__input{
     padding: 16px 24px;
-    border: 1px solid #086482;
+    border: 1px solid var(--secondary-color);
     border-radius: 17px;
-    background-color: #086482;
-    color: #ffffff;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
     width: 100%;
     outline: none;
     
@@ -58,35 +60,36 @@ body{
 
 .register__input::placeholder{
     opacity: 1;
-    color: #ffffff;
+    color: var(--text-color);
     font-size: 16px;
 
 }
 
 .register__input:hover{
-    border: 1px solid #009EC9;
+    border: 1px solid var(--tertiary-color);
 }
 
 .register__input:focus{
     background-color: #ffffff;
-    color: #001B26;
+    color: var(--primary-color);
 }
 
 .register__button{
     width: 100%;
-    background-color: #009EC9;
+    background-color: var(--tertiary-color);
     border: none;
     border-radius: 17px;
     padding: 14px 24px;
-    color: #ffffff;
+    color: var(--text-color);
     font-weight: bold;
+    font-size: 16px;
 }
 
 .register__button:hover{
-    background-color: #00b9de;
+    background-color: var(--light-hover);
 }
 .register__button:active{
-    background-color: #18d6f8;
+    background-color: var(--quaternary-color);
 }
 
 
