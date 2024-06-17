@@ -44,7 +44,7 @@ body{
     text-align: center;
 }
 
-.menu__banner{
+.search__container{
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
