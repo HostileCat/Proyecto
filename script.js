@@ -1,17 +1,20 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const userIcon = document.getElementById("userIcon");
-  const subitem = document.getElementById("subitem");
+// opciones panel
+
+document.addEventListener("DOMContentLoaded", function () {
+  const userIcon = document.querySelector("#logUser__icon");
+  const logOut = document.querySelector("#logOut");
 
   userIcon.addEventListener("click", function(event) {
     event.preventDefault(); // Previene el comportamiento por defecto del enlace
-    if (subitem.style.display === "none" || subitem.style.display === "") {
-      subitem.style.display = "flex";
+    if (logOut.style.display === "none" || logOut.style.display === "") {
+      logOut.style.display = "flex";
     } else {
-      subitem.style.display = "none";
+      logOut.style.display = "none";
     }
   });
 });
 
+// menu hamburguesa
 
 document.addEventListener('DOMContentLoaded', function () {
   const hamburgerMenu = document.getElementById('hamburger-menu');
@@ -42,6 +45,53 @@ document.addEventListener('DOMContentLoaded', function () {
     mainSelectDish.classList.toggle('show');
     arrow.classList.toggle('show');
     mainMenu.classList.toggle('show');
+  });
+});
+
+// modal
+document.addEventListener('DOMContentLoaded', function () {
+  const dishItems = document.querySelectorAll(".dish__item");
+
+  const modal = document.querySelector('#modal');
+  const modalClose = document.querySelector('#modal-close');
+  const modalTitle = document.querySelector('#modal-title');
+  const modalDescription = document.querySelector('#modal-description');
+  const modalDelete = document.querySelector('#modal-delete');
+  const modalCancel = document.querySelector('#modal-cancel');
+
+  // Añadir evento de clic a cada item de plato
+  dishItems.forEach(item => {
+      item.addEventListener('click', () => {
+          const dishId = item.getAttribute('data-id');
+          // Aquí podrías hacer una llamada para obtener los detalles del plato
+          modalTitle.textContent = `Eliminar Plato ${dishId}`;
+          modalDescription.textContent = `Descripción del Plato ${dishId}`;
+
+          modal.style.display = 'flex';
+      });
+  });
+
+  // Función para cerrar el modal
+  const closeModal = () => {
+      modal.style.display = 'none';
+  };
+
+  // Añadir eventos de clic para cerrar el modal
+  modalClose.addEventListener('click', closeModal);
+  modalCancel.addEventListener('click', closeModal);
+
+  // Evento de clic para el botón de eliminar
+  modalDelete.addEventListener('click', () => {
+      // Aquí puedes añadir la lógica para eliminar el plato
+      alert('Plato eliminado');
+      closeModal();
+  });
+
+  // Ocultar el modal si se hace clic fuera del contenido del modal
+  window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+          closeModal();
+      }
   });
 });
 

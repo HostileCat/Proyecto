@@ -87,10 +87,6 @@
     background-color: var(--tertiary-color);
 }
 
-.header__userIcon{
-    color: var(--text-color);
-}
-
 .subitem{
     position: absolute;
     list-style-type: none;
@@ -159,7 +155,7 @@
 
 }
 
-/* circle */
+/* hidden__actions */
 
 .user__icon{
     height: 38px;
@@ -167,6 +163,10 @@
     fill: var(--text-color);
     border-radius: 50%;
     display: none;
+}
+
+.user__icon.show-icon{
+  display: block;
 }
 
 .hidden__actions{
@@ -215,6 +215,30 @@
     background-color: var(--tertiary-color);
 }
 
+/* usuarios registrados */
+
+.header__rol{
+  margin-right: 15px;
+}
+
+.logOut{
+  position: absolute;
+  display: none;
+  top: 64px;
+  right: 0px;
+  text-align: center;
+  padding: 10px 20px 10px 20px;
+}
+
+.logOut__button{
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  padding: 14px 24px;
+  border-radius: 17px;
+  box-shadow: 10px 4px 10px #000000; 
+}
 
 
 /* Media Queries */
