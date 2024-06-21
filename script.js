@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // modal
 document.addEventListener('DOMContentLoaded', function () {
-  const dishItems = document.querySelectorAll(".dish__item");
+  const dishItems = document.querySelectorAll(".edit__item");
 
   const modal = document.querySelector('#modal');
   const modalClose = document.querySelector('#modal-close');

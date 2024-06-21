@@ -65,7 +65,7 @@
       <section class="main__selectCategory" id="main__selectCategory">
         <ul class="main__list">
           <li class="main__item--title">Categorias</li>
-          <a href="añadirCategoria.html">
+          <a href="">
             <li class="main__item">Añadir</li>
           </a>
           <a href="">
@@ -93,26 +93,46 @@
       </section>
     </div>
     <section class="main__section">
-      <h1 class="section__title">Añadir Plato</h1>
-      <form action="#" class="section__form">
-        <div class="section__add addDish">
-          <input type="text" placeholder="Nombre" class="add__input">
-          <input type="text" placeholder="Categoria" class="add__input">
-          <input type="text" placeholder="Descripción" class="add__input">
-          <input type="text" placeholder="Precio" class="add__input">
-          <input type="file" accept="image/*" class="addDish__img">
+      <h1 class="section__title">Editar Plato</h1>
+      <div class="search__container">
+        <form class="search__form" id="search-form" action="#" method="get">
+          <input type="text" class="search__input" placeholder="Buscar...">
+          <button type="submit" class="search__button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path
+                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+            </svg>
+          </button>
+      
+        </form>
+      </div>
+      <div class="edit__container">
+        <div class="edit__content">
+          <h1 class="category__title">Platos Principales</h1>
+          <ul class="edit__list">
+            <a class="edit__item" href="paginaEdicionCategoria.html">
+              <li>Nombre del plato</li>
+            </a>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+            <li class="edit__item">Nombre del plato</li>
+          </ul>
         </div>
-        <div class="section__view">
-          <h2 class="view__title">Vista</h2>
-          <div class="view__card">
-            <div class="view__img"></div>
-            <h2 class="view__dishName">Nombre del Plato</h2>
-            <p class="view__dishDescription">Descripción de ingredientes</p>
-            <h2 class="view__dishCost">$10.000</h2>
-          </div>
-        </div>
-        <button class="section__addButton">Añadir</button>
-      </form>
+      </div>
     </section>
   </main>
 
