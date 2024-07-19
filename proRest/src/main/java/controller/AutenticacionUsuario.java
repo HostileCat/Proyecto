@@ -87,29 +87,48 @@ public class AutenticacionUsuario extends HttpServlet {
             String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
             // Patrón para validar la contraseña
             String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$";
-
+            
             String errorMessage = null;
-
+            String errorNombre = null;
+            String errorCorreo = null;
+            String errorContrasena = null;
+            String errorConfirmContrasena = null;
+            boolean validacion = true;
+            
 
             if (!Pattern.matches(namePattern, nombreUsuario)) {
-                errorMessage = "El nombre solo puede contener letras y espacios.";
-            } else if (!Pattern.matches(emailPattern, correoElectronico)) {
-                errorMessage = "El correo electrónico no es válido.";
-            } else if (!Pattern.matches(passwordPattern, contrasena)) {
-                errorMessage = "La contraseña debe tener al menos 6 caracteres, incluyendo una mayúscula, una minúscula y un número.";
-            } else if (!contrasena.equals(confirmContrasena)) {
-                errorMessage = "Las contraseñas no coinciden.";
-            } else {
-                Usuario usuario = new Usuario();
-                usuario.setCorreoElectronico(correoElectronico);
-                UsuarioDAO usuarioDAO = new UsuarioDAO();
-                if (usuarioDAO.correoRepetido(usuario)) {
-                    errorMessage = "El correo electrónico ya está registrado.";
-                }
-            }
-
-            if (errorMessage != null) {
+                errorNombre = "El nombre solo puede contener letras y espacios.";
+                request.setAttribute("errorNombre", errorNombre);
+                validacion = false;
+            } 
+            if (!Pattern.matches(emailPattern, correoElectronico)) {
+                errorCorreo = "El correo electrónico no es válido.";
+                request.setAttribute("errorCorreo", errorCorreo);
+                validacion = false;
+            } 
+            if (!Pattern.matches(passwordPattern, contrasena)) {
+                errorContrasena = "La contraseña debe tener al menos 6 caracteres, incluyendo una mayúscula, una minúscula y un número.";
+                request.setAttribute("errorContrasena", errorContrasena);
+                validacion = false;
+            } 
+            if (!contrasena.equals(confirmContrasena)) {
+                errorConfirmContrasena = "Las contraseñas no coinciden.";
+                request.setAttribute("errorConfirmContrasena", errorConfirmContrasena);
+                validacion = false;
+            } 
+            
+            Usuario correoUsuario = new Usuario();
+            correoUsuario.setCorreoElectronico(correoElectronico);
+            UsuarioDAO usuariodao = new UsuarioDAO();
+            if (usuariodao.correoRepetido(correoUsuario)) {
+                errorMessage = "El correo electrónico ya está registrado.";
                 request.setAttribute("errorMessage", errorMessage);
+                validacion = false;
+            }
+            
+        
+
+            if (!validacion) {
                 request.getRequestDispatcher("login/register.jsp").forward(request, response);
             } else{
                 // Crear un objeto Usuario con los datos del formulario
@@ -125,7 +144,7 @@ public class AutenticacionUsuario extends HttpServlet {
 
                 // Redireccionar a una página de confirmación o mostrar un mensaje de error
                 if (registroExitoso) {
-                    response.sendRedirect("login/login.jsp");
+                    response.sendRedirect("main.jsp");
                 } else {
                     response.sendRedirect("login/register.jsp");
                 }
