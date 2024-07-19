@@ -1,0 +1,127 @@
+@import url("customProp.css");
+
+body{
+    margin: 0;
+    background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login{
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    display: flex;
+    width: 660px;
+    min-width: 300px;
+    margin: 10px;
+    justify-content: center;
+}
+
+.login__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 450px;
+    min-width: 300px;
+    padding: 40px 30px 80px 30px;
+}
+
+.logo{
+    width: 100px;
+    height: 100px; 
+}
+
+.login__title{
+    margin: 18px 0;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+
+.login__group{
+    display: flex;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.login__input{
+    padding: 16px 24px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 17px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+}
+
+.login__input::placeholder{
+    opacity: 1;
+    color: var(--text-color);
+}
+
+.login__input:hover{
+    border: 1px solid var(--tertiary-color);
+}
+
+.login__input:focus{
+    background-color: #ffffff;
+    color: var(--primary-color);
+}
+
+.login__goForgotPassword{
+    align-self: flex-end;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.login__goForgotPassword:hover{
+    color: var(--tertiary-color);
+}
+
+.login__button{
+    width: 100%;
+    background-color: var(--tertiary-color);
+    border: none;
+    border-radius: 17px;
+    padding: 14px 24px;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.login__button:hover{
+    background-color: var(--light-hover);
+}
+.login__button:active{
+    background-color: var(--quaternary-color);
+}
+
+.login__registerText{
+    align-self: flex-start;
+    margin-top: 80px;
+}
+
+.login__goRegister{
+    width: 100%;
+    text-align: center;
+    padding: 14px 24px;
+    border: 2px solid var(--tertiary-color);
+    border-radius: 17px;
+    color: var(--tertiary-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login__goRegister:hover{
+    background-color: var(--tertiary-color);
+    color: var(--text-color);
+}
+.login__goRegister:active{
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
