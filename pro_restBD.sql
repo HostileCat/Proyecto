@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-07-2024 a las 23:33:31
+-- Tiempo de generación: 19-07-2024 a las 23:54:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -203,12 +203,11 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `correo_usuario`, `contra
 (3, 'María López', 'maria@example.com', 'hashed_password3', NULL),
 (4, 'Pedro Rodriguez', 'pedro@example.com', 'hashed_password4', NULL),
 (5, 'Sofía Martínez', 'sofia@example.com', 'hashed_password5', NULL),
-(7, 'qwer', 'qwer@gmail.com', '1234', 4),
+(7, 'qwer', 'qwer@gmail.com', '1234', 3),
 (8, 'juan', 'juan@gmail.com', '1234', 4),
-(9, 'Jhon CarreÃ±o', 'Jfcarreo5@soy.sena.edu.co', 'juanitoperez', 4),
 (10, 'Carreño', 'jcarre5@soy.sena.edu.co', '', 4),
-(11, 'abel', 'abel@gmail.com', 'abel1234', 4),
-(12, 'marquez', 'diosmarquez@gmail.com', '1234', 1);
+(11, 'abel', 'abel@gmail.com', 'abel1234', 2),
+(12, 'marquez', 'marquez@gmail.com', '1234', 1);
 
 --
 -- Índices para tablas volcadas
