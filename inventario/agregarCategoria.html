@@ -18,28 +18,22 @@
     </div>
     <div class="mobile-nav" id="mobile-nav">
       <ul class="mobile-nav__list">
-        <li class="mobile-nav__item">Inicio</li>
-        <li class="mobile-nav__item">Nosotros</li>
-        <li class="mobile-nav__item">Servicios</li>
-        <li class="mobile-nav__item">Contacto</li>
+          <li class="mobile-nav__item"><a>Inicio</a></li>
+          <li class="mobile-nav__item"><a class="menu-link">Nosotros</a></li>
+          <li class="mobile-nav__item"><a class="menu-link">Ver Carta</a></li>
       </ul>
     </div>
     <div class="header__navigation">
       <figure class="navigation__logo">
-        <img src="../img/logo.png" alt="Descripción de la imagen">
+        <img src="img/logo.png" alt="Descripcion de la imagen">
         <figcaption class="logo__name">Bocado Escencial</figcaption>
       </figure>
-      <nav class="navigation__navbar">
-        <ul class="navbar__list">
-          <li class="navbar__item">Inicio</li>
-          <li class="navbar__item">Nosotros</li>
-          <li class="navbar__item">Productos</li>
-          <li class="navbar__item">Contacto</li>
-        </ul>
-      </nav>
+      
     </div>
     <div class="header__actions">
-      <p class="header__rol">Admin</p>
+        <p class="header__rol">
+            User
+        </p>
       <div class="user__icon show-icon" id="logUser__icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
           <path
@@ -47,7 +41,7 @@
         </svg>
       </div>
       <div class="logOut" id="logOut">
-        <a class="logOut__button" href="index.html">Cerrar Sesión</a>
+        <a class="logOut__button" href="index.html">Cerrar Sesion</a>
       </div>
     </div>
 
@@ -65,14 +59,14 @@
       <section class="main__selectCategory" id="main__selectCategory">
         <ul class="main__list">
           <li class="main__item--title">Categorias</li>
-          <a href="añadirCategoria.html">
-            <li class="main__item">Añadir</li>
+          <a class="main__item" href="agregarCategoria.html">
+            <li>Añadir</li>
           </a>
-          <a href="">
-            <li class="main__item">Eliminar</li>
+          <a class="main__item" href="eliminarCategoria.html">
+            <li>Eliminar</li>
           </a>
-          <a href="">
-            <li class="main__item">Editar</li>
+          <a class="main__item" href="editarCategoria.html">
+            <li>Editar</li>
           </a>
 
         </ul>
@@ -80,7 +74,7 @@
       <section class="main__selectDish" id="main__selectDish">
         <ul class="main__list">
           <li class="main__item--title">Platos</li>
-          <a class="main__item" href="añadirPlato.html">
+          <a class="main__item" href="agregarPlato.html">
             <li>Añadir</li>
           </a>
           <a class="main__item" href="eliminarPlato.html">
@@ -95,21 +89,8 @@
     <section class="main__section">
       <h1 class="section__title">Añadir Plato</h1>
       <form action="#" class="section__form">
-        <div class="section__add addDish">
+        <div class="section__add addCategory">
           <input type="text" placeholder="Nombre" class="add__input">
-          <input type="text" placeholder="Categoria" class="add__input">
-          <input type="text" placeholder="Descripción" class="add__input">
-          <input type="text" placeholder="Precio" class="add__input">
-          <input type="file" accept="image/*" class="addDish__img">
-        </div>
-        <div class="section__view">
-          <h2 class="view__title">Vista</h2>
-          <div class="view__card">
-            <div class="view__img"></div>
-            <h2 class="view__dishName">Nombre del Plato</h2>
-            <p class="view__dishDescription">Descripción de ingredientes</p>
-            <h2 class="view__dishCost">$10.000</h2>
-          </div>
         </div>
         <button class="section__addButton">Añadir</button>
       </form>
