@@ -7,6 +7,14 @@ public class Usuario {
     private String contrasena;
     private int rol;
 
+    public String getNombreRol() {
+        return nombreRol;
+    }
+
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
+    }
+    private String nombreRol;
     
 
     // Getters y setters

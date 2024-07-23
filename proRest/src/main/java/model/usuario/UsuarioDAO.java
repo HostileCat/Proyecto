@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import model.Rol;
 
 public class UsuarioDAO {
     private final Connection conexion;
@@ -70,6 +73,39 @@ public class UsuarioDAO {
         }
 
         return false; // Usuario no encontrado o error de SQL
+    }
+    
+    public List<Usuario> todosLosUsuarios(){
+        String sql = "SELECT id_usuario, nombre_usuario, correo_usuario, contrasena_usuario, id_rol_fk, nombre_rol FROM usuario INNER JOIN roles ON id_rol_fk = id_rol";
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        
+        try (PreparedStatement ps = conexion.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()){
+            while(rs.next()){
+                int idUsuario = rs.getInt("id_usuario");
+                String nombreUsuario = rs.getString("nombre_usuario");
+                String correoUsuario = rs.getString("correo_usuario");
+                String contrasenaUsuario = rs.getString("contrasena_usuario");
+                int idRol = rs.getInt("id_rol_fk");
+                String nombreRol = rs.getString("nombre_rol");
+                
+                Usuario usuario = new Usuario();
+                Rol rol = new Rol();
+                usuario.setId(idUsuario);
+                usuario.setNombreUsuario(nombreUsuario);
+                usuario.setCorreoElectronico(correoUsuario);
+                usuario.setContrasena(contrasenaUsuario);
+                usuario.setRol(idRol);
+                usuario.setNombreRol(nombreRol);
+                
+                usuarios.add(usuario);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return usuarios;
     }
 }
         

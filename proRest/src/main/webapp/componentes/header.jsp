@@ -4,10 +4,10 @@
 
 <header class="header">
             <%
-                Usuario usuario = (Usuario) session.getAttribute("usuario");
-                String nombreUsuario = usuario.getNombreUsuario();
-                int rolUsuario = usuario.getRol();
-                //int rolUsuario = 1;
+                //Usuario usuario = (Usuario) session.getAttribute("usuario");
+                //String nombreUsuario = usuario.getNombreUsuario();
+                //int rolUsuario = usuario.getRol();
+                int rolUsuario = 1;
             %>
           <div class="hamburger-menu" id="hamburger-menu">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
