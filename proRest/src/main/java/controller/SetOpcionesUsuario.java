@@ -46,11 +46,11 @@ public class SetOpcionesUsuario extends HttpServlet {
                                "<div class='grid__item actionButtons'>" +
                                "<form action='editarUsuario' method='get'>" +
                                "<input type='hidden' name='id' value='<%= usuario.getId() %>'>" +
-                               "<button type='submit' class='edit-button'>Editar</button>" +
+                               "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
                                "<form action='eliminarCategoria' method='post'>" +
                                "<input type='hidden' name='categoryId' value='<%= usuario.getId() %>'>" +
-                               "<button type='submit' class='delete-button'>Eliminar</button>" +
+                               "<button type='submit' class='delete__button'>Eliminar</button>" +
                                "</form>" +
                                "</div>";
                     }                          
@@ -92,11 +92,11 @@ public class SetOpcionesUsuario extends HttpServlet {
                                "<div class='grid__item actionButtons'>" +
                                "<form action='editarUsuario' method='get'>" +
                                "<input type='hidden' name='id' value='<%= usuario.getId() %>'>" +
-                               "<button type='submit' class='edit-button'>Editar</button>" +
+                               "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
                                "<form action='eliminarCategoria' method='post'>" +
                                "<input type='hidden' name='categoryId' value='<%= usuario.getId() %>'>" +
-                               "<button type='submit' class='delete-button'>Eliminar</button>" +
+                               "<button type='submit' class='delete__button'>Eliminar</button>" +
                                "</form>" +
                                "</div>";
                                
