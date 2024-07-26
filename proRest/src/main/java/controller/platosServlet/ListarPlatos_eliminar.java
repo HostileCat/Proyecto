@@ -12,10 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.categoria.Categoria;
-import model.categoria.CategoriaDAO;
-import model.platos.Platos;
-import model.platos.PlatosDAO;
+import model.Categoria;
+import model.CategoriaDAO;
+import model.Platos;
+import model.PlatosDAO;
 
 
 @WebServlet("/listarPlatos_eliminar")
@@ -34,7 +34,7 @@ public class ListarPlatos_eliminar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Llamar al DAO para obtener la lista de platos y categorías
         PlatosDAO platoDAO = new PlatosDAO();
-        List<Platos> platos = platoDAO.obtenerTodosLosPlatos();
+        List<Platos> platos = platoDAO.todosLosPlatos();
 
         // Llamar al DAO para obtener la lista de categorías (opcional)
         CategoriaDAO categoriaDAO = new CategoriaDAO();
