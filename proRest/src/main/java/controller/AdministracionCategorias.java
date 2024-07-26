@@ -33,7 +33,8 @@ public class AdministracionCategorias extends HttpServlet {
        String nombreCategoria = request.getParameter("nombreCategoria");
        String accion = request.getParameter("accion");
        
-       if(accion.equals("agregar")){
+       
+       if(accion.equals("agregarSubmit")){
            Categoria categoria = new Categoria();
            categoria.setNombreCategoria(nombreCategoria);
            
@@ -46,7 +47,7 @@ public class AdministracionCategorias extends HttpServlet {
             } else {
                  response.sendRedirect("../error.jsp");
             }
-       } else if(accion.equals("editar")) {
+       } else if(accion.equals("editarSubmit")) {
            
            Categoria categoria = new Categoria();
           
@@ -65,8 +66,27 @@ public class AdministracionCategorias extends HttpServlet {
        
     }
     
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String accion = request.getParameter("accion");
         
+        switch (accion){
+            case "agregar":
+                request.getRequestDispatcher("administracion/agregarCategoria.jsp").forward(request, response);
+                break;
+            case "editar":
+                request.getRequestDispatcher("administracion/agregarCategoria.jsp").forward(request, response);
+                break;
+            default:
+                break;
+        }
     }
 
 }

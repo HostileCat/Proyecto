@@ -43,7 +43,7 @@ public class PaginaCategorias extends HttpServlet {
         
         switch(opcion){
             case "categoria":
-                botonAgregar = "<a href='/proRest/administracionCategoria' id='addUserBtn' class='add__button'>+</a>"
+                botonAgregar = "<a href='/proRest/administracionCategoria?accion=agregar' id='addUserBtn' class='add__button'>+</a>"
                         + "<p class='add__text'>Añadir Categoria</p>";
                 grid = "<h2 class='section__title'>Administrar Categorias</h2>"
                         + "<div class='grid__containerCategory' id='userGridContainer'>"

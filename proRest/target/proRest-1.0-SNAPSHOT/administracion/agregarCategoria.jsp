@@ -18,7 +18,7 @@
         <main class="main">
             <section class="main__section">
                 <h1 class="section__title">Agregar Categoria</h1>
-                <form action="/proRest/administracionCategoria" class="section__form" method="post">
+                <form action="/proRest/paginaCategorias?opcion=categoria" class="section__form" method="post">
                   <div class="section__add addCategory">
                     <input type="hidden" id="categoryId" name="accion" value="agregar">
                     <input type="text" placeholder="Nombre" class="add__input" name="nombreCategoria">
