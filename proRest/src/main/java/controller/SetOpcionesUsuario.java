@@ -12,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.usuario.Usuario;
-import model.usuario.UsuarioDAO;
+import model.Usuario;
+import model.UsuarioDAO;
 
 /**
  *
@@ -44,12 +44,17 @@ public class SetOpcionesUsuario extends HttpServlet {
                                "<p class='grid__item'>"+ usuario.getContrasena()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getNombreRol()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='editarUsuario' method='get'>" +
-                               "<input type='hidden' name='id' value='<%= usuario.getId() %>'>" +
-                               "<button type='submit' class='edit__button'>Editar</button>" +
+                               "<form action='/proRest/administracionUsuario' method='get'>" +
+                               "<input type='hidden' name='accion' value='editar'>" +
+                               "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
+                               "<input type='hidden' name='nombreUsuario' value='"+ usuario.getNombreUsuario() +"'>" +
+                               "<input type='hidden' name='correoUsuario' value='"+ usuario.getCorreoElectronico() +"'>" +
+                               "<input type='hidden' name='contrasenaUsuario' value='"+ usuario.getContrasena() +"'>" +
+                                "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
-                               "<form action='eliminarCategoria' method='post'>" +
-                               "<input type='hidden' name='categoryId' value='<%= usuario.getId() %>'>" +
+                               "<form action='/proRest/administracionUsuario' method='post'>" +
+                               "<input type='hidden' name='accion' value='eliminar'>" +
+                                "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
                                "<button type='submit' class='delete__button'>Eliminar</button>" +
                                "</form>" +
                                "</div>";
@@ -67,13 +72,17 @@ public class SetOpcionesUsuario extends HttpServlet {
                                "<p class='grid__item'>"+ usuario.getContrasena()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getNombreRol()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='editarUsuario' method='get'>" +
-                               "<input type='hidden' name='id' value='<%= usuario.getId() %>'>" +
-                               "<button type='submit' class='edit-button'>Editar</button>" +
+                               "<form action='/proRest/administracionUsuario' method='get'>" +
+                               "<input type='hidden' name='accion' value='editar'>" +
+                               "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
+                               "<input type='hidden' name='nombreUsuario' value='"+ usuario.getNombreUsuario() +"'>" +
+                               "<input type='hidden' name='correoUsuario' value='"+ usuario.getCorreoElectronico() +"'>" +
+                               "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
-                               "<form action='eliminarCategoria' method='post'>" +
-                               "<input type='hidden' name='categoryId' value='<%= usuario.getId() %>'>" +
-                               "<button type='submit' class='delete-button'>Eliminar</button>" +
+                               "<form action='/proRest/administracionUsuario' method='post'>" +
+                               "<input type='hidden' name='accion' value='eliminar'>" +
+                                "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
+                               "<button type='submit' class='delete__button'>Eliminar</button>" +
                                "</form>" +
                                "</div>";
                     }                          
@@ -90,12 +99,16 @@ public class SetOpcionesUsuario extends HttpServlet {
                                "<p class='grid__item'>"+ usuario.getContrasena()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getNombreRol()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='editarUsuario' method='get'>" +
-                               "<input type='hidden' name='id' value='<%= usuario.getId() %>'>" +
+                               "<form action='/proRest/administracionUsuario' method='get'>" +
+                               "<input type='hidden' name='accion' value='editar'>" +
+                               "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
+                               "<input type='hidden' name='nombreUsuario' value='"+ usuario.getNombreUsuario() +"'>" +
+                               "<input type='hidden' name='correoUsuario' value='"+ usuario.getCorreoElectronico() +"'>" +
                                "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
-                               "<form action='eliminarCategoria' method='post'>" +
-                               "<input type='hidden' name='categoryId' value='<%= usuario.getId() %>'>" +
+                               "<form action='/proRest/administracionUsuario' method='post'>" +
+                               "<input type='hidden' name='accion' value='eliminar'>" +
+                                "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
                                "<button type='submit' class='delete__button'>Eliminar</button>" +
                                "</form>" +
                                "</div>";

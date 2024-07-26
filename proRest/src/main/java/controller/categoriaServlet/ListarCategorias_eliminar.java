@@ -9,8 +9,8 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
-import model.categoria.Categoria;
-import model.categoria.CategoriaDAO;
+import model.Categoria;
+import model.CategoriaDAO;
 
 @WebServlet("/listarCategoria_eliminar")
 public class ListarCategorias_eliminar extends HttpServlet {

@@ -5,10 +5,7 @@ body{
     background-color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
 }
 
 .register{
@@ -19,6 +16,7 @@ body{
     min-width: 300px;
     margin: 10px;
     justify-content: center;
+    margin: 30px auto;
 }
 
 .register__form{
@@ -38,7 +36,7 @@ body{
 .register__title{
     margin: 18px 0 16px 0;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 32px;
 }
 
 .register__group{

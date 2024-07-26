@@ -14,7 +14,13 @@
   --light-hover: #00b9de;
   
   --text-color: #ffffff;
+  --text-colorD: #000000;
+  
   --delete-button-color: #C12A2A;
   --delete-button-hover: #dc2f2f;
-  --delete-button-active: #ff3939;
+  --delete-button-colorD: #ff3939;
+  
+  --add-button-color: #32b550;
+  --add-button-hover: #28a745;
+  --add-button-colorD: #1e5d2d;
 }

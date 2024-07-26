@@ -12,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.categoria.Categoria;
-import model.categoria.CategoriaDAO;
+import model.Categoria;
+import model.CategoriaDAO;
 
 /**
  *

@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.usuario.Usuario;
-import model.usuario.UsuarioDAO;
+import model.Usuario;
+import model.UsuarioDAO;
 
 @WebServlet("/autenticacionUsuario")
 public class AutenticacionUsuario extends HttpServlet {
@@ -140,7 +140,7 @@ public class AutenticacionUsuario extends HttpServlet {
 
                 // Insertar el usuario en la base de datos
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
-                boolean registroExitoso = usuarioDAO.registrarCliente(usuario);
+                boolean registroExitoso = usuarioDAO.agregarUsuario(usuario);
 
                 // Redireccionar a una página de confirmación o mostrar un mensaje de error
                 if (registroExitoso) {

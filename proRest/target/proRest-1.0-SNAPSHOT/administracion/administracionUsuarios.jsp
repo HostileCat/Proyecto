@@ -16,6 +16,7 @@
         <%@ include file="../componentes/header.jsp" %>
         
         <main class="main">
+            <h1 class="main__title">Administracion de usuarios</h1>
             <div class="main__nav">
                 <ul class="nav__list">
                     
@@ -58,6 +59,16 @@
                 </div>
             </section>
         </main>
+        
+        <div class="add__container">
+            <a href="/proRest/administracionUsuario?accion=agregar" id="addUserBtn" class="add__button">+</a>
+            <p class="add__text">Añadir Usuario</p>       
+        </div>
+                
+        <footer>
+            
+        </footer>
+        
         
         <script src="/proRest/js/script.js"></script>
     </body>

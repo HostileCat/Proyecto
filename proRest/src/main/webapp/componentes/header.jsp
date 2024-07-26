@@ -1,5 +1,3 @@
-
-<%@page import="model.usuario.Usuario"%>
 <%@ page session="true" %>
 
 <header class="header">

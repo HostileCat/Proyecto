@@ -4,7 +4,7 @@
  */
 package controller;
 
-import model.categoria.CategoriaDAO;
+import model.CategoriaDAO;
 
 /**
  *
