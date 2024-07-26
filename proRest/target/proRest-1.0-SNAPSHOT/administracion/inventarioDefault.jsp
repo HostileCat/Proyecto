@@ -27,41 +27,35 @@
                 </ul>
             </div>
             <section class="section__container">
+                
+                    
                 <%
-                    String titulo = (String) request.getAttribute("titulo");
-                    
-                    if(titulo != null){
-                        out.print(titulo);
-                    } else{
-                        out.print("<h2 class='section__title'>Administración</h2>");
-                    }
+                        String tabla = (String) request.getAttribute("tabla");
+                        String grid = (String) request.getAttribute("grid");
+                        
+                        out.print(grid);
+                        if(tabla != null){
+                            out.print(tabla);
+                            out.print("</div>");
+                        }
                 %>
-                <div class="grid__container" id="userGridContainer">
-                    
-                    <h3 class="grid__title">ID</h3>
-                    <h3 class="grid__title">Nombre</h3>
-                    <h3 class="grid__title">Acciones</h3>
-                    
-                    <%
-                            String fila = (String) request.getAttribute("fila");
 
-                            if(fila != null){
-                                out.print(fila);
-                            }
-                    %>
-                </div>
             </section>
         </main>
         
         <div class="add__container">
-            <a href="/proRest/administracionUsuario?accion=agregar" id="addUserBtn" class="add__button">+</a>
-            <p class="add__text">Añadir Usuario</p>       
+            <%
+                        String botonAgregar = (String) request.getAttribute("botonAgregar");
+                        
+                        
+                        if(botonAgregar != null){
+                            out.print(botonAgregar);
+                            
+                        }
+            %>      
         </div>
                 
-        <footer>
-            
-        </footer>
-        
+       
         
         <script src="/proRest/js/script.js"></script>
     </body>

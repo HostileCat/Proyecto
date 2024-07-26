@@ -11,11 +11,11 @@ package model;
 public class Platos {
     private int id;
     private String nombrePlato;
-    private int idCategoria;
     private String descripcionPlato;
     private int precioPlato;
     private String imagenPlato;
-    
+    private int idCategoria;
+    private String nombreCategoria;
     
 
     public int getId() {
@@ -64,6 +64,14 @@ public class Platos {
 
     public void setImagenPlato(String imagenPlato) {
         this.imagenPlato = imagenPlato;
+    }
+    
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
     }
     
     

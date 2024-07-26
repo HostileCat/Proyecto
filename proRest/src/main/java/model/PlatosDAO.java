@@ -41,7 +41,7 @@ public class PlatosDAO {
     
     public List<Platos> todosLosPlatos() {
         List<Platos> platos = new ArrayList<>();
-        String sql = "SELECT * FROM platos";
+        String sql = "SELECT id_plato, nombre_plato, descripcion_plato, precio_plato, id_categoria_fk, imagen_plato, nombre_categoria FROM platos INNER JOIN categoria ON id_categoria_fk = id_categoria";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -54,6 +54,7 @@ public class PlatosDAO {
                 plato.setPrecioPlato(rs.getInt("precio_plato"));
                 plato.setIdCategoria(rs.getInt("id_categoria_fk")); // Ajustar según tu esquema de base de datos
                 plato.setImagenPlato(rs.getString("imagen_plato"));
+                plato.setNombreCategoria(rs.getString("nombre_categoria"));
                 
                 // Agregar el plato a la lista
                 platos.add(plato);
@@ -61,7 +62,6 @@ public class PlatosDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Manejar la excepción según tus requerimientos
         }
 
         return platos;
