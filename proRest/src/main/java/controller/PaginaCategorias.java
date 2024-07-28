@@ -4,6 +4,7 @@
  */
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,6 +21,20 @@ import model.PlatosDAO;
 
 @WebServlet("/paginaCategorias")
 public class PaginaCategorias extends HttpServlet {
+    
+
+    
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String opcion = request.getParameter("opcion");
+        
+        switch(opcion){
+            case "categoria":
+                response.sendRedirect("paginaCategorias?opcion=categoria");
+        }        
+    }
+
 
     /**
      *
@@ -56,13 +71,13 @@ public class PaginaCategorias extends HttpServlet {
                                "<div class='grid__item actionButtons'>" +
                                "<form action='/proRest/administracionCategoria' method='get'>" +
                                "<input type='hidden' name='accion' value='editar'>" +
-                               "<input type='hidden' name='idUsuario' value='"+ categoria.getId() +"'>" +
-                               "<input type='hidden' name='nombreUsuario' value='"+ categoria.getNombreCategoria() +"'>" +
+                               "<input type='hidden' name='idCategoria' value='"+ categoria.getId() +"'>" +
+                               "<input type='hidden' name='nombreCategoria' value='"+ categoria.getNombreCategoria() +"'>" +
                                 "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
                                "<form action='/proRest/administracionCategoria' method='post'>" +
                                "<input type='hidden' name='accion' value='eliminar'>" +
-                                "<input type='hidden' name='idUsuario' value='"+ categoria.getId() +"'>" +
+                                "<input type='hidden' name='idCategoria' value='"+ categoria.getId() +"'>" +
                                "<button type='submit' class='delete__button'>Eliminar</button>" +
                                "</form>" +
                                "</div>";
@@ -74,34 +89,38 @@ public class PaginaCategorias extends HttpServlet {
             case "plato":
                 botonAgregar = "<a href='/proRest/administracionPlato?accion=agregar' id='addUserBtn' class='add__button'>+</a>"
                         + "<p class='add__text'>Añadir Plato</p>";
-                grid = "<div class='grid__containerDish' id='userGridContainer'>"
-                        + "<h2 class='section__title'>Administrar Platos</h2>";
-                for (Platos plato : platos){
-                    tabla +="<h3 class='grid__title'>ID</h3>" +
+                grid = "<h2 class='section__title'>Administrar Platos</h2>"
+                        + "<div class='grid__containerDish' id='userGridContainer'>"
+                        + "<h3 class='grid__title'>ID</h3>" +
                             "<h3 class='grid__title'>Nombre</h3>" +
                             "<h3 class='grid__title'>Descripcion</h3>" + 
                             "<h3 class='grid__title'>Precio</h3>" +
                             "<h3 class='grid__title'>Ruta Imagen</h3>" +
                             "<h3 class='grid__title'>Categoria</h3>" + 
-                            "<h3 class='grid__title'>Acciones</h3>" + 
-                            "<p class='grid__item'>"+ plato.getId() +"</p>" +
+                            "<h3 class='grid__title'>Acciones</h3>";
+                
+                
+                
+                
+                for (Platos plato : platos){
+                    tabla +="<p class='grid__item'>"+ plato.getId() +"</p>" +
                                "<p class='grid__item'>"+ plato.getNombrePlato()+"</p>" +
                             "<p class='grid__item'>"+ plato.getDescripcionPlato()+"</p>" +
                             "<p class='grid__item'>"+ plato.getPrecioPlato()+"</p>" +
-                            "<p class='grid__item'>"+ plato.getPrecioPlato()+"</p>" +
+                            "<p class='grid__item'>" + plato.getImagenPlato() +"</p>" +
                             "<p class='grid__item'>"+ plato.getNombreCategoria()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='/proRest/administracionCategoria' method='get'>" +
+                               "<form action='/proRest/administracionPlato' method='get'>" +
                                "<input type='hidden' name='accion' value='editar'>" +
-                               "<input type='hidden' name='idUsuario' value='"+  plato.getId() +"'>" +
-                               "<input type='hidden' name='nombreUsuario' value='"+ plato.getDescripcionPlato() +"'>" +
+                               "<input type='hidden' name='idPlato' value='"+  plato.getId() +"'>" +
                                 "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
-                               "<form action='/proRest/administracionCategoria' method='post'>" +
+                               "<form action='/proRest/administracionPlato' method='post'>" +
                                "<input type='hidden' name='accion' value='eliminar'>" +
-                                "<input type='hidden' name='idUsuario' value='"+ plato.getId() +"'>" +
+                                "<input type='hidden' name='idPlato' value='"+ plato.getId() +"'>" +
                                "<button type='submit' class='delete__button'>Eliminar</button>" +
-                               "</form>";
+                               "</form>"
+                            + "</div>";
                 }
                 
                 

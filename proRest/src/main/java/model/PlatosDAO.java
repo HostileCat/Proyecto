@@ -24,7 +24,7 @@ public class PlatosDAO {
         
         
     }
-    public void guardarPlato(Platos platos) {
+    public boolean guardarPlato(Platos platos) {
             String sql = "INSERT INTO platos (nombre_plato, id_categoria_fk, descripcion_plato, precio_plato, imagen_plato) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -33,9 +33,13 @@ public class PlatosDAO {
                 ps.setString(3, platos.getDescripcionPlato());
                 ps.setDouble(4, platos.getPrecioPlato());
                 ps.setString(5, platos.getImagenPlato());
-                ps.executeUpdate();
+                
+                int filasAfectadas = ps.executeUpdate();
+                
+                return filasAfectadas > 0;
             } catch (SQLException e) {
                 e.printStackTrace();
+                return false;
         }
     }
     
@@ -65,5 +69,36 @@ public class PlatosDAO {
         }
 
         return platos;
+    }
+    
+    public boolean actualizarPlato(Platos plato) {
+        String sql = "UPDATE platos SET nombre_plato = ?, categoria_plato = ?, descripcion_plato = ?, precio_plato = ?, imagen_plato = ? WHERE id_plato = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            
+            ps.setString(1, plato.getNombrePlato());
+            ps.setInt(2, plato.getIdCategoria());
+            ps.setString(3, plato.getDescripcionPlato());
+            ps.setDouble(4, plato.getPrecioPlato());
+            ps.setString(5, plato.getImagenPlato());
+            ps.setInt(6, plato.getId());
+            
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean eliminarPlato(Platos plato) {
+        String sql = "DELETE FROM platos WHERE id_plato = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, plato.getId());
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

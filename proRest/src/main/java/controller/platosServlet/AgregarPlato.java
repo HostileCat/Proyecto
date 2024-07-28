@@ -32,7 +32,9 @@ public class AgregarPlato extends HttpServlet {
         String descripcionPlato = request.getParameter("descripcionPlato");
         int precioPlato = Integer.parseInt(request.getParameter("precioPlato"));
         
-        String uploadFilePath = getServletContext().getRealPath("/") + UPLOAD_DIR;
+        String contextPath = getServletContext().getRealPath("/");
+       String alteredFilePath = contextPath.replace("target/proRest-1.0-SNAPSHOT", "src/main/webapp");
+       String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR;
         
         File uploadDir = new File(uploadFilePath);
         if (!uploadDir.exists()) {

@@ -42,22 +42,29 @@ public class AutenticacionUsuario extends HttpServlet {
             usuario.setContrasena(contrasena);
             UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-            boolean accionExitosa = usuarioDAO.autenticarUsuario(usuario);
+            if(usuarioDAO.usuarioHabilitado(usuario)){
+               boolean accionExitosa = usuarioDAO.autenticarUsuario(usuario);
 
-            if (accionExitosa) {
-                // Usuario autenticado correctamente
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario);
-
-
-                response.sendRedirect("main.jsp");
+                if (accionExitosa) {
+                    // Usuario autenticado correctamente
+                    HttpSession session = request.getSession();
+                    session.setAttribute("usuario", usuario);
 
 
+                    response.sendRedirect("main.jsp");
 
-            } else {
-                request.setAttribute("errorMessage", "Invalid username or password");
+
+
+                } else {
+                    request.setAttribute("errorMessage", "Usuario o Contraseña incorrectos");
+                    request.getRequestDispatcher("login/login.jsp").forward(request, response);
+                } 
+            } else{
+                request.setAttribute("errorMessage", "El usuario esta deshabilitado");
                 request.getRequestDispatcher("login/login.jsp").forward(request, response);
             }
+            
+            
         } else if(accion.equalsIgnoreCase("cerrarSesion")){
             HttpSession session = request.getSession(false);
             if (session != null) {
@@ -137,6 +144,7 @@ public class AutenticacionUsuario extends HttpServlet {
                 usuario.setNombreUsuario(nombreUsuario);
                 usuario.setCorreoElectronico(correoElectronico);
                 usuario.setContrasena(contrasena);
+                usuario.setRol(4);
 
                 // Insertar el usuario en la base de datos
                 UsuarioDAO usuarioDAO = new UsuarioDAO();

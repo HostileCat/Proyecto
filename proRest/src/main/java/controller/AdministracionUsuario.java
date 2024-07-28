@@ -36,63 +36,62 @@ public class AdministracionUsuario extends HttpServlet {
         String idUsuarioString = request.getParameter("idUsuario");
         String accion = request.getParameter("accion");
 
-        if (accion.equals("agregarSubmit")) {
-            // Agregar un nuevo usuario
-     
-            int idRolFk = Integer.parseInt(request.getParameter("rolUsuario"));
-
-            Usuario usuario = new Usuario();
-            usuario.setNombreUsuario(nombre);
-            usuario.setCorreoElectronico(correo);
-            usuario.setContrasena(contraseña);
-            usuario.setRol(idRolFk);
-
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            boolean accionExitosa = usuarioDAO.agregarUsuario(usuario);
-
-            // Redireccionar a una página de confirmación o mostrar un mensaje de error
-            if (accionExitosa) {
-                response.sendRedirect("administracion/administracionUsuarios.jsp");
-            } else {
-                response.sendRedirect("../error.jsp");
-            }
-        } else if (accion.equals("editarSubmit")) {
-            // Editar un usuario existente
-            int idUsuario = Integer.parseInt(idUsuarioString);
-            int idRolFk = Integer.parseInt(request.getParameter("rolUsuario"));            
-
-            Usuario usuario = new Usuario();
-            usuario.setId(idUsuario);
-            usuario.setNombreUsuario(nombre);
-            usuario.setCorreoElectronico(correo);
-            usuario.setContrasena(contraseña);
-            usuario.setRol(idRolFk);
-
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            boolean accionExitosa = usuarioDAO.actualizarUsuario(usuario);
-
-            // Redireccionar a una página de confirmación o mostrar un mensaje de error
-            if (accionExitosa) {
-                response.sendRedirect("administracion/administracionUsuarios.jsp");
-            } else {
-                response.sendRedirect("../error.jsp");
-            }
-        } else if(accion.equals("eliminar")){
-            int idUsuario = Integer.parseInt(idUsuarioString);
-            
-            Usuario usuario = new Usuario();
-            usuario.setId(idUsuario);
-            
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            boolean accionExitosa = usuarioDAO.eliminarUsuario(usuario);
-
-            // Redireccionar a una página de confirmación o mostrar un mensaje de error
-            if (accionExitosa) {
-                response.sendRedirect("administracion/administracionUsuarios.jsp");
-            } else {
-                response.sendRedirect("../error.jsp");
-            }
-            
+        switch (accion) {
+            case "agregarSubmit":
+                {
+                    // Agregar un nuevo usuario
+                    
+                    int idRolFk = Integer.parseInt(request.getParameter("rolUsuario"));
+                    Usuario usuario = new Usuario();
+                    usuario.setNombreUsuario(nombre);
+                    usuario.setCorreoElectronico(correo);
+                    usuario.setContrasena(contraseña);
+                    usuario.setRol(idRolFk);
+                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    boolean accionExitosa = usuarioDAO.agregarUsuario(usuario);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("administracion/administracionUsuarios.jsp");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }       break;
+                }
+            case "editarSubmit":
+                {
+                    // Editar un usuario existente
+                    int idUsuario = Integer.parseInt(idUsuarioString);
+                    int idRolFk = Integer.parseInt(request.getParameter("rolUsuario"));
+                    Usuario usuario = new Usuario();
+                    usuario.setId(idUsuario);
+                    usuario.setNombreUsuario(nombre);
+                    usuario.setCorreoElectronico(correo);
+                    usuario.setContrasena(contraseña);
+                    usuario.setRol(idRolFk);
+                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    boolean accionExitosa = usuarioDAO.actualizarUsuario(usuario);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("administracion/administracionUsuarios.jsp");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }       break;
+                }
+            case "eliminar":
+                {
+                    int idUsuario = Integer.parseInt(idUsuarioString);
+                    Usuario usuario = new Usuario();
+                    usuario.setId(idUsuario);
+                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    boolean accionExitosa = usuarioDAO.eliminarUsuario(usuario);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("administracion/administracionUsuarios.jsp");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }       break;
+                }
+            default:
+                break;
         }
     }
     

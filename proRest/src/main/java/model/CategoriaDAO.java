@@ -76,16 +76,16 @@ public class CategoriaDAO {
     }
     
     public boolean actualizarNombreCategoria(Categoria categoria) {
-    String sql = "UPDATE categoria SET nombre_categoria = ? WHERE id_categoria = ?";
-    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-        ps.setString(1, categoria.getNombreCategoria());
-        ps.setInt(2, categoria.getId());
-        int filasAfectadas = ps.executeUpdate();
-        return filasAfectadas > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
-    }
+        String sql = "UPDATE categoria SET nombre_categoria = ? WHERE id_categoria = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setString(1, categoria.getNombreCategoria());
+            ps.setInt(2, categoria.getId());
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
    }
 }
 

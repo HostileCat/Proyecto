@@ -50,7 +50,7 @@ public class Platos {
         this.descripcionPlato = descripcionPlato;
     }
 
-    public double getPrecioPlato() {
+    public int getPrecioPlato() {
         return precioPlato;
     }
 

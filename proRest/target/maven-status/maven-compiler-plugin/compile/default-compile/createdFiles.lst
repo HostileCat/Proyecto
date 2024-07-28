@@ -16,10 +16,10 @@ controller\categoriaServlet\ActualizarCategoria.class
 controller\categoriaServlet\EliminarCategoria.class
 model\UsuarioDAO.class
 controller\menuServlet\Header.class
-model\Plato.class
 controller\platosServlet\ListarCategorias_agregarForm.class
 config\conexion.class
 controller\platosServlet\ListarPlatos_eliminar.class
+controller\AdministracionPlatos.class
 com\mycompany\prorest\JakartaRestConfiguration.class
 controller\categoriaServlet\ListarCategorias_editar.class
 controller\SetOpcionesUsuario.class
