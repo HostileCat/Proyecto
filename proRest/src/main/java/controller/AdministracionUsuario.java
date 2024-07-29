@@ -34,6 +34,7 @@ public class AdministracionUsuario extends HttpServlet {
         String correo = request.getParameter("correoUsuario");
         String contraseña = request.getParameter("contrasenaUsuario");
         String idUsuarioString = request.getParameter("idUsuario");
+        String idEstadoString = request.getParameter("idEstado");
         String accion = request.getParameter("accion");
 
         switch (accion) {
@@ -76,13 +77,15 @@ public class AdministracionUsuario extends HttpServlet {
                         response.sendRedirect("../error.jsp");
                     }       break;
                 }
-            case "eliminar":
+            case "estado":
                 {
                     int idUsuario = Integer.parseInt(idUsuarioString);
+                    int idEstado = Integer.parseInt(idEstadoString);
                     Usuario usuario = new Usuario();
                     usuario.setId(idUsuario);
+                    usuario.setEstado(idEstado);
                     UsuarioDAO usuarioDAO = new UsuarioDAO();
-                    boolean accionExitosa = usuarioDAO.eliminarUsuario(usuario);
+                    boolean accionExitosa = usuarioDAO.cambiarEstadoUsuario(usuario);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
                         response.sendRedirect("administracion/administracionUsuarios.jsp");

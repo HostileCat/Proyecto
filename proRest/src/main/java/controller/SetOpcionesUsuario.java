@@ -53,9 +53,10 @@ public class SetOpcionesUsuario extends HttpServlet {
                                 "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
                                "<form action='/proRest/administracionUsuario' method='post'>" +
-                               "<input type='hidden' name='accion' value='eliminar'>" +
+                               "<input type='hidden' name='accion' value='estado'>" +
                                 "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
-                               "<button type='submit' class='status__button'>" + (usuario.isEstado() ? "Deshabilitar" : "Habilitar") + "</button>" +
+                                "<input type='hidden' name='idEstado' value='"+ usuario.getEstado() +"'>" +
+                                "<button type='submit' class='status__button'>" + (usuario.getEstado() == 1? "Habilitado" : "Inhabilitado") + "</button>" +
                                "</form>" +
                                "</div>";
                     }                          

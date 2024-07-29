@@ -6,15 +6,17 @@ public class Usuario {
     private String correoElectronico;
     private String contrasena;
     private int rol;
-    private boolean estado;
+    private int estado;
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    
 
     public String getNombreRol() {
         return nombreRol;

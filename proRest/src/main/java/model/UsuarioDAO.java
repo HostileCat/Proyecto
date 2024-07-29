@@ -103,9 +103,9 @@ public class UsuarioDAO {
     }
     
     public List<Usuario> todosLosUsuarios(){
-        String sql = "SELECT id_usuario, nombre_usuario, correo_usuario, contrasena_usuario, id_rol_fk, nombre_rol, estado FROM usuario "
-                + "INNER JOIN roles ON id_rol_fk = id_rol"
-                + "INNER JOIN usuario_estado ON id_usuario_fk = id_usuario";
+        String sql = "SELECT id_usuario, nombre_usuario, correo_usuario, contrasena_usuario, id_rol_fk, nombre_rol, id_estado_fk "
+                + "FROM usuario "
+                + "INNER JOIN roles ON id_rol_fk = id_rol ";
         
         List<Usuario> usuarios = new ArrayList<>();
         
@@ -118,7 +118,7 @@ public class UsuarioDAO {
                 String contrasenaUsuario = rs.getString("contrasena_usuario");
                 int idRol = rs.getInt("id_rol_fk");
                 String nombreRol = rs.getString("nombre_rol");
-                boolean estado = rs.getBoolean("estado");
+                int idEstado = rs.getInt("id_estado_fk");
                 
                 Usuario usuario = new Usuario();
                 
@@ -128,7 +128,7 @@ public class UsuarioDAO {
                 usuario.setContrasena(contrasenaUsuario);
                 usuario.setRol(idRol);
                 usuario.setNombreRol(nombreRol);
-                usuario.setEstado(estado);
+                usuario.setEstado(idEstado);
                 
                 usuarios.add(usuario);
             }
@@ -163,6 +163,19 @@ public class UsuarioDAO {
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setInt(1, usuario.getId());
             
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean cambiarEstadoUsuario(Usuario usuario) {
+        String sql = "UPDATE usuario SET id_estado_fk = ? WHERE id_usuario = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, usuario.getEstado());
+            ps.setInt(2, usuario.getId());
             int filasAfectadas = ps.executeUpdate();
             return filasAfectadas > 0;
         } catch (SQLException e) {

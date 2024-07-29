@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-07-2024 a las 00:34:04
+-- Tiempo de generación: 29-07-2024 a las 17:30:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -174,19 +174,18 @@ CREATE TABLE `reserva` (
 
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
-  `nombre_rol` varchar(255) NOT NULL,
-  `descripcion` varchar(255) DEFAULT NULL
+  `nombre_rol` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `roles` (`id_rol`, `nombre_rol`, `descripcion`) VALUES
-(1, 'superadministrador', 'Tiene acceso total y control sobre todas las funcionalidades del sistema.'),
-(2, 'administrador', 'Encargado de la gestión y administración del sistema, pero con ciertas restricciones comparado con el superadministrador.'),
-(3, 'empleado', 'Persona encargada de las tareas operativas del restaurante, como tomar pedidos'),
-(4, 'cliente', 'Usuario final que realiza pedidos y reserva mesas en el restaurante.');
+INSERT INTO `roles` (`id_rol`, `nombre_rol`) VALUES
+(1, 'superadministrador'),
+(2, 'administrador'),
+(3, 'empleado'),
+(4, 'cliente');
 
 -- --------------------------------------------------------
 
@@ -199,25 +198,25 @@ CREATE TABLE `usuario` (
   `nombre_usuario` varchar(255) NOT NULL,
   `correo_usuario` varchar(255) DEFAULT NULL,
   `contrasena_usuario` varchar(255) NOT NULL,
-  `id_rol_fk` int(11) DEFAULT NULL
+  `id_rol_fk` int(11) DEFAULT NULL,
+  `id_estado_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `correo_usuario`, `contrasena_usuario`, `id_rol_fk`) VALUES
-(1, 'Juan Pérez', 'juan@example.com', 'hashed_password1', NULL),
-(2, 'Ana García', 'ana@example.com', 'hashed_password2', NULL),
-(3, 'María López', 'maria@example.com', 'hashed_password3', NULL),
-(4, 'Pedro Rodriguez', 'pedro@example.com', 'hashed_password4', NULL),
-(5, 'Sofía Martínez', 'sofia@example.com', 'hashed_password5', NULL),
-(7, 'qwer', 'qwer@gmail.com', '1234', 3),
-(8, 'juan', 'juan@gmail.com', '1234', 4),
-(10, 'Carreño', 'jcarre5@soy.sena.edu.co', '', 4),
-(11, 'abel', 'abel@gmail.com', 'abel1234', 2),
-(12, 'marquez', 'marquez@gmail.com', '1234', 1),
-(13, 'daniel', 'daniel@gmail.com', '1234Daniel', 4);
+INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `correo_usuario`, `contrasena_usuario`, `id_rol_fk`, `id_estado_fk`) VALUES
+(1, 'Juan Pérez', 'juan@example.com', 'hashed_password1', NULL, 1),
+(2, 'Ana García', 'ana@example.com', 'hashed_password2', NULL, 1),
+(3, 'María López', 'maria@example.com', 'hashed_password3', NULL, 1),
+(4, 'Pedro Rodriguez', 'pedro@example.com', 'hashed_password4', NULL, 1),
+(5, 'Sofía Martínez', 'sofia@example.com', 'hashed_password5', NULL, 1),
+(7, 'qwer', 'qwer@gmail.com', '1234', 3, 1),
+(8, 'juan', 'juan@gmail.com', '1234', 4, 1),
+(11, 'abel', 'abel@gmail.com', 'abel1234', 2, 1),
+(12, 'marquez', 'marquez@gmail.com', '1234', 1, 1),
+(13, 'daniel', 'daniel@gmail.com', '1234Daniel', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -227,9 +226,16 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `correo_usuario`, `contra
 
 CREATE TABLE `usuario_estado` (
   `id_estado` int(11) NOT NULL,
-  `id_usuario_fk` int(11) DEFAULT NULL,
-  `estado` tinyint(1) NOT NULL DEFAULT 1
+  `estado` varchar(255) NOT NULL DEFAULT 'Habilitado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario_estado`
+--
+
+INSERT INTO `usuario_estado` (`id_estado`, `estado`) VALUES
+(1, 'Habilitado'),
+(2, 'Inhabilitado');
 
 --
 -- Índices para tablas volcadas
@@ -287,14 +293,14 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD KEY `fk_usuario_rol` (`id_rol_fk`);
+  ADD KEY `fk_usuario_rol` (`id_rol_fk`),
+  ADD KEY `fk_estado_usuario` (`id_estado_fk`);
 
 --
 -- Indices de la tabla `usuario_estado`
 --
 ALTER TABLE `usuario_estado`
-  ADD PRIMARY KEY (`id_estado`),
-  ADD KEY `id_usuario_fk` (`id_usuario_fk`);
+  ADD PRIMARY KEY (`id_estado`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -340,7 +346,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `usuario_estado`
 --
 ALTER TABLE `usuario_estado`
-  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -376,13 +382,8 @@ ALTER TABLE `reserva`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
+  ADD CONSTRAINT `fk_estado_usuario` FOREIGN KEY (`id_estado_fk`) REFERENCES `usuario_estado` (`id_estado`),
   ADD CONSTRAINT `fk_usuario_rol` FOREIGN KEY (`id_rol_fk`) REFERENCES `roles` (`id_rol`);
-
---
--- Filtros para la tabla `usuario_estado`
---
-ALTER TABLE `usuario_estado`
-  ADD CONSTRAINT `usuario_estado_ibfk_1` FOREIGN KEY (`id_usuario_fk`) REFERENCES `usuario` (`id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
