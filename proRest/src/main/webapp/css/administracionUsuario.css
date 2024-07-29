@@ -38,7 +38,7 @@ body{
     padding: 0;
 }
 
-.nav__item{
+.nav__item a{
     padding: 14px 24px;
     background-color: var(--secondary-color);
     border-radius: 17px;
@@ -48,12 +48,17 @@ body{
     margin: 0;
     align-content: center;
     white-space: normal;
-}
-
-.nav__item a{
     color: var(--text-color);
     font-weight: bold;
     font-size: 24px;
+}
+
+.nav__item a:hover{
+    background-color: var(--normal-hover);
+}
+
+.nav__item a:active{
+    background-color: var(--tertiary-color);
 }
 
 .section__container{
@@ -68,7 +73,7 @@ body{
 
 .grid__container{
     display: grid;
-    grid-template-columns: 70px repeat(3, minmax(auto, 1fr)) 120px 1fr;
+    grid-template-columns: 70px repeat(3, minmax(auto, 1fr)) minmax(auto, 120px) 1fr;
     padding: 10px 20px;
     gap: 5px;
     
@@ -118,7 +123,7 @@ body{
     color: var(--text-color);
     font-weight: bold;
     border-radius: 17px;
-    width: 102px;
+    width: 115px;
 }
 
 .edit__button:hover{
@@ -129,6 +134,36 @@ body{
     background-color: var(--primary-color);
 }
 
+.status__button{
+    padding: 10px 24px;
+    background-color: var(--status-button-color);
+    border: none;
+    color: var(--text-color);
+    font-weight: bold;
+    border-radius: 17px;
+    width: 115px;
+}
+
+.status__button:hover{
+    background-color: var(--status-button-hover);
+}
+
+.status__button:active{
+    background-color: var(--status-button-colorD);
+}
+
+.negative{
+    background-color: var(--negative-button-color); 
+}
+
+.negative:hover{
+    background-color: var(--negative-button-hover); 
+}
+
+.negative:active{
+    background-color: var(--negative-button-colorD); 
+}
+
 .delete__button{
     padding: 10px 24px;
     background-color: var(--delete-button-colorD);
@@ -136,7 +171,7 @@ body{
     color: var(--text-color);
     font-weight: bold;
     border-radius: 17px;
-    width: 102px;
+    width: 115px;
 }
 
 .delete__button:hover{

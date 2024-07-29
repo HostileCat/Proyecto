@@ -23,4 +23,12 @@
   --add-button-color: #32b550;
   --add-button-hover: #28a745;
   --add-button-colorD: #1e5d2d;
+  
+  --status-button-color: #ffa500;
+  --status-button-hover: #e27c00;
+  --status-button-colorD: #bb5502;
+  
+  --negative-button-color: #E0E0E0;
+  --negative-button-hover: #D3D3D3;
+  --negative-button-colorD: #BEBEBE;
 }

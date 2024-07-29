@@ -20,11 +20,11 @@
             <div class="main__nav">
                 <ul class="nav__list">
                     
-                    <li class="nav__item"><a href="/proRest/insertarOpcionesUsuario?opcion=cliente">Cliente</a></li>
-                    <li class="nav__item"><a href="/proRest/insertarOpcionesUsuario?opcion=empleado">Empleado</a></li>
+                    <li class="nav__item"><a href="/proRest/paginaUsuarios?opcion=cliente">Cliente</a></li>
+                    <li class="nav__item"><a href="/proRest/paginaUsuarios?opcion=empleado">Empleado</a></li>
                     <%
                         if(rolUsuario == 1){
-                            out.print("<li class='nav__item'><a href='/proRest/insertarOpcionesUsuario?opcion=administrador'>Administrador</a></li>");
+                            out.print("<li class='nav__item'><a href='/proRest/paginaUsuarios?opcion=administrador'>Administrador</a></li>");
                         }
                     %>
                     
@@ -46,7 +46,7 @@
                     <h3 class="grid__title">Nombre</h3>
                     <h3 class="grid__title">Correo</h3>
                     <h3 class="grid__title">Contraseña</h3>
-                    <h3 class="grid__title">Rol</h3>
+                    <h3 class="grid__title">Estado</h3>
                     <h3 class="grid__title">Acciones</h3>
                     
                     <%

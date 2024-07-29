@@ -19,7 +19,7 @@
         <main class="main">
             <section class="main__section">
                 <h1 class="section__title">Añadir Plato</h1>
-                    <form action="/proRest/administracionPlato?accion=agregarSubmit" method="post" enctype="multipart/form-data" class="section__form">
+                    <form action="/proRest/administracionPlato?accion=agregarSubmit" method="post" enctype="multipart/form-data" class="section__form section__form--dish">
                         <div class="section__add addDish">
                           <input type="text" placeholder="Nombre" class="add__input" name="nombrePlato" id="nombrePlato" value="" required>
                         </div> 

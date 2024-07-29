@@ -22,15 +22,6 @@
                 StringBuilder sb = new StringBuilder();
                
                 if (rolUsuario >= 1 && rolUsuario <= 4) {
-                    sb.append("<li class='mobile-nav__item'><p class='menu-link'>Pedido</a>"
-                    + "<ul class='navbar__sublist'>"
-                    + "<li class='navbar__subitem'><a href='index.jsp'>Pedido a Domicilio</a></li>");
-                    if (rolUsuario <= 3){
-                        sb.append("<li class='navbar__subitem'><a href='index.jsp'>Tomar Pedido</a></li>"
-                        + "<li class='navbar__subitem'><a href='index.jsp'>Administrar Pedidos</a></li>");
-                    }
-                    sb.append("</ul>"
-                    + "</li>");
                     
                     sb.append("<li class='mobile-nav__item'><p class='menu-link'>Reservas</p>"
                     + "<ul class='navbar__sublist'>"
@@ -41,9 +32,34 @@
                     sb.append("</ul>"
                     + "</li>");
                     
+                    
+                    if (rolUsuario <= 3){
+                        sb.append("<li class='mobile-nav__item'><p class='menu-link'>Pedido</p>"
+                        + "<ul class='navbar__sublist'>");
+                        sb.append("<li class='navbar__subitem'><a href='index.jsp'>Tomar Pedido</a></li>"
+                        + "<li class='navbar__subitem'><a href='index.jsp'>Administrar Pedidos</a></li>");
+                        sb.append("</ul>"
+                        + "</li>");
+                    }
+
                     if (rolUsuario <= 2) {
                         sb.append("<li class='mobile-nav__item'><a class='menu-link'>Administrar Carta</a></li>");
-                        sb.append("<li class='mobile-nav__item'><a href='/proRest/administracion/administracionUsuarios.jsp' class='menu-link'>Administrar Usuarios</a></li>");
+                        sb.append("<li class='mobile-nav__item'><p class='menu-link'>Administrar Platos</p>"
+                        + "<ul class='navbar__sublist'>");
+                        sb.append("<li class='navbar__subitem'><a href='/proRest/paginaPlatos?opcion=categoria'>Categorias</a></li>"
+                        + "<li class='navbar__subitem'><a href='/proRest/paginaPlatos?opcion=plato'>Platos</a></li>");
+                        sb.append("</ul>"
+                        + "</li>");
+                        
+                        sb.append("<li class='mobile-nav__item'><p class='menu-link'>Administrar Usuarios</p>"
+                        + "<ul class='navbar__sublist'>");
+                        sb.append("<li class='navbar__subitem'><a href='/proRest/paginaUsuarios?opcion=cliente'>Clientes</a></li>"
+                        + "<li class='navbar__subitem'><a href='/proRest/paginaUsuarios?opcion=empleado'>Empleados</a></li>");
+                        if (rolUsuario == 1){
+                            sb.append("<li class='navbar__subitem'><a href='/proRest/paginaUsuarios?opcion=administrador'>Administradores</a></li>");
+                        }
+                        sb.append("</ul>"
+                        + "</li>");
                     }
       
                 }

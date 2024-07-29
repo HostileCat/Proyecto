@@ -19,7 +19,7 @@ import model.Platos;
 import model.PlatosDAO;
 
 
-@WebServlet("/paginaCategorias")
+@WebServlet("/paginaPlatos")
 public class PaginaCategorias extends HttpServlet {
     
 
@@ -30,8 +30,10 @@ public class PaginaCategorias extends HttpServlet {
         String opcion = request.getParameter("opcion");
         
         switch(opcion){
-            case "categoria":
-                response.sendRedirect("paginaCategorias?opcion=categoria");
+            case "categoriaSubmit":
+                response.sendRedirect("paginaPlatos?opcion=categoria");
+            case "platoSubmit":
+                response.sendRedirect("paginaPlatos?opcion=plato");    
         }        
     }
 
@@ -132,7 +134,7 @@ public class PaginaCategorias extends HttpServlet {
         request.setAttribute("tabla", tabla);
         request.setAttribute("botonAgregar", botonAgregar);
         request.setAttribute("grid", grid);
-        request.getRequestDispatcher("administracion/inventarioDefault.jsp").forward(request, response);
+        request.getRequestDispatcher("administracion/administracionPlatos.jsp").forward(request, response);
     }
 
 }

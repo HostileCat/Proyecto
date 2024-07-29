@@ -44,10 +44,11 @@ public class AdministracionCategorias extends HttpServlet {
                     boolean accionExitosa = categoriaDAO.agregarCategoria(categoria);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaCategorias?opcion=categoria");
+                        response.sendRedirect("paginaPlatos?opcion=categoria");
                     } else {
                         response.sendRedirect("../error.jsp");
-                    }       break;
+                    }       
+                    break;
                 }
             case "editarSubmit":
                 {
@@ -59,10 +60,11 @@ public class AdministracionCategorias extends HttpServlet {
                     boolean accionExitosa = categoriaDAO.actualizarNombreCategoria(categoria);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaCategorias?opcion=categoria");
+                        response.sendRedirect("paginaPlatos?opcion=categoria");
                     } else {
                         response.sendRedirect("../error.jsp");
-                    }       break;
+                    }       
+                    break;
                 }
             case "eliminar":
                 {
@@ -73,7 +75,7 @@ public class AdministracionCategorias extends HttpServlet {
                     boolean accionExitosa = categoriaDAO.eliminarCategoria(categoria);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaCategorias?opcion=categoria");
+                        response.sendRedirect("paginaPlatos?opcion=categoria");
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       

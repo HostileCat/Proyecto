@@ -60,7 +60,7 @@ public class AutenticacionUsuario extends HttpServlet {
                     request.getRequestDispatcher("login/login.jsp").forward(request, response);
                 } 
             } else{
-                request.setAttribute("errorMessage", "El usuario esta deshabilitado");
+                request.setAttribute("errorMessage", "El usuario esta inhabilitado");
                 request.getRequestDispatcher("login/login.jsp").forward(request, response);
             }
             

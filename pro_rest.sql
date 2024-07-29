@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-07-2024 a las 17:30:10
+-- Tiempo de generación: 30-07-2024 a las 01:10:23
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,30 +44,10 @@ INSERT INTO `categoria` (`id_categoria`, `nombre_categoria`) VALUES
 (5, 'Menú Infantil'),
 (10, 'gsdg'),
 (12, 'jamon'),
-(14, 'alo');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mesa`
---
-
-CREATE TABLE `mesa` (
-  `numero_mesa` int(11) NOT NULL,
-  `descripcion_mesa` varchar(255) DEFAULT NULL,
-  `capacidad_mesa` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `mesa`
---
-
-INSERT INTO `mesa` (`numero_mesa`, `descripcion_mesa`, `capacidad_mesa`) VALUES
-(1, 'Mesa junto a la ventana', 4),
-(2, 'Mesa en el patio', 6),
-(3, 'Mesa VIP', 2),
-(4, 'Mesa en la esquina', 3),
-(5, 'Mesa para grupos grandes', 10);
+(14, 'alo'),
+(15, 'qwer'),
+(16, 'qwer'),
+(17, 'qwer');
 
 -- --------------------------------------------------------
 
@@ -80,7 +60,6 @@ CREATE TABLE `pedido` (
   `id_usuario_fk` int(11) DEFAULT NULL,
   `fechaInicio_pedido` datetime DEFAULT NULL,
   `fechaFin_pedido` datetime DEFAULT NULL,
-  `numero_mesa_fk` int(11) DEFAULT NULL,
   `estado_pedido` enum('espera','entregado','cancelado') NOT NULL,
   `detalle_pedido` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -89,12 +68,12 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fechaInicio_pedido`, `fechaFin_pedido`, `numero_mesa_fk`, `estado_pedido`, `detalle_pedido`) VALUES
-(1, 1, '2023-11-01 18:00:00', '2023-11-01 19:30:00', NULL, 'espera', NULL),
-(2, 1, '2023-11-02 19:30:00', '2023-11-02 20:45:00', NULL, 'espera', NULL),
-(3, 3, '2023-11-03 20:00:00', '2023-11-03 21:15:00', NULL, 'espera', NULL),
-(4, 3, '2023-11-04 18:30:00', '2023-11-04 19:45:00', NULL, 'espera', NULL),
-(5, 5, '2023-11-05 17:45:00', '2023-11-05 18:30:00', NULL, 'espera', NULL);
+INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fechaInicio_pedido`, `fechaFin_pedido`, `estado_pedido`, `detalle_pedido`) VALUES
+(1, 1, '2023-11-01 18:00:00', '2023-11-01 19:30:00', 'espera', NULL),
+(2, 1, '2023-11-02 19:30:00', '2023-11-02 20:45:00', 'espera', NULL),
+(3, 3, '2023-11-03 20:00:00', '2023-11-03 21:15:00', 'espera', NULL),
+(4, 3, '2023-11-04 18:30:00', '2023-11-04 19:45:00', 'espera', NULL),
+(5, 5, '2023-11-05 17:45:00', '2023-11-05 18:30:00', 'espera', NULL);
 
 -- --------------------------------------------------------
 
@@ -151,7 +130,8 @@ INSERT INTO `platos` (`id_plato`, `nombre_plato`, `descripcion_plato`, `precio_p
 (11, 'plato', 'platillo', 12345, 3, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg'),
 (12, 'plato', 'platillo', 12345, 2, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg'),
 (13, 'hola', 'hello', 54321, 4, '1f1d408dddce4984a689afc06d9f42d8.webp'),
-(14, 'hola', 'hello', 54321, 1, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg');
+(14, 'hola', 'hello', 54321, 1, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg'),
+(15, 'hola', 'hola hola', 123456, 17, 'Captura de pantalla 2024-05-25 115754.png');
 
 -- --------------------------------------------------------
 
@@ -162,8 +142,9 @@ INSERT INTO `platos` (`id_plato`, `nombre_plato`, `descripcion_plato`, `precio_p
 CREATE TABLE `reserva` (
   `id_reserva` int(11) NOT NULL,
   `id_cliente_fk` int(11) NOT NULL,
-  `fecha_reserva` datetime NOT NULL,
-  `estado_reserva` enum('confirmada','cancelada') DEFAULT NULL
+  `fecha_reserva` date NOT NULL,
+  `estado_reserva` enum('confirmada','cancelada') DEFAULT NULL,
+  `hora_reserva` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -248,18 +229,11 @@ ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indices de la tabla `mesa`
---
-ALTER TABLE `mesa`
-  ADD PRIMARY KEY (`numero_mesa`);
-
---
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`id_pedido`),
-  ADD KEY `id_usuario_fk` (`id_usuario_fk`),
-  ADD KEY `numero_mesa_fk` (`numero_mesa_fk`);
+  ADD KEY `id_usuario_fk` (`id_usuario_fk`);
 
 --
 -- Indices de la tabla `pedido_platos`
@@ -310,13 +284,7 @@ ALTER TABLE `usuario_estado`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `mesa`
---
-ALTER TABLE `mesa`
-  MODIFY `numero_mesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -328,7 +296,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `platos`
 --
 ALTER TABLE `platos`
-  MODIFY `id_plato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_plato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -356,8 +324,7 @@ ALTER TABLE `usuario_estado`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_usuario_fk`) REFERENCES `usuario` (`id_usuario`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`numero_mesa_fk`) REFERENCES `mesa` (`numero_mesa`);
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_usuario_fk`) REFERENCES `usuario` (`id_usuario`);
 
 --
 -- Filtros para la tabla `pedido_platos`

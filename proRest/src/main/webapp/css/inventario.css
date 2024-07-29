@@ -17,7 +17,10 @@ body {
 .main {
     padding: 20px;
     max-width: 1200px;
+    min-height: 90vh;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
 }
 
 .main__section {
@@ -25,13 +28,15 @@ body {
     padding: 20px;
     border-radius: 17px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
 }
 
 .section__title {
-    flex-basis: 100%;
+    grid-row: 1/2;
+    grid-column: 1/3;
     margin-bottom: 20px;
     font-size: 24px;
     text-align: center;
@@ -40,10 +45,15 @@ body {
 }
 
 .section__form {
-    flex-basis: 55%;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+.section__form--category{
+    grid-column: 1/3;
+}
+.section__form--dish{
+    grid-column: 1/2;
 }
 
 .section__add {
@@ -102,8 +112,11 @@ body {
     background-color: var(--normal-hover);
 }
 
+.section__addButton:active {
+    background-color: var(--tertiary-color);
+}
+
 .section__view {
-    flex-basis: 40%;
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 10px;
@@ -111,7 +124,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
+    
     width: 100%;
 }
 
@@ -151,14 +164,17 @@ body {
 }
 
 /* Media Queries for Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .main__section{
-        justify-content: center;
-        gap: 80px;
+        grid-template-columns: 1fr;
+    }
+    
+    .section__title{
+        grid-column: 1/2;
     }
     
     .section__form, .section__view {
-        flex-basis: 100%;
+        grid-column: 1/2;
     }
 
     .view__img {
@@ -166,32 +182,3 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .section__title {
-        font-size: 20px;
-        margin: 30px 0;
-    }
-
-    .add__input, .addDish__img, .section__addButton {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-
-    .view__title {
-        font-size: 18px;
-        margin-bottom: 15px;
-    }
-
-    .view__img {
-        
-    }
-
-    .view__dishName,
-    .view__dishCost {
-        font-size: 16px;
-    }
-
-    .view__dishDescription {
-        font-size: 14px;
-    }
-}

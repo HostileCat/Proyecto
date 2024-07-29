@@ -37,22 +37,38 @@ public class AdministracionUsuario extends HttpServlet {
         String idEstadoString = request.getParameter("idEstado");
         String accion = request.getParameter("accion");
 
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        
         switch (accion) {
             case "agregarSubmit":
                 {
                     // Agregar un nuevo usuario
                     
-                    int idRolFk = Integer.parseInt(request.getParameter("rolUsuario"));
+                    int idRol = Integer.parseInt(request.getParameter("rolUsuario"));
                     Usuario usuario = new Usuario();
                     usuario.setNombreUsuario(nombre);
                     usuario.setCorreoElectronico(correo);
                     usuario.setContrasena(contraseña);
-                    usuario.setRol(idRolFk);
-                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    usuario.setRol(idRol);
+                    
                     boolean accionExitosa = usuarioDAO.agregarUsuario(usuario);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("administracion/administracionUsuarios.jsp");
+                        switch (idRol) {
+                            case 2:
+                                response.sendRedirect("paginaUsuarios?opcion=administrador");
+                                break;
+                            case 3:
+                                response.sendRedirect("paginaUsuarios?opcion=empleado");
+                                break;
+                            case 4:
+                                response.sendRedirect("paginaUsuarios?opcion=cliente");
+                                break;
+                            default:
+                                
+                                break;
+                        }
+                        
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       break;
@@ -61,18 +77,30 @@ public class AdministracionUsuario extends HttpServlet {
                 {
                     // Editar un usuario existente
                     int idUsuario = Integer.parseInt(idUsuarioString);
-                    int idRolFk = Integer.parseInt(request.getParameter("rolUsuario"));
+                    int idRol = Integer.parseInt(request.getParameter("rolUsuario"));
                     Usuario usuario = new Usuario();
                     usuario.setId(idUsuario);
                     usuario.setNombreUsuario(nombre);
                     usuario.setCorreoElectronico(correo);
                     usuario.setContrasena(contraseña);
-                    usuario.setRol(idRolFk);
-                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    usuario.setRol(idRol);
                     boolean accionExitosa = usuarioDAO.actualizarUsuario(usuario);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("administracion/administracionUsuarios.jsp");
+                        switch (idRol) {
+                            case 2:
+                                response.sendRedirect("paginaUsuarios?opcion=administrador");
+                                break;
+                            case 3:
+                                response.sendRedirect("paginaUsuarios?opcion=empleado");
+                                break;
+                            case 4:
+                                response.sendRedirect("paginaUsuarios?opcion=cliente");
+                                break;
+                            default:
+                                
+                                break;
+                        }                    
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       break;
@@ -80,15 +108,44 @@ public class AdministracionUsuario extends HttpServlet {
             case "estado":
                 {
                     int idUsuario = Integer.parseInt(idUsuarioString);
-                    int idEstado = Integer.parseInt(idEstadoString);
+                    
+                    List<Usuario> usuarios = usuarioDAO.todosLosUsuarios();
+                    
+                    int idEstado = 0;
+                    int idRol = 0;
+            
+                    for (Usuario usuario : usuarios){
+                        if (usuario.getId() == Integer.parseInt(idUsuarioString)){
+                            idEstado = usuario.getEstado();
+                            idRol = usuario.getRol();
+                        }
+                    }
+                    
+                    if(idEstado == 1){
+                        idEstado = 2;
+                    } else{
+                        idEstado = 1;
+                    }
                     Usuario usuario = new Usuario();
                     usuario.setId(idUsuario);
                     usuario.setEstado(idEstado);
-                    UsuarioDAO usuarioDAO = new UsuarioDAO();
                     boolean accionExitosa = usuarioDAO.cambiarEstadoUsuario(usuario);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("administracion/administracionUsuarios.jsp");
+                        switch (idRol) {
+                            case 2:
+                                response.sendRedirect("paginaUsuarios?opcion=administrador");
+                                break;
+                            case 3:
+                                response.sendRedirect("paginaUsuarios?opcion=empleado");
+                                break;
+                            case 4:
+                                response.sendRedirect("paginaUsuarios?opcion=cliente");
+                                break;
+                            default:
+                                
+                                break;
+                        }                    
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       break;
@@ -131,12 +188,21 @@ public class AdministracionUsuario extends HttpServlet {
             request.setAttribute("accion", "agregarSubmit");
             request.getRequestDispatcher("administracion/agregarUsuario.jsp").forward(request, response);
         } else if(accion.equals("editar")){
-            String nombre = request.getParameter("nombreUsuario");
-            String correo = request.getParameter("correoUsuario");
             String idUsuarioString = request.getParameter("idUsuario");
+            String nombre = "";
+            String correo = "";
             
-            RolDAO rolDAO = new RolDAO();
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            List<Usuario> usuarios = usuarioDAO.todosLosUsuarios();
             
+            for (Usuario usuario : usuarios){
+                if (usuario.getId() == Integer.parseInt(idUsuarioString)){
+                    nombre = usuario.getNombreUsuario();
+                    correo = usuario.getCorreoElectronico();
+                }
+            }
+            
+            RolDAO rolDAO = new RolDAO();            
             List<Rol> roles = rolDAO.todosLosRoles();
             
             for (Rol rol : roles){

@@ -39,7 +39,8 @@ public class CategoriaDAO {
     }
     
     public List<Categoria> todasLasCategorias() {
-        String sql = "SELECT id_categoria, nombre_categoria FROM categoria";
+        String sql = "SELECT id_categoria, nombre_categoria FROM categoria "
+                + "ORDER BY id_categoria DESC";
         List<Categoria> categorias = new ArrayList<>();
 
         try (PreparedStatement ps = conexion.prepareStatement(sql);

@@ -45,7 +45,8 @@ public class PlatosDAO {
     
     public List<Platos> todosLosPlatos() {
         List<Platos> platos = new ArrayList<>();
-        String sql = "SELECT id_plato, nombre_plato, descripcion_plato, precio_plato, id_categoria_fk, imagen_plato, nombre_categoria FROM platos INNER JOIN categoria ON id_categoria_fk = id_categoria";
+        String sql = "SELECT id_plato, nombre_plato, descripcion_plato, precio_plato, id_categoria_fk, imagen_plato, nombre_categoria FROM platos INNER JOIN categoria ON id_categoria_fk = id_categoria "
+                + "ORDER BY id_plato DESC";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {

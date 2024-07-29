@@ -55,17 +55,15 @@ public class UsuarioDAO {
     
     public boolean usuarioHabilitado(Usuario usuario) {
         
-        String sql = "SELECT estado FROM usuario "
-                + "INNER JOIN usuario_estado ON id_usuario = id_usuario_fk"
-                + "WHERE correo_usuario = ?";
+        String sql = "SELECT id_estado_fk FROM usuario WHERE correo_usuario = ?";
         
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
              
             ps.setString(1, usuario.getCorreoElectronico());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    boolean estado = rs.getBoolean("estado");
-                    if (estado){
+                    int estado = rs.getInt("id_estado_fk");
+                    if (estado == 1){
                         return true;
                     }
                 }
@@ -89,10 +87,7 @@ public class UsuarioDAO {
                 if (rs.next()) {
                     usuario.setNombreUsuario(rs.getString("nombre_usuario"));
                     usuario.setRol(rs.getInt("id_rol_fk"));
-                    boolean estado = rs.getBoolean("estado");
-                    if (estado) {
-                        return true;
-                    }
+                    return true;
                 }
             }
         } catch (SQLException e) {
@@ -105,7 +100,8 @@ public class UsuarioDAO {
     public List<Usuario> todosLosUsuarios(){
         String sql = "SELECT id_usuario, nombre_usuario, correo_usuario, contrasena_usuario, id_rol_fk, nombre_rol, id_estado_fk "
                 + "FROM usuario "
-                + "INNER JOIN roles ON id_rol_fk = id_rol ";
+                + "INNER JOIN roles ON id_rol_fk = id_rol "
+                + "ORDER BY id_usuario DESC";
         
         List<Usuario> usuarios = new ArrayList<>();
         

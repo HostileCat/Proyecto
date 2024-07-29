@@ -37,7 +37,7 @@ body{
     padding: 0;
 }
 
-.nav__item{
+.nav__item a{
     padding: 14px 24px;
     background-color: var(--secondary-color);
     border-radius: 17px;
@@ -47,6 +47,15 @@ body{
     margin: 0;
     align-content: center;
     white-space: normal;
+}
+
+.nav__item a:hover{
+    background-color: var(--normal-hover);
+}
+
+.nav__item a:active{
+    background-color: var(--tertiary-color);
+    
 }
 
 .nav__item a{

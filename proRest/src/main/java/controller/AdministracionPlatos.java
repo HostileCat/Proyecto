@@ -80,7 +80,7 @@ public class AdministracionPlatos extends HttpServlet {
                     boolean accionExitosa = platoDAO.guardarPlato(plato);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaCategorias?opcion=platos");
+                        response.sendRedirect("paginaPlatos?opcion=platos");
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       
@@ -114,7 +114,7 @@ public class AdministracionPlatos extends HttpServlet {
                     boolean accionExitosa = platoDAO.actualizarPlato(plato);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaCategorias?opcion=platos");
+                        response.sendRedirect("paginaPlatos?opcion=plato");
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       
@@ -132,7 +132,7 @@ public class AdministracionPlatos extends HttpServlet {
                     boolean accionExitosa = platoDAO.eliminarPlato(plato);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaCategorias?opcion=platos");
+                        response.sendRedirect("paginaPlatos?opcion=platos");
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       
