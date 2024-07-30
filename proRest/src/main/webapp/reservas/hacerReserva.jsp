@@ -1,37 +1,40 @@
-<%@page import="java.util.Arrays"%>
-<%@page import="java.time.format.DateTimeFormatter"%>
-<%@page import="java.time.LocalDateTime"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- 
+    Document   : administracionUsuarios
+    Created on : 18/07/2024, 1:15:56 p. m.
+    Author     : Propietario
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Horarios</title>
-</head>
-<body>
-    <h1>Horarios disponibles:</h1>
-    <ul>
-        <%-- Ejemplo de horarios (puedes cargarlos desde una lista en el backend) --%>
-        <%
-            List<String> horarios = Arrays.asList("12 00", "8:00", "19:00");
-            LocalDateTime horaActual = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <link rel="stylesheet" href="/proRest/css/reservas.css">        
+    </head>
+    <body>
+        <%@ include file="../componentes/header.jsp" %>
+        
+        <main class="main">
+            <section class="main__section">
 
-            for (String horario : horarios) {
-                LocalDateTime horarioLocal = LocalDateTime.parse(horario, formatter);
-                boolean esActivo = horarioLocal.isAfter(horaActual);
-        %>
-        <li>
-            <span><%= horario %></span>
-            <% if (esActivo) { %>
-                <button>Activar</button>
-            <% } else { %>
-                <button disabled>Deshabilitado</button>
-            <% } %>
-        </li>
-        <% } %>
-    </ul>
-</body>
+                <h1 class="section__title">Agregar Categoria</h1>
+                <form action="/proRest/administracionCategoria?accion=agregarSubmit" class="section__form section__form--category" method="post">
+                  <div class="section__add">
+                    <input type="hidden" id="category" name="accion" value="agregar">
+                    <input type="text" id="nombreCliente" name="nombreUsuario" required>
+                  </div>
+                  <div class="section__add">
+                    <input type="date" id="fechaReserva" name="fechaReserva" required>                  
+                  </div>
+                  <div class="section__add">
+                    <input type="time" id="horaReserva" name="horaReserva" required>                  
+                  </div>
+                  <button class="section__addButton">Agregar</button>
+                </form>
+            </section>
+        </main>
+
+        <script src="/proRest/js/script.js"></script>
+    </body>
 </html>
-

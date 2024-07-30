@@ -10,8 +10,8 @@ controller\AdministracionPlatos.class
 model\RolDAO.class
 com\mycompany\prorest\JakartaRestConfiguration.class
 controller\PaginaCategorias.class
+controller\PaginaUsuarios.class
 model\Platos.class
-controller\SetOpcionesUsuario.class
 model\Categoria.class
 controller\AdministracionUsuario.class
 model\CategoriaDAO.class
