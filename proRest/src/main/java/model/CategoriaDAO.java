@@ -63,12 +63,16 @@ public class CategoriaDAO {
         return categorias;
     }
     
-    public boolean eliminarCategoria(Categoria categoria) {
-        String sql = "DELETE FROM categoria WHERE id_categoria = ?";
+    public boolean eliminarCategoria(Categoria categoria) throws SQLException {
+        conexion.setAutoCommit(false);
         
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-            ps.setInt(1, categoria.getId());
-            int filasAfectadas = ps.executeUpdate();
+        String sqlUpdate = "UPDATE platos SET id_categoria_fk = NULL WHERE id_categoria_fk = ?";
+        String sqlDelete = "DELETE FROM categoria WHERE id_categoria = ?";
+        
+        try (PreparedStatement psUpdate = conexion.prepareStatement(sqlUpdate);
+             PreparedStatement psDelete = conexion.prepareStatement(sqlDelete)) {
+            psUpdate.setInt(1, categoria.getId());
+            int filasAfectadas = psUpdate.executeUpdate();
             return filasAfectadas > 0;
         } catch (SQLException e) {
             e.printStackTrace();

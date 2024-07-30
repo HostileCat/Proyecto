@@ -15,26 +15,29 @@
     <body>
         <%@ include file="../componentes/header.jsp" %>
         
+        
+       
+        
         <main class="main">
             <section class="main__section">
 
                 <h1 class="section__title">Agregar Categoria</h1>
-                <form action="/proRest/administracionCategoria?accion=agregarSubmit" class="section__form section__form--category" method="post">
+                <form id="section__form" action="#" class="section__form" method="post">
                   <div class="section__add">
-                    <input type="hidden" id="category" name="accion" value="agregar">
-                    <input type="text" id="nombreCliente" name="nombreUsuario" required>
+                    <input class="add__input" type="text" id="nombreCliente" name="nombreUsuario" required>
                   </div>
                   <div class="section__add">
-                    <input type="date" id="fechaReserva" name="fechaReserva" required>                  
+                    <input class="add__input" type="date" id="fechaReserva" name="fechaReserva" required>                  
                   </div>
                   <div class="section__add">
-                    <input type="time" id="horaReserva" name="horaReserva" required>                  
+                    <input class="add__input" type="time" id="horaReserva" name="horaReserva" required>                  
                   </div>
-                  <button class="section__addButton">Agregar</button>
+                  <input type="hidden" id="category" name="accion" value="agregar">
+                  <button type="button" class="section__addButton">Agregar</button>
                 </form>
             </section>
         </main>
 
-        <script src="/proRest/js/script.js"></script>
+        <script src="/proRest/js/date.js"></script>
     </body>
 </html>

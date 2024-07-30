@@ -34,7 +34,6 @@ public class AdministracionUsuario extends HttpServlet {
         String correo = request.getParameter("correoUsuario");
         String contraseña = request.getParameter("contrasenaUsuario");
         String idUsuarioString = request.getParameter("idUsuario");
-        String idEstadoString = request.getParameter("idEstado");
         String accion = request.getParameter("accion");
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
