@@ -99,6 +99,7 @@ public class PaginaCategorias extends HttpServlet {
                             "<h3 class='grid__title'>Precio</h3>" +
                             "<h3 class='grid__title'>Ruta Imagen</h3>" +
                             "<h3 class='grid__title'>Categoria</h3>" + 
+                            "<h3 class='grid__title'>Estado</h3>" +
                             "<h3 class='grid__title'>Acciones</h3>";
                 
                 
@@ -111,16 +112,18 @@ public class PaginaCategorias extends HttpServlet {
                             "<p class='grid__item'>"+ plato.getPrecioPlato()+"</p>" +
                             "<p class='grid__item'>" + plato.getImagenPlato() +"</p>" +
                             "<p class='grid__item'>"+ plato.getNombreCategoria()+"</p>" +
-                               "<div class='grid__item actionButtons'>" +
+                            "<p class='grid__item'>"+ (plato.isEstado()? "Habilitado" : "Inhabilitado")+"</p>" +                               
+                                "<div class='grid__item actionButtons'>" +
                                "<form action='/proRest/administracionPlato' method='get'>" +
                                "<input type='hidden' name='accion' value='editar'>" +
                                "<input type='hidden' name='idPlato' value='"+  plato.getId() +"'>" +
                                 "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
                                "<form action='/proRest/administracionPlato' method='post'>" +
-                               "<input type='hidden' name='accion' value='eliminar'>" +
-                                "<input type='hidden' name='idPlato' value='"+ plato.getId() +"'>" +
-                               "<button type='submit' class='delete__button'>Eliminar</button>" +
+                               "<input type='hidden' name='accion' value='estado'>" +
+                                "<input type='hidden' name='idPlato' value='"+ plato.getId() +"'>"
+                                + "<input type='hidden' name='estado' value='"+ !plato.isEstado() +"'>" +
+                                "<button type='submit' class='status__button "+ (!plato.isEstado()? "negative" : "") +"'>" + (plato.isEstado()? "Inhabilitar" : "Habilitar") + "</button>" +
                                "</form>"
                             + "</div>";
                 }

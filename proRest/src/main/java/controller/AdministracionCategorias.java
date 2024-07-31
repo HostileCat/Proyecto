@@ -68,7 +68,7 @@ public class AdministracionCategorias extends HttpServlet {
                 }
             case "eliminar":
                 {
-                    System.out.println("SI LLEGO");
+                    
                     String idCategoria = request.getParameter("idCategoria");
                     Categoria categoria = new Categoria();
                     categoria.setId(Integer.parseInt(idCategoria));
@@ -77,7 +77,9 @@ public class AdministracionCategorias extends HttpServlet {
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
                         response.sendRedirect("paginaPlatos?opcion=categoria");
-                    }     
+                    }  else {
+                        response.sendRedirect("../error.jsp");
+                    }   
                     break;
                 }
             default:

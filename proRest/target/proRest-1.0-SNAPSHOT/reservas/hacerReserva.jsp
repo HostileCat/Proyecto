@@ -22,9 +22,10 @@
             <section class="main__section">
 
                 <h1 class="section__title">Agregar Categoria</h1>
-                <form id="section__form" action="#" class="section__form" method="post">
+                <form id="section__form" action="/proRest/administracionReservas" class="section__form" method="post">
                   <div class="section__add">
-                    <input class="add__input" type="text" id="nombreCliente" name="nombreUsuario" required>
+                      <input type="hidden" id="idUsuario" name="idUsuario" value="<% out.print(idUsuario); %>">
+                      <input class="add__input" type="text" id="nombreUsuario" name="nombreUsuario" value="<% out.print(nombreUsuario); %>" disabled>
                   </div>
                   <div class="section__add">
                     <input class="add__input" type="date" id="fechaReserva" name="fechaReserva" required>                  
@@ -32,7 +33,7 @@
                   <div class="section__add">
                     <input class="add__input" type="time" id="horaReserva" name="horaReserva" required>                  
                   </div>
-                  <input type="hidden" id="category" name="accion" value="agregar">
+                  <input type="hidden" id="category" name="accion" value="agregarSubmit">
                   <button type="button" class="section__addButton">Agregar</button>
                 </form>
             </section>

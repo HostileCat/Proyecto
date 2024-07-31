@@ -18,8 +18,8 @@
         
         <main class="main">
             <section class="main__section">
-                <h1 class="section__title">Añadir Plato</h1>
-                    <form action="/proRest/administracionPlato?accion=agregarSubmit" method="post" enctype="multipart/form-data" class="section__form section__form--dish">
+                <h1 class="section__title">Editar Plato</h1>
+                    <form action="/proRest/administracionPlato?accion=editarSubmit" method="post" enctype="multipart/form-data" class="section__form section__form--dish">
                         
                         <%
                             String idPlato = (String) request.getAttribute("idPlato");

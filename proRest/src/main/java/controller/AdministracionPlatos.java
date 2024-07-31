@@ -46,7 +46,7 @@ public class AdministracionPlatos extends HttpServlet {
        String categoriaPlato = request.getParameter("categoriaPlato");
        String descripcionPlato = request.getParameter("descripcionPlato");
        String precioPlato = request.getParameter("precioPlato");
-       
+       String estadoPlato = request.getParameter("estado");
        
        
        
@@ -80,7 +80,7 @@ public class AdministracionPlatos extends HttpServlet {
                     boolean accionExitosa = platoDAO.guardarPlato(plato);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaPlatos?opcion=platos");
+                        response.sendRedirect("paginaPlatos?opcion=plato");
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       
@@ -120,19 +120,18 @@ public class AdministracionPlatos extends HttpServlet {
                     }       
                     break;
                 }
-            case "eliminar":
+            case "estado":
                 {
-                    
-                    
                     Platos plato = new Platos();
-                    plato.setId(Integer.parseInt(idPlato));
-                    
                     
                     PlatosDAO platoDAO = new PlatosDAO();
-                    boolean accionExitosa = platoDAO.eliminarPlato(plato);
+                    plato.setId(Integer.parseInt(idPlato));
+                    plato.setEstado(Boolean.parseBoolean(estadoPlato));
+
+                    boolean accionExitosa = platoDAO.cambiarEstadoPlato(plato);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaPlatos?opcion=platos");
+                        response.sendRedirect("paginaPlatos?opcion=plato");
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       

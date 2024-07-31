@@ -82,6 +82,11 @@ body {
     color: var(--primary-color);
 }
 
+.add__input:disabled {
+    background-color: var(--negative-button-color); /* Un color de fondo más claro */
+    cursor: not-allowed; /* Cambia el cursor a no permitido */
+}
+
 .section__addButton {
     width: 100%;
     padding: 10px;
@@ -100,6 +105,11 @@ body {
 
 .section__addButton:active {
     background-color: var(--tertiary-color);
+}
+
+.errorMessage{
+    color: var(--delete-button-color);
+    font-size: 12px;
 }
 
 

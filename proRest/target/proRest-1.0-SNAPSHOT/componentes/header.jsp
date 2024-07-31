@@ -6,6 +6,8 @@
                 //String nombreUsuario = usuario.getNombreUsuario();
                 //int rolUsuario = usuario.getRol();
                 int rolUsuario = 1;
+                int idUsuario = 12;
+                String nombreUsuario = "marquez";
             %>
           <div class="hamburger-menu" id="hamburger-menu">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

@@ -39,7 +39,7 @@ public class CategoriaDAO {
     }
     
     public List<Categoria> todasLasCategorias() {
-        String sql = "SELECT id_categoria, nombre_categoria FROM categoria "
+        String sql = "SELECT id_categoria, nombre_categoria FROM categoria WHERE id_categoria <> 1 "
                 + "ORDER BY id_categoria DESC";
         List<Categoria> categorias = new ArrayList<>();
 
@@ -63,17 +63,21 @@ public class CategoriaDAO {
         return categorias;
     }
     
-    public boolean eliminarCategoria(Categoria categoria) throws SQLException {
-        conexion.setAutoCommit(false);
-        
-        String sqlUpdate = "UPDATE platos SET id_categoria_fk = NULL WHERE id_categoria_fk = ?";
+    public boolean eliminarCategoria(Categoria categoria) {
+        String sqlUpdate = "UPDATE platos SET id_categoria_fk = 1 WHERE id_categoria_fk = ?";
         String sqlDelete = "DELETE FROM categoria WHERE id_categoria = ?";
         
         try (PreparedStatement psUpdate = conexion.prepareStatement(sqlUpdate);
              PreparedStatement psDelete = conexion.prepareStatement(sqlDelete)) {
             psUpdate.setInt(1, categoria.getId());
-            int filasAfectadas = psUpdate.executeUpdate();
-            return filasAfectadas > 0;
+            psUpdate.executeUpdate();
+
+            // Elimina la categoría si se actualizaron las filas correspondientes
+            
+            psDelete.setInt(1, categoria.getId());
+            int filasBorradas = psDelete.executeUpdate();
+            return filasBorradas > 0;
+            
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

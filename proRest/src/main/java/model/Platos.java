@@ -16,7 +16,15 @@ public class Platos {
     private String imagenPlato;
     private int idCategoria;
     private String nombreCategoria;
-    
+    private boolean estado;
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 
     public int getId() {
         return id;
