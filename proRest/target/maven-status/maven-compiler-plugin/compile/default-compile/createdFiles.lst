@@ -7,13 +7,17 @@ model\Rol.class
 model\Usuario.class
 controller\AdministracionCategorias.class
 controller\AdministracionPlatos.class
+model\Reserva.class
 model\RolDAO.class
 com\mycompany\prorest\JakartaRestConfiguration.class
 controller\PaginaCategorias.class
 controller\PaginaUsuarios.class
 model\Platos.class
+controller\PaginaReservas.class
 model\Categoria.class
 controller\AdministracionUsuario.class
 model\CategoriaDAO.class
 controller\AutenticacionUsuario.class
 model\UsuarioDAO.class
+controller\AdministracionReservas.class
+model\ReservaDAO.class

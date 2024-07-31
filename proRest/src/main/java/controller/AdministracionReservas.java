@@ -49,7 +49,7 @@ public class AdministracionReservas extends HttpServlet {
         switch (accion) {
             case "agregarSubmit":
                 {
-                    String estadoReserva = "En espera";
+                    String estadoReserva = "espera";
 
                     Reserva reserva = new Reserva();
                     reserva.setIdCliente(Integer.parseInt(idUsuario));

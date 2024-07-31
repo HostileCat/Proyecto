@@ -17,6 +17,7 @@ public class Reserva {
     private LocalDate fecha;
     private LocalTime hora;
     private String estado;
+    private String nombreCliente;
 
     public int getIdReserva() {
         return idReserva;
@@ -58,6 +59,14 @@ public class Reserva {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
     }
     
     

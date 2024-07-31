@@ -20,8 +20,10 @@
             <div class="main__nav">
                 <ul class="nav__list">
                     
-                    <li class="nav__item"><a href="/proRest/paginaPlatos?opcion=categoria">Horarios</a></li>
-                    <li class="nav__item"><a href="/proRest/paginaPlatos?opcion=plato">Reservas</a></li>
+                    <li class="nav__item"><a href="/proRest/paginaReservas?opcion=espera">En espera</a></li>
+                    <li class="nav__item"><a href="/proRest/paginaReservas?opcion=confirmada">Confirmadas</a></li>
+                    <li class="nav__item"><a href="/proRest/paginaReservas?opcion=terminada">Terminadas</a></li>
+                    <li class="nav__item"><a href="/proRest/paginaReservas?opcion=cancelada">Canceladas</a></li>
                     
                     
                 </ul>
@@ -30,30 +32,34 @@
                 
                     
                 <%
-                        String tabla = (String) request.getAttribute("tabla");
-                        String grid = (String) request.getAttribute("grid");
-                        
-                        out.print(grid);
-                        if(tabla != null){
-                            out.print(tabla);
-                            out.print("</div>");
-                        }
+                    String titulo = (String) request.getAttribute("titulo");
+                    
+                    if(titulo != null){
+                        out.print(titulo);
+                    } else{
+                        out.print("<h2 class='section__title'>Administración</h2>");
+                    }
                 %>
+                <div class="grid__container" id="userGridContainer">
+                    
+                    <h3 class="grid__title">ID</h3>
+                    <h3 class="grid__title">Usuario</h3>
+                    <h3 class="grid__title">Fecha</h3>
+                    <h3 class="grid__title">Hora</h3>
+                    <h3 class="grid__title">Acciones</h3>
+                    
+                    <%
+                            String fila = (String) request.getAttribute("fila");
 
+                            if(fila != null){
+                                out.print(fila);
+                            }
+                    %>
+                </div>
             </section>
         </main>
         
-        <div class="add__container">
-            <%
-                        String botonAgregar = (String) request.getAttribute("botonAgregar");
-                        
-                        
-                        if(botonAgregar != null){
-                            out.print(botonAgregar);
-                            
-                        }
-            %>      
-        </div>
+        
                 
        
         

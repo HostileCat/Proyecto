@@ -29,7 +29,7 @@
                     + "<ul class='navbar__sublist'>"
                     + "<li class='navbar__subitem'><a href='/proRest/reservas/hacerReserva.jsp'>Hacer Reserva</a></li>");
                     if (rolUsuario <= 3) {
-                        sb.append("<li class='navbar__subitem'><a href='index.jsp'>Administrar Reservas</a></li>");
+                        sb.append("<li class='navbar__subitem'><a href='/proRest/paginaReservas?opcion=espera'>Administrar Reservas</a></li>");
                     }
                     sb.append("</ul>"
                     + "</li>");
