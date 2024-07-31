@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-07-2024 a las 17:57:26
+-- Tiempo de generación: 31-07-2024 a las 18:04:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -37,17 +37,12 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nombre_categoria`) VALUES
-(1, 'Entradas'),
+(1, 'No tiene categoría'),
 (2, 'Platos Principales'),
 (3, 'Postres'),
 (4, 'Bebidas'),
 (5, 'Menú Infantil'),
-(10, 'gsdg'),
-(12, 'jamon'),
-(14, 'alo'),
-(15, 'qwer'),
-(16, 'qwer'),
-(17, 'qwer');
+(12, 'jamon');
 
 -- --------------------------------------------------------
 
@@ -110,28 +105,31 @@ CREATE TABLE `platos` (
   `descripcion_plato` varchar(255) DEFAULT NULL,
   `precio_plato` int(11) NOT NULL,
   `id_categoria_fk` int(11) DEFAULT NULL,
-  `imagen_plato` varchar(255) NOT NULL
+  `imagen_plato` varchar(255) NOT NULL,
+  `estado` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `platos`
 --
 
-INSERT INTO `platos` (`id_plato`, `nombre_plato`, `descripcion_plato`, `precio_plato`, `id_categoria_fk`, `imagen_plato`) VALUES
-(1, 'sopa', 'sopa rica', 100000, 2, 'Captura de pantalla 2024-05-25 115754.png'),
-(2, 'patacones', 'asdasdas', 12331, 1, 'Captura de pantalla 2024-05-25 115754.png'),
-(3, 'cajita feliz', 'asdasdas', 12331, 5, 'Captura de pantalla 2024-05-25 115754.png'),
-(4, 'cajita feliz', 'asdasdas', 12331, 5, 'Captura de pantalla 2024-05-25 115754.png'),
-(6, 'cajita feliz', 'asdasdas', 12331, 10, 'Captura de pantalla 2024-05-25 115754.png'),
-(7, 'plato', 'platillo', 12345, 3, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg'),
-(8, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\target\\proRest-1.0-SNAPSHOT\\\\uploads'),
-(9, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\uploads'),
-(10, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\uploads'),
-(11, 'plato', 'platillo', 12345, 3, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg'),
-(12, 'plato', 'platillo', 12345, 2, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg'),
-(13, 'hola', 'hello', 54321, 4, '1f1d408dddce4984a689afc06d9f42d8.webp'),
-(14, 'hola', 'hello', 54321, 1, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg'),
-(15, 'hola', 'hola hola', 123456, 17, 'Captura de pantalla 2024-05-25 115754.png');
+INSERT INTO `platos` (`id_plato`, `nombre_plato`, `descripcion_plato`, `precio_plato`, `id_categoria_fk`, `imagen_plato`, `estado`) VALUES
+(1, 'sopa', 'sopa rica', 100000, 2, 'Captura de pantalla 2024-05-25 115754.png', 1),
+(2, 'patacones', 'asdasdas', 12331, 1, 'Captura de pantalla 2024-05-25 115754.png', 1),
+(3, 'cajita feliz', 'asdasdas', 12331, 5, 'Captura de pantalla 2024-05-25 115754.png', 1),
+(4, 'cajita feliz', 'asdasdas', 12331, 5, 'Captura de pantalla 2024-05-25 115754.png', 1),
+(6, 'cajita feliz', 'asdasdas', 12331, 1, 'Captura de pantalla 2024-05-25 115754.png', 1),
+(7, 'plato', 'platillo', 12345, 3, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg', 1),
+(8, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\target\\proRest-1.0-SNAPSHOT\\\\uploads', 1),
+(9, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\uploads', 1),
+(10, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\uploads', 1),
+(11, 'plato', 'platillo', 12345, 3, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg', 1),
+(12, 'plato', 'platillo', 12345, 2, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg', 1),
+(13, 'hola', 'hello', 54321, 4, '1f1d408dddce4984a689afc06d9f42d8.webp', 1),
+(14, 'hola', 'hello', 54321, 1, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg', 1),
+(15, 'hola', 'hola hola', 123456, 1, 'Captura de pantalla 2024-05-25 115754.png', 1),
+(16, 'platoss', 'platilloss', 1234567, 4, 'Captura de pantalla (5).png', 1),
+(17, 'platos', 'platillos', 1234567, 1, 'RobloxScreenShot20240627_135446031.png', 1);
 
 -- --------------------------------------------------------
 
@@ -143,9 +141,20 @@ CREATE TABLE `reserva` (
   `id_reserva` int(11) NOT NULL,
   `id_cliente_fk` int(11) NOT NULL,
   `fecha_reserva` date NOT NULL,
-  `estado_reserva` enum('confirmada','cancelada') DEFAULT NULL,
+  `estado_reserva` varchar(255) DEFAULT NULL,
   `hora_reserva` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`id_reserva`, `id_cliente_fk`, `fecha_reserva`, `estado_reserva`, `hora_reserva`) VALUES
+(2, 1, '2024-08-15', 'Confirmada', '14:00:00'),
+(3, 12, '2024-08-15', 'Confirmada', '14:00:00'),
+(6, 1, '2024-08-05', 'En espera', '13:55:00'),
+(7, 1, '2024-08-06', 'En espera', '13:00:00'),
+(8, 12, '2024-08-06', 'En espera', '13:01:00');
 
 -- --------------------------------------------------------
 
@@ -296,7 +305,13 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `platos`
 --
 ALTER TABLE `platos`
-  MODIFY `id_plato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_plato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `reserva`
+--
+ALTER TABLE `reserva`
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
