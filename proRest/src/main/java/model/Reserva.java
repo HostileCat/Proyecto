@@ -16,8 +16,11 @@ public class Reserva {
     private int idCliente;
     private LocalDate fecha;
     private LocalTime hora;
-    private String estado;
+    private int estado;
     private String nombreCliente;
+    private LocalDate nuevaFecha;
+    private LocalTime nuevaHora;
+    private int sugerir; 
 
     public int getIdReserva() {
         return idReserva;
@@ -53,11 +56,11 @@ public class Reserva {
         this.hora = hora;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
@@ -67,6 +70,30 @@ public class Reserva {
 
     public void setNombreCliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
+    }
+
+    public LocalDate getNuevaFecha() {
+        return nuevaFecha;
+    }
+
+    public void setNuevaFecha(LocalDate nuevaFecha) {
+        this.nuevaFecha = nuevaFecha;
+    }
+
+    public LocalTime getNuevaHora() {
+        return nuevaHora;
+    }
+
+    public void setNuevaHora(LocalTime nuevaHora) {
+        this.nuevaHora = nuevaHora;
+    }
+
+    public int getSugerir() {
+        return sugerir;
+    }
+
+    public void setSugerir(int sugerir) {
+        this.sugerir = sugerir;
     }
     
     

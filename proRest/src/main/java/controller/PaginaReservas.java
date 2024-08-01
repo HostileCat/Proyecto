@@ -46,24 +46,23 @@ public class PaginaReservas extends HttpServlet {
                 titulo = "<h2 class='section__title'>Reservas en espera</h2>";
                 for (Reserva reserva : reservas) {
                     
-                    if(reserva.getEstado().equals("espera")){
-                        fila +="<p class='grid__item'>"+ reserva.getIdReserva()+"</p>" +
-                               "<p class='grid__item'>"+ reserva.getNombreCliente()+"</p>" +
-                               "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
-                               "<p class='grid__item'>"+ reserva.getHora()+"</p>" +
-                               "<div class='grid__item actionButtons'>" +
-                               "<form action='/proRest/administracionUsuario' method='get'>" +
-                               "<input type='hidden' name='accion' value='editar'>" +
-                               "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>" +
-                                "<button type='submit' class='edit__button'>Editar</button>" +
-                               "</form>" +
-                               "<form action='/proRest/administracionUsuario' method='post'>" +
-                               "<input type='hidden' name='accion' value='estado'>" +
-                                "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>"
-                                + "<input type='hidden' name='idEstado' value=''>" +
-                                "<button type='submit' class='status__button'></button>" +
-                               "</form>" +
-                               "</div>";
+                    if(reserva.getEstado() == 1){
+                        fila += "<p class='grid__item'>" + reserva.getIdReserva() + "</p>" +
+                                "<p class='grid__item'>" + reserva.getNombreCliente() + "</p>" +
+                                "<p class='grid__item'>" + reserva.getFecha() + "</p>" +
+                                "<p class='grid__item'>" + reserva.getHora() + "</p>" +
+                                "<div class='grid__item actionButtons'>" +
+                                "<form action='/proRest/administracionReservas' method='post'>" +
+                                "<input type='hidden' name='accion' value='confirmar'>" +
+                                "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
+                                "<button type='submit' class='confirm__button'>Confirmar</button>" +
+                                "</form>" +
+                                "<form action='/proRest/administracionReservas' method='get'>" +
+                                "<input type='hidden' name='accion' value='sugerir'>" +
+                                "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
+                                "<button type='submit' class='edit__button'>Sugerir</button>" +
+                                "</form>" +
+                                "</div>";
                     }                          
                 }
                 break;
@@ -71,7 +70,7 @@ public class PaginaReservas extends HttpServlet {
                 titulo = "<h2 class='section__title'>Administrar Empleados</h2>";
                 for (Reserva reserva : reservas) {
                     
-                    if(reserva.getEstado().equals("Confirmada")){
+                    if(reserva.getEstado() == 2){
                         fila +="<p class='grid__item'>"+ reserva.getIdReserva()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getNombreCliente()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
@@ -92,11 +91,11 @@ public class PaginaReservas extends HttpServlet {
                     }                            
                 }
                 break;
-            case "administrador":
+            case "terminada":
                 titulo = "<h2 class='section__title'>Administrar Administradores</h2>";
                 for (Reserva reserva : reservas) {
                     
-                    if(reserva.getEstado().equals("En espera")){
+                    if(reserva.getEstado() == 3){
                         fila +="<p class='grid__item'>"+ reserva.getIdReserva()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getNombreCliente()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
@@ -117,6 +116,31 @@ public class PaginaReservas extends HttpServlet {
                     }                            
                 }
                 break;
+            case "cancelada":
+                titulo = "<h2 class='section__title'>Administrar Administradores</h2>";
+                for (Reserva reserva : reservas) {
+                    
+                    if(reserva.getEstado() == 3){
+                        fila +="<p class='grid__item'>"+ reserva.getIdReserva()+"</p>" +
+                               "<p class='grid__item'>"+ reserva.getNombreCliente()+"</p>" +
+                               "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
+                               "<p class='grid__item'>"+ reserva.getHora()+"</p>" +
+                               "<div class='grid__item actionButtons'>" +
+                               "<form action='/proRest/administracionUsuario' method='get'>" +
+                               "<input type='hidden' name='accion' value='editar'>" +
+                               "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>" +
+                                "<button type='submit' class='edit__button'>Editar</button>" +
+                               "</form>" +
+                               "<form action='/proRest/administracionUsuario' method='post'>" +
+                               "<input type='hidden' name='accion' value='estado'>" +
+                                "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>"
+                                + "<input type='hidden' name='idEstado' value=''>" +
+                                "<button type='submit' class='status__button'></button>" +
+                               "</form>" +
+                               "</div>";
+                    }                            
+                }
+                break;                
             default:
                 break;
      

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-07-2024 a las 18:04:54
+-- Tiempo de generación: 01-08-2024 a las 18:02:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -141,20 +141,42 @@ CREATE TABLE `reserva` (
   `id_reserva` int(11) NOT NULL,
   `id_cliente_fk` int(11) NOT NULL,
   `fecha_reserva` date NOT NULL,
-  `estado_reserva` varchar(255) DEFAULT NULL,
-  `hora_reserva` time NOT NULL
+  `id_estadoR_fk` int(11) DEFAULT NULL,
+  `hora_reserva` time NOT NULL,
+  `fecha_sugerida` date NOT NULL DEFAULT '1970-01-01',
+  `hora_sugerida` time NOT NULL,
+  `estado_sugerencia` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `reserva`
 --
 
-INSERT INTO `reserva` (`id_reserva`, `id_cliente_fk`, `fecha_reserva`, `estado_reserva`, `hora_reserva`) VALUES
-(2, 1, '2024-08-15', 'Confirmada', '14:00:00'),
-(3, 12, '2024-08-15', 'Confirmada', '14:00:00'),
-(6, 1, '2024-08-05', 'En espera', '13:55:00'),
-(7, 1, '2024-08-06', 'En espera', '13:00:00'),
-(8, 12, '2024-08-06', 'En espera', '13:01:00');
+INSERT INTO `reserva` (`id_reserva`, `id_cliente_fk`, `fecha_reserva`, `id_estadoR_fk`, `hora_reserva`, `fecha_sugerida`, `hora_sugerida`, `estado_sugerencia`) VALUES
+(11, 12, '2024-08-05', 1, '20:46:00', '1970-01-01', '00:00:00', 0),
+(12, 12, '2024-08-04', 1, '22:20:00', '2024-08-04', '17:22:00', 1),
+(13, 11, '2024-08-04', 1, '19:00:00', '1970-01-01', '00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reserva_estado`
+--
+
+CREATE TABLE `reserva_estado` (
+  `id_reserva` int(11) NOT NULL,
+  `estado` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reserva_estado`
+--
+
+INSERT INTO `reserva_estado` (`id_reserva`, `estado`) VALUES
+(1, 'En espera'),
+(2, 'Confirmada'),
+(3, 'Terminada'),
+(4, 'Cancelada');
 
 -- --------------------------------------------------------
 
@@ -263,7 +285,14 @@ ALTER TABLE `platos`
 --
 ALTER TABLE `reserva`
   ADD PRIMARY KEY (`id_reserva`),
-  ADD KEY `id_cliente_fk` (`id_cliente_fk`);
+  ADD KEY `id_cliente_fk` (`id_cliente_fk`),
+  ADD KEY `id_estado_fk` (`id_estadoR_fk`);
+
+--
+-- Indices de la tabla `reserva_estado`
+--
+ALTER TABLE `reserva_estado`
+  ADD PRIMARY KEY (`id_reserva`);
 
 --
 -- Indices de la tabla `roles`
@@ -311,7 +340,13 @@ ALTER TABLE `platos`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `reserva_estado`
+--
+ALTER TABLE `reserva_estado`
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -358,7 +393,8 @@ ALTER TABLE `platos`
 -- Filtros para la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  ADD CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`id_cliente_fk`) REFERENCES `usuario` (`id_usuario`);
+  ADD CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`id_cliente_fk`) REFERENCES `usuario` (`id_usuario`),
+  ADD CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`id_estadoR_fk`) REFERENCES `reserva_estado` (`id_reserva`);
 
 --
 -- Filtros para la tabla `usuario`

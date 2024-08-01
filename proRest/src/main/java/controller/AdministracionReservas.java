@@ -49,28 +49,58 @@ public class AdministracionReservas extends HttpServlet {
         switch (accion) {
             case "agregarSubmit":
                 {
-                    String estadoReserva = "espera";
+                    String estadoReserva = "1";
 
                     Reserva reserva = new Reserva();
                     reserva.setIdCliente(Integer.parseInt(idUsuario));
                     reserva.setFecha(fechaReserva);
                     reserva.setHora(horaReserva);
-                    reserva.setEstado(estadoReserva);
+                    reserva.setEstado(Integer.parseInt(estadoReserva));
                     
                       
                     ReservaDAO reservaDAO = new ReservaDAO();
-                    boolean accionExitosa = reservaDAO.hacerReserva(reserva);
-                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
-                    if (accionExitosa) {
-                        response.sendRedirect("main.jsp");
-                    } else {
-                        response.sendRedirect("../error.jsp");
-                    }       
+                    
+                    if (reservaDAO.reservaEnEsperaExistente(reserva)){
+                        request.setAttribute("errorMessage", "<span class='errorMessage'>Solo puede realizar una reserva a la vez, por favor, espere a que acepten su reserva en espera.</span>");
+                        request.getRequestDispatcher("reservas/hacerReserva.jsp").forward(request, response);
+                    } else{
+                        boolean accionExitosa = reservaDAO.hacerReserva(reserva);
+                        // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                        if (accionExitosa) {
+                            response.sendRedirect("paginaMisReservas?opcion=espera&idUsuario="+ idUsuario);
+                        } else {
+                            response.sendRedirect("../error.jsp");
+                        }       
+                    }
+                    
+                    
                     break;
                 }
-            case "editarSubmit":
+            case "sugerirSubmit":
                 {
+                    int idReserva = Integer.parseInt(request.getParameter("idReserva"));
+                    String nuevaFechaString = request.getParameter("fechaReserva");
+                    DateTimeFormatter newDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate nuevaFecha = LocalDate.parse(nuevaFechaString, newDateFormatter);
+
+                    String nuevaHoraString = request.getParameter("horaReserva");       
+                    DateTimeFormatter NewtimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime nuevaHora = LocalTime.parse(nuevaHoraString, NewtimeFormatter);
                     
+                    Reserva reserva = new Reserva();
+                    reserva.setIdReserva(idReserva);
+                    reserva.setNuevaFecha(nuevaFecha);
+                    reserva.setNuevaHora(nuevaHora);
+                    
+                    ReservaDAO reservaDAO = new ReservaDAO();
+                    
+                    boolean accionExitosa = reservaDAO.sugerirNuevaFechaHora(reserva);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("paginaReservas?opcion=espera");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }      
                     break;
                 }
             case "estado":
@@ -84,4 +114,22 @@ public class AdministracionReservas extends HttpServlet {
         
     }
     
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+       String accion = request.getParameter("accion");
+       String idReserva = request.getParameter("idReserva");
+       
+       if ("sugerir".equals(accion)){
+           request.setAttribute("idReserva", idReserva);
+           request.getRequestDispatcher("reservas/sugerirReserva.jsp").forward(request, response);
+       }
+    }
+
 }

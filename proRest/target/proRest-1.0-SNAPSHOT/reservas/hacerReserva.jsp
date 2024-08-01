@@ -23,6 +23,14 @@
 
                 <h1 class="section__title">Agregar Categoria</h1>
                 <form id="section__form" action="/proRest/administracionReservas" class="section__form" method="post">
+                  
+                    <%
+                        String errorSpan = (String) request.getAttribute("errorMessage");
+                        
+                        if (errorSpan != null){
+                            out.println(errorSpan);
+                        }
+                    %>
                   <div class="section__add">
                       <input type="hidden" id="idUsuario" name="idUsuario" value="<% out.print(idUsuario); %>">
                       <input class="add__input" type="text" id="nombreUsuario" name="nombreUsuario" value="<% out.print(nombreUsuario); %>" disabled>
