@@ -36,19 +36,21 @@ public class AdministracionReservas extends HttpServlet {
         
        String idUsuario = request.getParameter("idUsuario");
        
-       String fechaReservaString = request.getParameter("fechaReserva");
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-       LocalDate fechaReserva = LocalDate.parse(fechaReservaString, formatter);
        
-       String horaReservaString = request.getParameter("horaReserva");       
-       DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-       LocalTime horaReserva = LocalTime.parse(horaReservaString, timeFormatter);
 
        String accion = request.getParameter("accion");
        
         switch (accion) {
             case "agregarSubmit":
                 {
+                    String fechaReservaString = request.getParameter("fechaReserva");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate fechaReserva = LocalDate.parse(fechaReservaString, formatter);
+
+                    String horaReservaString = request.getParameter("horaReserva");       
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime horaReserva = LocalTime.parse(horaReservaString, timeFormatter);
+                    
                     String estadoReserva = "1";
 
                     Reserva reserva = new Reserva();
@@ -60,8 +62,8 @@ public class AdministracionReservas extends HttpServlet {
                       
                     ReservaDAO reservaDAO = new ReservaDAO();
                     
-                    if (reservaDAO.reservaEnEsperaExistente(reserva)){
-                        request.setAttribute("errorMessage", "<span class='errorMessage'>Solo puede realizar una reserva a la vez, por favor, espere a que acepten su reserva en espera.</span>");
+                    if (reservaDAO.reservaExistente(reserva)){
+                        request.setAttribute("errorMessage", "<span class='errorMessage'>Ya hiciste una reserva. Para hacer otra debes cancelar la reserva en proceso.</span>");
                         request.getRequestDispatcher("reservas/hacerReserva.jsp").forward(request, response);
                     } else{
                         boolean accionExitosa = reservaDAO.hacerReserva(reserva);
@@ -103,8 +105,99 @@ public class AdministracionReservas extends HttpServlet {
                     }      
                     break;
                 }
-            case "estado":
+            case "confirmarCliente":
                 {
+                    int idReserva = Integer.parseInt(request.getParameter("idReserva"));
+                    
+                    Reserva reserva = new Reserva();
+                    reserva.setIdReserva(idReserva);
+                    
+                    ReservaDAO reservaDAO = new ReservaDAO();
+                    
+                    boolean accionExitosa = reservaDAO.confirmarSugerencia(reserva);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("paginaMisReservas?opcion=confirmada");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }
+                    
+                    break;
+                }
+            case "confirmar":
+                {
+                    int idReserva = Integer.parseInt(request.getParameter("idReserva"));
+                    
+                    Reserva reserva = new Reserva();
+                    reserva.setIdReserva(idReserva);
+                    
+                    ReservaDAO reservaDAO = new ReservaDAO();
+                    
+                    boolean accionExitosa = reservaDAO.confirmarReserva(reserva);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("paginaReservas?opcion=confirmada");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }
+                    
+                    break;
+                }   
+                
+            case "cancelarCliente":
+                {
+                    int idReserva = Integer.parseInt(request.getParameter("idReserva"));
+                    
+                    Reserva reserva = new Reserva();
+                    reserva.setIdReserva(idReserva);
+                    
+                    ReservaDAO reservaDAO = new ReservaDAO();
+                    
+                    boolean accionExitosa = reservaDAO.cancelarReserva(reserva);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("paginaMisReservas?opcion=cancelada");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }
+                    
+                    break;
+                }
+            case "cancelar":
+                {
+                    int idReserva = Integer.parseInt(request.getParameter("idReserva"));
+                    
+                    Reserva reserva = new Reserva();
+                    reserva.setIdReserva(idReserva);
+                    
+                    ReservaDAO reservaDAO = new ReservaDAO();
+                    
+                    boolean accionExitosa = reservaDAO.cancelarReserva(reserva);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("paginaReservas?opcion=cancelada");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }
+                    
+                    break;
+                }
+            case "terminar":
+                {
+                    int idReserva = Integer.parseInt(request.getParameter("idReserva"));
+                    
+                    Reserva reserva = new Reserva();
+                    reserva.setIdReserva(idReserva);
+                    
+                    ReservaDAO reservaDAO = new ReservaDAO();
+                    
+                    boolean accionExitosa = reservaDAO.terminarReserva(reserva);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("paginaReservas?opcion=terminada");
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }
                     
                     break;
                 }

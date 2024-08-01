@@ -28,10 +28,11 @@ public class ReservaDAO {
         }
     }
     
-    public boolean reservaEnEsperaExistente(Reserva reserva) {
+    public boolean reservaExistente(Reserva reserva) {
         boolean reservaExistente = false;
         String sql = "SELECT COUNT(*) FROM reserva "
-                    + "WHERE id_cliente_fk = ? AND id_estadoR_fk = 1;";        
+                    + "WHERE id_cliente_fk = ? "
+                + "AND (id_estadoR_fk = 1 OR id_estadoR_fk = 2)";        
         try (PreparedStatement ps = conexion.prepareStatement(sql)){           
             ps.setInt(1, reserva.getIdCliente());            
             try (ResultSet rs = ps.executeQuery()) {
@@ -68,20 +69,68 @@ public class ReservaDAO {
     }
     
     public boolean sugerirNuevaFechaHora(Reserva reserva) {
-    String sql = "UPDATE reserva SET fecha_sugerida = ?, hora_sugerida = ?, estado_sugerencia = 1 WHERE id_reserva = ?";
-    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-        ps.setDate(1, Date.valueOf(reserva.getNuevaFecha()));
-        ps.setTime(2, Time.valueOf(reserva.getNuevaHora()));
-        ps.setInt(3, reserva.getIdReserva());
-        
-        int filasAfectadas = ps.executeUpdate();
-        
-        return filasAfectadas > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
+        String sql = "UPDATE reserva SET fecha_sugerida = ?, hora_sugerida = ?, estado_sugerencia = 1 WHERE id_reserva = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setDate(1, Date.valueOf(reserva.getNuevaFecha()));
+            ps.setTime(2, Time.valueOf(reserva.getNuevaHora()));
+            ps.setInt(3, reserva.getIdReserva());
+
+            int filasAfectadas = ps.executeUpdate();
+
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
-}
+    
+    public boolean confirmarSugerencia(Reserva reserva) {
+        String sql = "UPDATE reserva SET fecha_reserva = fecha_sugerida, hora_reserva = hora_sugerida, estado_sugerencia = 0, id_estadoR_fk = 2 WHERE id_reserva = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, reserva.getIdReserva());
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean confirmarReserva(Reserva reserva) {
+        String sql = "UPDATE reserva SET id_estadoR_fk = 2 WHERE id_reserva = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, reserva.getIdReserva());
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean cancelarReserva(Reserva reserva) {
+        String sql = "UPDATE reserva SET id_estadoR_fk = 4, estado_sugerencia = 0 WHERE id_reserva = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, reserva.getIdReserva());
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean terminarReserva(Reserva reserva) {
+        String sql = "UPDATE reserva SET id_estadoR_fk = 3 WHERE id_reserva = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, reserva.getIdReserva());
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     
     public List<Reserva> todasLasReservas(){
         String sql = "SELECT id_reserva, id_cliente_fk, fecha_reserva, hora_reserva, id_estadoR_fk, hora_sugerida, fecha_sugerida, estado_sugerencia, nombre_usuario "

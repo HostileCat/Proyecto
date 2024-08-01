@@ -57,34 +57,34 @@ public class PaginaMisReservas extends HttpServlet {
                                 "<p class='grid__item'>" + reserva.getHora() + "</p>" +
                                 "<div class='grid__item actionButtons'>" +
                                 "<form action='/proRest/administracionReservas' method='post'>" +
-                                "<input type='hidden' name='accion' value='confirmar'>" +
+                                "<input type='hidden' name='accion' value='cancelarCliente'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
-                                "<button type='submit' class='confirm__button'>Confirmar</button>" +
-                                "</form>" +
-                                "<form action='/proRest/editarReserva' method='get'>" +
-                                "<input type='hidden' name='accion' value='editar'>" +
-                                "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
-                                "<button type='submit' class='edit__button'>Sugerir</button>" +
+                                "<button type='submit' class='add__button'>Cancelar</button>" +
                                 "</form>" +
                                 "</div>";
                     }      
 
-                    if (reserva.getSugerir() == 1){
-                        modal += "<div class'modal__container'>"
-                                + "<p>Esta horario no esta disponible, el administrador sugiere una nueva fecha y hora:</p>" +
-                                "<p>Fecha: " + reserva.getNuevaFecha()+"</p>" +
-                                "<p>Hora: "+ reserva.getNuevaHora()+"</p>" +
-                                "<form action='/proRest/administracionResrvas' method='post'>" +
-                                "<input type='hidden' name='accion' value='confirmar'>" +
-                                "<input type='hidden' name='idReserva' value='"+ reserva.getIdReserva() +"'>" +
-                                "<button type='submit'>Confirmar</button>" +
+                    if (reserva.getSugerir() == 1 && reserva.getIdCliente() == Integer.parseInt(idUsuario)){
+                        modal += "<div class='modal'>" +
+                                "<div class='modal__container'>" +
+                                "<h1 class='modal__title'>Fecha de reserva: "+ reserva.getFecha()+" "+ reserva.getHora() +"</h1>"
+                                + "<p>Este horario no está disponible. El administrador sugiere una nueva fecha y hora:</p>" +
+                                "<p>Fecha: " + reserva.getNuevaFecha() + "</p>" +
+                                "<p>Hora: " + reserva.getNuevaHora() + "</p>" +
+                                "<div class='form__container'>" +
+                                "<form action='/proRest/administracionReservas' method='post'>" +
+                                "<input type='hidden' name='accion' value='confirmarCliente'>" +
+                                "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
+                                "<button type='submit' class='button button--confirm'>Confirmar</button>" +
                                 "</form>" +
-                                "<form action='/proRest/administracionResrvas' method='post'>" +
-                                "<input type='hidden' name='accion' value='cancelar'>" +
-                                "<input type='hidden' name='idReserva' value='"+ reserva.getIdReserva() +"'>" +
-                                "<button type='submit'>Cancelar reserva</button>" +
-                                "</form>"
-                                + "</div>";
+                                "<form action='/proRest/administracionReservas' method='post'>" +
+                                "<input type='hidden' name='accion' value='cancelarCliente'>" +
+                                "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
+                                "<button type='submit' class='button button--cancel'>Cancelar reserva</button>" +
+                                "</form>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>";
 
                     }
                     
@@ -103,17 +103,7 @@ public class PaginaMisReservas extends HttpServlet {
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getHora()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='/proRest/administracionUsuario' method='get'>" +
-                               "<input type='hidden' name='accion' value='editar'>" +
-                               "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>" +
-                                "<button type='submit' class='edit__button'>Editar</button>" +
-                               "</form>" +
-                               "<form action='/proRest/administracionUsuario' method='post'>" +
-                               "<input type='hidden' name='accion' value='estado'>" +
-                                "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>"
-                                + "<input type='hidden' name='idEstado' value=''>" +
-                                "<button type='submit' class='status__button'></button>" +
-                               "</form>" +
+                               "<p>Sin acciones</p>"+
                                "</div>";
                     }                            
                 }
@@ -128,17 +118,7 @@ public class PaginaMisReservas extends HttpServlet {
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getHora()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='/proRest/administracionUsuario' method='get'>" +
-                               "<input type='hidden' name='accion' value='editar'>" +
-                               "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>" +
-                                "<button type='submit' class='edit__button'>Editar</button>" +
-                               "</form>" +
-                               "<form action='/proRest/administracionUsuario' method='post'>" +
-                               "<input type='hidden' name='accion' value='estado'>" +
-                                "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>"
-                                + "<input type='hidden' name='idEstado' value=''>" +
-                                "<button type='submit' class='status__button'></button>" +
-                               "</form>" +
+                               "<p>Sin acciones</p>"+
                                "</div>";
                     }                            
                 }
@@ -153,17 +133,7 @@ public class PaginaMisReservas extends HttpServlet {
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getHora()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='/proRest/administracionUsuario' method='get'>" +
-                               "<input type='hidden' name='accion' value='editar'>" +
-                               "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>" +
-                                "<button type='submit' class='edit__button'>Editar</button>" +
-                               "</form>" +
-                               "<form action='/proRest/administracionUsuario' method='post'>" +
-                               "<input type='hidden' name='accion' value='estado'>" +
-                                "<input type='hidden' name='idUsuario' value='"+ reserva.getIdReserva() +"'>"
-                                + "<input type='hidden' name='idEstado' value=''>" +
-                                "<button type='submit' class='status__button'></button>" +
-                               "</form>" +
+                               "<p>Sin acciones</p>"+
                                "</div>";
                     }                            
                 }

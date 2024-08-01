@@ -124,8 +124,8 @@ body{
 
 }
 
-.actionButtons form{
-    
+.actionButtons p{
+    margin: 0;
 }
 
 .edit__button{
@@ -164,29 +164,15 @@ body{
     background-color: var(--delete-button-color);
 }
 
-.add__container{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
 .add__button {
+    padding: 10px 24px;
     background-color: var(--add-button-color);
-    color: #fff;
     border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+    color: var(--text-color);
+    font-weight: bold;
+    border-radius: 17px;
+    width: 102px;
 }
 
 .add__text{
@@ -214,5 +200,85 @@ footer {
     height: 300px;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
+
+
+/* Estilos para el fondo oscuro */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Estilos para el contenedor del modal */
+.modal__container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 500px;
+    width: 100%;
+    color: white;
+}
+
+.modal__title{
+    margin-bottom: 50px;
+}
+
+.modal__container p {
+    margin-bottom: 10px;
+}
+
+/* Estilos para el contenedor del formulario */
+.form__container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+/* Estilos para los botones */
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button--confirm {
+    background-color: var(--add-button-color);
+    color: white;
+}
+
+.button--confirm:hover {
+    background-color: var(--add-button-hover);
+}
+
+.button--confirm:active {
+    background-color: var(--add-button-colorD);
+}
+
+
+.button--cancel {
+    background-color: var(--delete-button-color);
+    color: white;
+}
+
+.button--cancel:hover {
+    background-color: var(--delete-button-hover);
+}
+
+.button--cancel:active {
+    background-color: var(--delete-button-colorD);
+}
+
 
 
