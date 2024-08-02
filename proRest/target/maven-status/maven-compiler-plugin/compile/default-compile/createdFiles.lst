@@ -20,6 +20,7 @@ config\conexion.class
 controller\NewMain.class
 controller\AdministracionPlatos.class
 com\mycompany\prorest\JakartaRestConfiguration.class
+controller\response.class
 controller\AutenticacionUsuario.class
 controller\AdministracionReservas.class
 model\ReservaDAO.class

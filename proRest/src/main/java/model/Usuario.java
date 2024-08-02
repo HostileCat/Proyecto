@@ -7,7 +7,11 @@ public class Usuario {
     private String contrasena;
     private int rol;
     private int estado;
+    private String nombreRol;
 
+    
+    
+    
     public int getEstado() {
         return estado;
     }
@@ -16,8 +20,7 @@ public class Usuario {
         this.estado = estado;
     }
 
-    
-
+   
     public String getNombreRol() {
         return nombreRol;
     }
@@ -25,10 +28,7 @@ public class Usuario {
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
     }
-    private String nombreRol;
     
-
-    // Getters y setters
     public int getId() {
         return id;
     }

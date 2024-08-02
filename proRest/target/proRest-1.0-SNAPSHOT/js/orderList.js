@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const plato = button.dataset.plato;
             const precio = button.dataset.precio;
-
-            agregarPlatoLista(plato, precio);
+            const id = button.dataset.id;
+            agregarPlatoLista(plato, precio, id);
         });
     });
+    
+    
 
     // Mostrar modal de detalles adicionales
     const modal = document.getElementById('modal');
@@ -45,13 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Función para agregar plato al carrito
-    function agregarPlatoLista(plato, precio) {
+    function agregarPlatoLista(plato, precio, id) {
         const listaBody = document.querySelector('#lista');
+        
+        const itemContainer = document.createElement("div");
+        itemContainer.setAttribute("class", "item__container");
         
         const nombrePlato = document.createElement("p");
         const precioPlato = document.createElement("p");
         const cantidadPlato = document.createElement("input");
-        const detallePlato = document.createElement("p");
+        const detallePlato = document.createElement("button");
         const totalPlato = document.createElement("p");
         const accionPlato = document.createElement("button");
         
@@ -59,38 +64,60 @@ document.addEventListener('DOMContentLoaded', () => {
         nombrePlato.textContent = plato;
         
         precioPlato.setAttribute("class", "grid__item");
+        precioPlato.setAttribute("id", "precioPlato");
         precioPlato.textContent = precio;
         
         cantidadPlato.setAttribute("class", "grid__item");
+        cantidadPlato.setAttribute("id", "cantidadPlato");
         cantidadPlato.setAttribute("type", "text");
         cantidadPlato.setAttribute("name", "cantidadPlato");
-        cantidadPlato.setAttribute("value", "1");
-        cantidadPlato.setAttribute("class", "grid__item");
-        cantidadPlato.setAttribute("class", "grid__item");
-        cantidadPlato.setAttribute("class", "grid__item");
+        cantidadPlato.setAttribute("value", "1");        
         cantidadPlato.classList.add("grid__item-number");
-        cantidadPlato.textContent = precio;
         
-        listaBody.appendChild(listaBody) `
-            
-        `;
+        detallePlato.setAttribute("class", "detalle__plato");
+        detallePlato.setAttribute("class", "detalle__plato");
+        detallePlato.textContent = "Detalle";
 
-        newRow.querySelector('.detalles-button').addEventListener('click', () => {
-            currentDetalleRow = newRow;
-            showModal();
+        totalPlato.setAttribute("class", "grid__item");
+        totalPlato.setAttribute("id", "totalPlato");
+        totalPlato.textContent = precio * cantidadPlato.value;
+        
+        accionPlato.setAttribute("class", "remover__plato");
+        accionPlato.setAttribute("data-plato", plato);
+        accionPlato.setAttribute("data-precio", precio);
+        accionPlato.setAttribute("data-id", id);
+        accionPlato.textContent = "Remover";
+        
+        itemContainer.appendChild(nombrePlato);
+        itemContainer.appendChild(precioPlato);
+        itemContainer.appendChild(cantidadPlato);
+        itemContainer.appendChild(detallePlato);
+        itemContainer.appendChild(totalPlato);
+        itemContainer.appendChild(accionPlato);
+        
+        listaBody.appendChild(itemContainer);
+        
+        // acciones en los items
+        
+        const itemsContainer = document.querySelectorAll('.item__container');
+    
+        itemsContainer.forEach(item => {
+
+            const cantidadItem = item.querySelector(".grid__item-number");
+            const totalItem = item.querySelector("#totalPlato");
+            const precioPlato = item.querySelector(("#precioPlato"));
+
+            console.log(itemsContainer);
+            console.log(precioPlato.textContent);
+            console.log(cantidadItem.value);
+
+            cantidadItem.addEventListener('input', () => {
+                totalItem.textContent = precioPlato.textContent * cantidadItem.value;
+            });
+            item.addEventListener('click', () => {
+
+            });
         });
-
-        newRow.querySelector('.remove-button').addEventListener('click', () => {
-            newRow.remove();
-        });
-
-        newRow.querySelector('input[type="number"]').addEventListener('input', (event) => {
-            const cantidad = event.target.value;
-            const total = cantidad * precio;
-            newRow.querySelector('.total').textContent = `$${total}`;
-        });
-
-        carritoBody.appendChild(newRow);
     }
 });
 

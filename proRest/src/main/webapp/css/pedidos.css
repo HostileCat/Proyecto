@@ -9,7 +9,7 @@ body {
 }
 
 .main {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 20px auto;
     padding: 20px;
     background-color: var(--primary-color);
@@ -101,6 +101,10 @@ body {
     width: 100%;
     padding: 20px 0;
     overflow-x: auto;
+}
+
+.item__container{
+    display: contents;
 }
 
 .remover__plato{

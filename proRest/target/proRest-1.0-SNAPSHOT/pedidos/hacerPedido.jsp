@@ -53,7 +53,7 @@
                         
                         <p class="grid__item">Plato 3</p>
                         <p class="grid__item">$15</p>
-                        <button class="agregar__plato" data-plato="Plato 1" data-precio="10">Agregar</button>
+                        <button class="agregar__plato" data-plato="Plato 1" data-precio="10" data-id="1">Agregar</button>
                         <!-- Agrega más platos según tu aplicación -->
                     </div>
                 </div>
@@ -73,12 +73,16 @@
                     <h3 class="grid__title">Total</h3>
                     <h3 class="grid__title">Accion</h3>
                     
-                    <p class="grid__item">Plato 1fasdfasdfasdfasdasdasdasdasdasdsafasf</p>
-                    <p class="grid__item">$10000</p>
-                    <input class="grid__item grid__item-number" type="text" name="cantidadPlato" value="1">
-                    <button class="detalle__plato" id="detalles">Detalle</button>
-                    <p class="grid__item">$100000</p>
-                    <button class="remover__plato" data-plato="Plato 1" data-precio="10">Remover</button>
+                    <div class="item__container">
+                        <p class="grid__item">Plato</p>
+                        <p class="grid__item" id="precioPlato">10000</p>
+                        <input class="grid__item grid__item-number" type="text" id="cantidadPlato" name="cantidadPlato" value="1">
+                        <button class="detalle__plato" id="detallePlato">Detalle</button>
+                        <p class="grid__item" id="totalPlato">100000</p>
+                        <button class="remover__plato" data-plato="Plato 1" data-precio="10" data-set="1">Remover</button>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>
