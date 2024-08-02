@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-08-2024 a las 18:02:17
+-- Tiempo de generación: 02-08-2024 a las 18:03:43
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -53,22 +53,21 @@ INSERT INTO `categoria` (`id_categoria`, `nombre_categoria`) VALUES
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `id_usuario_fk` int(11) DEFAULT NULL,
-  `fechaInicio_pedido` datetime DEFAULT NULL,
-  `fechaFin_pedido` datetime DEFAULT NULL,
-  `estado_pedido` enum('espera','entregado','cancelado') NOT NULL,
-  `detalle_pedido` varchar(255) DEFAULT NULL
+  `fecha_pedido` datetime DEFAULT NULL,
+  `detalle_pedido` varchar(255) NOT NULL,
+  `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fechaInicio_pedido`, `fechaFin_pedido`, `estado_pedido`, `detalle_pedido`) VALUES
-(1, 1, '2023-11-01 18:00:00', '2023-11-01 19:30:00', 'espera', NULL),
-(2, 1, '2023-11-02 19:30:00', '2023-11-02 20:45:00', 'espera', NULL),
-(3, 3, '2023-11-03 20:00:00', '2023-11-03 21:15:00', 'espera', NULL),
-(4, 3, '2023-11-04 18:30:00', '2023-11-04 19:45:00', 'espera', NULL),
-(5, 5, '2023-11-05 17:45:00', '2023-11-05 18:30:00', 'espera', NULL);
+INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fecha_pedido`, `detalle_pedido`, `total`) VALUES
+(1, 1, '2023-11-01 18:00:00', '', 0),
+(2, 1, '2023-11-02 19:30:00', '', 0),
+(3, 3, '2023-11-03 20:00:00', '', 0),
+(4, 3, '2023-11-04 18:30:00', '', 0),
+(5, 5, '2023-11-05 17:45:00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -144,7 +143,7 @@ CREATE TABLE `reserva` (
   `id_estadoR_fk` int(11) DEFAULT NULL,
   `hora_reserva` time NOT NULL,
   `fecha_sugerida` date NOT NULL DEFAULT '1970-01-01',
-  `hora_sugerida` time NOT NULL,
+  `hora_sugerida` time NOT NULL DEFAULT '00:00:00',
   `estado_sugerencia` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -153,9 +152,13 @@ CREATE TABLE `reserva` (
 --
 
 INSERT INTO `reserva` (`id_reserva`, `id_cliente_fk`, `fecha_reserva`, `id_estadoR_fk`, `hora_reserva`, `fecha_sugerida`, `hora_sugerida`, `estado_sugerencia`) VALUES
-(11, 12, '2024-08-05', 1, '20:46:00', '1970-01-01', '00:00:00', 0),
-(12, 12, '2024-08-04', 1, '22:20:00', '2024-08-04', '17:22:00', 1),
-(13, 11, '2024-08-04', 1, '19:00:00', '1970-01-01', '00:00:00', 0);
+(11, 12, '1970-01-01', 3, '00:00:00', '1970-01-01', '00:00:00', 0),
+(12, 12, '2024-08-04', 2, '17:22:00', '2024-08-04', '17:22:00', 0),
+(13, 11, '2024-08-04', 1, '19:00:00', '2024-08-05', '15:42:00', 1),
+(14, 12, '2024-08-04', 4, '14:50:00', '1970-01-01', '00:00:00', 0),
+(15, 12, '2024-08-07', 4, '15:25:00', '2024-08-05', '15:26:00', 0),
+(16, 12, '2024-08-07', 3, '17:07:00', '2024-08-07', '17:07:00', 0),
+(17, 12, '2024-08-06', 3, '17:43:00', '2024-08-06', '17:43:00', 0);
 
 -- --------------------------------------------------------
 
@@ -340,7 +343,7 @@ ALTER TABLE `platos`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva_estado`

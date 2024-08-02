@@ -39,7 +39,7 @@
                     if (rolUsuario <= 3){
                         sb.append("<li class='mobile-nav__item'><p class='menu-link'>Pedido</p>"
                         + "<ul class='navbar__sublist'>");
-                        sb.append("<li class='navbar__subitem'><a href='index.jsp'>Tomar Pedido</a></li>"
+                        sb.append("<li class='navbar__subitem'><a href='/proRest/paginaPedidos'>Tomar Pedido</a></li>"
                         + "<li class='navbar__subitem'><a href='index.jsp'>Administrar Pedidos</a></li>");
                         sb.append("</ul>"
                         + "</li>");
