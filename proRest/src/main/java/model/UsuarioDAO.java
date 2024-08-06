@@ -7,17 +7,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data DAO para manejar las operaciones relacionadas con los usuarios en la base de datos.
+ */
 public class UsuarioDAO {
     private final Connection conexion;
-
+    
+    /**
+     * Constructor que establece la conexión a la base de datos.
+     */
     public UsuarioDAO() {
         conexion = config.conexion.getConnection(); // Obtener la conexión a la base de datos
         if (conexion == null) {
             System.err.println("Error al conectar a la base de datos");
-            // Aquí puedes lanzar una excepción o manejar el error de alguna otra manera
         }
     }
-
+    /**
+     * Agrega un nuevo usuario a la base de datos.
+     * @param usuario El objeto Usuario con la información del nuevo usuario.
+     * @return true si la inserción fue exitosa, false en caso contrario.
+     */
     public boolean agregarUsuario(Usuario usuario) {
         String sql = "INSERT INTO usuario (nombre_usuario, correo_usuario, contrasena_usuario, id_rol_fk) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -33,7 +42,11 @@ public class UsuarioDAO {
         }
     }
     
-    // Método para verificar si un correo electrónico ya está registrado
+    /**
+     * Verifica si un correo electrónico ya está registrado en la base de datos.
+     * @param usuario El objeto Usuario con el correo electrónico a verificar.
+     * @return true si el correo electrónico ya está registrado, false en caso contrario.
+     */
     public boolean correoRepetido(Usuario usuario) {
         boolean correoExistente = false;
         String sql = "SELECT COUNT(*) FROM usuario WHERE correo_usuario = ?";
@@ -52,7 +65,11 @@ public class UsuarioDAO {
         
         return correoExistente;
     }
-    
+    /**
+     * Verifica si un usuario está habilitado.
+     * @param usuario El objeto Usuario con el correo electrónico para verificar el estado.
+     * @return true si el usuario está habilitado (estado 1), false en caso contrario.
+     */
     public boolean usuarioHabilitado(Usuario usuario) {
         
         String sql = "SELECT id_estado_fk FROM usuario WHERE correo_usuario = ?";
@@ -74,9 +91,13 @@ public class UsuarioDAO {
         
         return false;
     }
-
+    /**
+     * Autentica a un usuario comparando su correo electrónico y contraseña.
+     * @param usuario El objeto Usuario con las credenciales a verificar.
+     * @return true si las credenciales son correctas, false en caso contrario.
+     */
     public boolean autenticarUsuario(Usuario usuario) {
-        String sql = "SELECT nombre_usuario, id_rol_fk FROM usuario "
+        String sql = "SELECT id_usuario, nombre_usuario, id_rol_fk FROM usuario "
                 + "WHERE correo_usuario = ? AND contrasena_usuario = ?";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -85,6 +106,7 @@ public class UsuarioDAO {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    usuario.setId(rs.getInt("id_usuario"));
                     usuario.setNombreUsuario(rs.getString("nombre_usuario"));
                     usuario.setRol(rs.getInt("id_rol_fk"));
                     return true;
@@ -94,9 +116,12 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
 
-        return false; // Usuario no encontrado o error de SQL
+        return false; 
     }
-    
+    /**
+     * Obtiene una lista de todos los usuarios de la base de datos.
+     * @return Una lista de objetos Usuario con la información de todos los usuarios.
+     */
     public List<Usuario> todosLosUsuarios(){
         String sql = "SELECT id_usuario, nombre_usuario, correo_usuario, contrasena_usuario, id_rol_fk, nombre_rol, id_estado_fk "
                 + "FROM usuario "
@@ -134,7 +159,11 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
-    
+    /**
+     * Actualiza la información de un usuario en la base de datos.
+     * @param usuario El objeto Usuario con la nueva información.
+     * @return true si la actualización fue exitosa, false en caso contrario.
+     */
     public boolean actualizarUsuario(Usuario usuario) {
         String sql = "UPDATE usuario SET nombre_usuario = ?, correo_usuario = ?, contrasena_usuario = ?, id_rol_fk = ? WHERE id_usuario = ?";
 
@@ -152,21 +181,11 @@ public class UsuarioDAO {
             return false;
         }
     }
-    
-    public boolean eliminarUsuario(Usuario usuario) {
-        String sql = "DELETE FROM usuario WHERE id_usuario = ?";
-
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-            ps.setInt(1, usuario.getId());
-            
-            int filasAfectadas = ps.executeUpdate();
-            return filasAfectadas > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
+    /**
+     * Cambia el estado de un usuario en la base de datos.
+     * @param usuario El objeto Usuario con el nuevo estado y el ID del usuario.
+     * @return true si la actualización del estado fue exitosa, false en caso contrario.
+     */
     public boolean cambiarEstadoUsuario(Usuario usuario) {
         String sql = "UPDATE usuario SET id_estado_fk = ? WHERE id_usuario = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {

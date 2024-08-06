@@ -1,8 +1,6 @@
-<%-- 
-    Document   : index
-    Created on : 15 abr 2024, 13:36:18
-    Author     : Propietario
---%>
+
+
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,8 +17,13 @@
         
         <main class="main">
             <section class="main__intro">
-                
-                
+                <div class="intro__content">
+                    <h1 class="intro__title">Bocado Esencial: Donde Cada Sabor Cuenta</h1>
+                    <p class="intro__description">Descubre la Esencia de la Gastronomía en Cada Delicioso Bocado</p>
+                    <div class="intro__actions">
+                        <a href="/proRest/paginaCarta" class="actions__login">Ver Carta</a>
+                    </div>
+                </div>
             </section>
 
         </main>

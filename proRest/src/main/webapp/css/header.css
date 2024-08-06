@@ -222,16 +222,20 @@ a{
 
 /* hidden__actions */
 
+.logUser__icon{
+    height: 38px;
+    width: 38px;
+    fill: var(--text-color);
+    border-radius: 50%;
+    display: block;
+}
+
 .user__icon{
     height: 38px;
     width: 38px;
     fill: var(--text-color);
     border-radius: 50%;
     display: none;
-}
-
-.user__icon.show-icon{
-  display: block;
 }
 
 .hidden__actions{
@@ -286,16 +290,23 @@ a{
   margin-right: 15px;
 }
 
-.logOut{
+.profileOptions{
   position: absolute;
   display: none;
+  flex-direction: column;
+  gap: 15px;
   top: 64px;
   right: 0px;
   text-align: center;
   padding: 10px 20px 10px 20px;
+  
 }
 
-.logOut__button{
+.profileOptions form{
+    display: contents;
+}
+
+.profile__button{
   display: block;
   text-decoration: none;
   color: var(--text-color);
@@ -303,6 +314,9 @@ a{
   padding: 14px 24px;
   border-radius: 17px;
   box-shadow: 10px 4px 10px #000000; 
+  border: none;
+  font-size: 16px;
+  
 }
 
 
@@ -310,10 +324,6 @@ a{
 @media (max-width: 1045px) {
     .navigation__navbar {
         display: none;
-    }
-
-    .hamburger-menu {
-        display: block
     }
 
     

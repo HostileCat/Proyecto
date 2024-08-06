@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.sql.Connection;
@@ -14,20 +10,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Diego
+ * Clase DAO para gestionar operaciones con la tabla 'reserva' en la base de datos.
  */
 public class ReservaDAO {
     private final Connection conexion;
+    /**
+     * Constructor que inicializa la conexión a la base de datos.
+     * Si la conexión es nula, se informa del error en la conexión.
+     */
     
     public ReservaDAO() {
         conexion = config.conexion.getConnection(); // Obtener la conexión a la base de datos
         if (conexion == null) {
             System.err.println("Error al conectar a la base de datos");
-            // Aquí puedes lanzar una excepción o manejar el error de alguna otra manera
         }
     }
     
+    /**
+     * Verifica si existe una reserva activa para un cliente específico.
+     * @param reserva El objeto Reserva que contiene el ID del cliente.
+     * @return true si existe una reserva activa, false en caso contrario.
+     */
     public boolean reservaExistente(Reserva reserva) {
         boolean reservaExistente = false;
         String sql = "SELECT COUNT(*) FROM reserva "
@@ -46,18 +49,22 @@ public class ReservaDAO {
         
         return reservaExistente;
     }
-    
+    /**
+     * Crea una nueva reserva en la base de datos.
+     * @param reserva El objeto Reserva con los detalles de la reserva.
+     * @return true si la reserva se creó exitosamente, false en caso contrario.
+     */
     public boolean hacerReserva(Reserva reserva) {
            
             String sql = "INSERT INTO reserva (id_cliente_fk, fecha_reserva, hora_reserva, id_estadoR_fk) VALUES (?, ?, ?, ?)";
 
-            try (PreparedStatement psInsert = conexion.prepareStatement(sql)) { 
-                psInsert.setInt(1, reserva.getIdCliente());
-                psInsert.setDate(2, Date.valueOf(reserva.getFecha()));
-                psInsert.setTime(3, Time.valueOf(reserva.getHora()));
-                psInsert.setInt(4, reserva.getEstado());
+            try (PreparedStatement ps = conexion.prepareStatement(sql)) { 
+                ps.setInt(1, reserva.getIdCliente());
+                ps.setDate(2, Date.valueOf(reserva.getFecha()));
+                ps.setTime(3, Time.valueOf(reserva.getHora()));
+                ps.setInt(4, reserva.getEstado());
                 
-                int filasAfectadas = psInsert.executeUpdate();
+                int filasAfectadas = ps.executeUpdate();
                 
                 return filasAfectadas > 0;
 
@@ -67,7 +74,11 @@ public class ReservaDAO {
         }
         
     }
-    
+    /**
+     * Sugiere una nueva fecha y hora para una reserva existente.
+     * @param reserva El objeto Reserva con la nueva fecha y hora sugeridas.
+     * @return true si la sugerencia se actualizó exitosamente, false en caso contrario.
+     */
     public boolean sugerirNuevaFechaHora(Reserva reserva) {
         String sql = "UPDATE reserva SET fecha_sugerida = ?, hora_sugerida = ?, estado_sugerencia = 1 WHERE id_reserva = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -83,7 +94,11 @@ public class ReservaDAO {
             return false;
         }
     }
-    
+    /**
+     * Confirma una sugerencia de nueva fecha y hora para una reserva.
+     * @param reserva El objeto Reserva con el ID de la reserva cuya sugerencia se desea confirmar.
+     * @return true si la sugerencia se confirmó exitosamente, false en caso contrario.
+     */
     public boolean confirmarSugerencia(Reserva reserva) {
         String sql = "UPDATE reserva SET fecha_reserva = fecha_sugerida, hora_reserva = hora_sugerida, estado_sugerencia = 0, id_estadoR_fk = 2 WHERE id_reserva = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -95,7 +110,11 @@ public class ReservaDAO {
             return false;
         }
     }
-    
+    /**
+     * Confirma una reserva existente.
+     * @param reserva El objeto Reserva con el ID de la reserva que se desea confirmar.
+     * @return true si la reserva se confirmó exitosamente, false en caso contrario.
+     */
     public boolean confirmarReserva(Reserva reserva) {
         String sql = "UPDATE reserva SET id_estadoR_fk = 2 WHERE id_reserva = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -107,7 +126,11 @@ public class ReservaDAO {
             return false;
         }
     }
-    
+    /**
+     * Cancela una reserva existente.
+     * @param reserva El objeto Reserva con el ID de la reserva que se desea cancelar.
+     * @return true si la reserva se canceló exitosamente, false en caso contrario.
+     */
     public boolean cancelarReserva(Reserva reserva) {
         String sql = "UPDATE reserva SET id_estadoR_fk = 4, estado_sugerencia = 0 WHERE id_reserva = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -119,7 +142,11 @@ public class ReservaDAO {
             return false;
         }
     }
-    
+    /**
+     * Marca una reserva como terminada.
+     * @param reserva El objeto Reserva con el ID de la reserva que se desea terminar.
+     * @return true si la reserva se marcó como terminada exitosamente, false en caso contrario.
+     */
     public boolean terminarReserva(Reserva reserva) {
         String sql = "UPDATE reserva SET id_estadoR_fk = 3 WHERE id_reserva = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -131,7 +158,10 @@ public class ReservaDAO {
             return false;
         }
     }
-    
+    /**
+     * Obtiene todas las reservas de la base de datos, incluyendo información del cliente.
+     * @return Una lista de objetos Reserva.
+     */
     public List<Reserva> todasLasReservas(){
         String sql = "SELECT id_reserva, id_cliente_fk, fecha_reserva, hora_reserva, id_estadoR_fk, hora_sugerida, fecha_sugerida, estado_sugerencia, nombre_usuario "
                 + "FROM reserva "

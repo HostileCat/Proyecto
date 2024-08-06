@@ -18,23 +18,39 @@ body {
     color: var(--text-color);
 }
 
-.grid-container {
+.main__title{
+    text-align: center;
+}
+
+.grid__container {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 20px;
 }
 
-.categorias-container {
+.category__container {
     padding: 20px;
-    border-right: 1px solid #ccc;
+    border: 1px solid #ccc;
 }
 
-.categorias-list {
+.category__list {
     list-style: none;
     padding: 0;
+    
 }
 
-.categoria {
+.category__list li {
+    margin-bottom: 10px;
+}
+
+.category__list li a{
+    text-decoration: none;
+    color: var(--quaternary-color);
+    
+        
+}
+
+.category {
     margin-bottom: 20px;
 }
 
@@ -142,6 +158,29 @@ body {
     background-color: var(--status-button-colorD);
 }
 
+.total__container{
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 30px;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    margin-top: 20px;    
+}
+
+.submit__button{
+    padding: 10px 24px;
+    background-color: var(--add-button-color);
+    border: none;
+    color: var(--text-color);
+    font-weight: bold;
+    border-radius: 17px;
+    width: 115px;
+}
+
+.total__title{
+    text-align: end;
+}
+
 
 .modal {
     display: none;
@@ -157,35 +196,114 @@ body {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    position: relative;
+    background-color: var(--primary-color);
     padding: 20px;
     border-radius: 8px;
     width: 50%;
     max-width: 600px;
 }
 
-.close {
-    float: right;
+.closeIcon {
+    position: absolute;
+    top: 10px;
+    right: 20px;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
 }
 
+.modalTitle{
+    text-align: center;
+}
+
+.textarea{
+    width: 100%;
+    resize: none;
+    height: 100px;
+}
+
 .modal-buttons {
-    text-align: right;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
     margin-top: 10px;
 }
 
-.modal-buttons button {
+.acceptButton {
     padding: 8px 16px;
-    margin-left: 10px;
-    background-color: #4CAF50;
+    background-color: var(--add-button-color);
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
 }
 
-.modal-buttons button:hover {
-    background-color: #45a049;
+.acceptButton:hover {
+    background-color: var(--add-button-hover);
 }
+
+.acceptButton:active {
+    background-color: var(--add-button-colorD);
+}
+
+.closeButton{
+    padding: 8px 16px;
+    background-color: var(--delete-button-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    
+}
+
+.closeButton:hover{
+    background-color: var(--delete-button-hover);
+}
+
+.closeButton:active{
+    background-color: var(--delete-button-colorD);
+}
+
+
+.scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: none; /* Oculto por defecto */
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 44px;
+    height: 44px;
+}
+
+.scrollToTopBtn svg{
+    width: 100%;
+    height: 100%;
+    fill: var(--text-color);
+}
+
+.scrollToTopBtn:hover {
+    background-color: #0056b3;
+}
+
+
+.lleno{
+    background-color: var(--add-button-color)
+}
+
+.lleno:hover{
+    background-color: var(--add-button-hover)
+}
+
+.lleno:active{
+    background-color: var(--add-button-colorD)
+}
+

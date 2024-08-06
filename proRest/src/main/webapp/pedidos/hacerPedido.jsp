@@ -13,57 +13,32 @@
     <main class="main">
         <h1 class="main__title">Selección de Platos</h1>
         
-        <div class="grid-container">
+        <div class="grid__container">
             <!-- Contenedor de categorías y platos -->
-            <div class="categorias-container">
-                <h2>Categorías</h2>
-                <ul class="categorias-list">
-                    <li><a href="#categoria1">Categoría 1</a></li>
-                    <li><a href="#categoria2">Categoría 2</a></li>
-                    <!-- Agrega más categorías según tu aplicación -->
-                </ul>
+            <div class="category__container">
+                <h2>Lista de categorías</h2>
+                <%
+                    String lista = (String) request.getAttribute("lista");
+                    
+                    if(lista != null){
+                        out.print(lista);
+                    }
                 
-                <!-- Categoría 1 -->
-                <div class="categoria" id="categoria1">
-                    <h3>Categoría 1</h3>
-                    <div class="grid">
-                        <h3 class="grid__title">Plato</h3>
-                        <h3 class="grid__title">Precio</h3>
-                        <h3 class="grid__title">Accion</h3>
-                        
-                        <p class="grid__item">Plato 1</p>
-                        <p class="grid__item">$10</p>
-                        <button class="agregar__plato" data-plato="Plato 1" data-precio="10">Agregar</button>
-                        
-                        <div class="grid__item">Plato 2</div>
-                        <div class="grid__item">$12</div>
-                        <button class="agregar__plato" data-plato="Plato 2" data-precio="12">Agregar</button>
-                        
-                        <!-- Agrega más platos según tu aplicación -->
-                    </div>
-                </div>
+                    String container = (String) request.getAttribute("container");
+                    
+                    if(container != null){
+                        out.print(container);
+                    }
+                %>
                 
-                <!-- Categoría 2 -->
-                <div class="categoria" id="categoria2">
-                    <h3>Categoría 2</h3>
-                    <div class="grid">
-                        <h3 class="grid__title">Plato</h3>
-                        <h3 class="grid__title">Precio</h3>
-                        <h3 class="grid__title">Accion</h3>
-                        
-                        <p class="grid__item">Plato 3</p>
-                        <p class="grid__item">$15</p>
-                        <button class="agregar__plato" data-plato="Plato 1" data-precio="10" data-id="1">Agregar</button>
-                        <!-- Agrega más platos según tu aplicación -->
-                    </div>
-                </div>
+                
                 
                 <!-- Agrega más categorías según tu aplicación -->
             </div>
             
             <!-- Contenedor del carrito de compras -->
             <div class="list__container">
-                <h2>Carrito de Compras</h2>
+                <h2>Pedido</h2>
                 <div class="list__grid" id="lista">
                     
                     <h3 class="grid__title">Plato</h3>
@@ -73,38 +48,46 @@
                     <h3 class="grid__title">Total</h3>
                     <h3 class="grid__title">Accion</h3>
                     
-                    <div class="item__container">
-                        <p class="grid__item">Plato</p>
-                        <p class="grid__item" id="precioPlato">10000</p>
-                        <input class="grid__item grid__item-number" type="text" id="cantidadPlato" name="cantidadPlato" value="1">
-                        <button class="detalle__plato" id="detallePlato">Detalle</button>
-                        <p class="grid__item" id="totalPlato">100000</p>
-                        <button class="remover__plato" data-plato="Plato 1" data-precio="10" data-set="1">Remover</button>
-                    </div>
-                    
                     
                 </div>
+                <div class="total__container">
+                    <form action="/proRest/administracionPedidos" method="post" id="pedidoForm">
+                        <input type="hidden" name="idEmpleado" value="<% out.print(idUsuario); %>">
+                        <input type="hidden" name="platos" id="platos-input" required>
+                        <input type="hidden" name="total" id="total-input">
+                        <input type="hidden" name="accion" value="registrar">
+                        <button type="submit" class="submit__button">Enviar</button>
+                    </form>
+                    <h3 class="total__title">Total del Pedido: $<span id="totalPedido">0</span></h3>
+                </div>
+                
             </div>
         </div>
         
         <!-- Modal para detalles adicionales -->
         <div id="modal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Detalles Adicionales</h2>
+                <span class="closeIcon" id="close">&times;</span>
+                <h2 class="modalTitle">Detalles Adicionales</h2>
                 <form id="modal-form">
                     <label for="detalles">Detalles:</label>
-                    <textarea id="detalles" name="detalles" rows="4"></textarea>
+                    <textarea class="textarea" id="detalles" name="detalles" rows="4"></textarea>
                     <div class="modal-buttons">
-                        <button type="button" id="aceptar-detalle">Aceptar</button>
-                        <button type="button" class="close">Cancelar</button>
+                        <button type="button" class="acceptButton" id="aceptar-detalle">Aceptar</button>
+                        <button type="button" class="closeButton" id="close">Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
     </main>
+                        
+    <button id="scrollToTopBtn" class="scrollToTopBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2 160 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-306.7L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
+        </svg>
+    </button>
     
     <script src="/proRest/js/script.js"></script> 
-    <script src="/proRest/js/orderList.js"></script> 
+    <script src="/proRest/js/orderList.js" type="module"></script> 
 </body>
 </html>

@@ -20,11 +20,11 @@
             <div class="main__nav">
                 <ul class="nav__list">
                     
-                    <li class="nav__item"><a href="/proRest/paginaUsuarios?opcion=cliente">Cliente</a></li>
-                    <li class="nav__item"><a href="/proRest/paginaUsuarios?opcion=empleado">Empleado</a></li>
+                    <li class="nav__item"><a href="/proRest/paginaUsuarios?opcion=cliente&rolUsuario=<% out.print(rolUsuario); %>">Cliente</a></li>
+                    <li class="nav__item"><a href="/proRest/paginaUsuarios?opcion=empleado&rolUsuario=<% out.print(rolUsuario); %>">Empleado</a></li>
                     <%
                         if(rolUsuario == 1){
-                            out.print("<li class='nav__item'><a href='/proRest/paginaUsuarios?opcion=administrador'>Administrador</a></li>");
+                            out.print("<li class='nav__item'><a href='/proRest/paginaUsuarios?opcion=administrador&rolUsuario="+ rolUsuario +"'>Administrador</a></li>");
                         }
                     %>
                     
@@ -42,7 +42,6 @@
                 %>
                 <div class="grid__container" id="userGridContainer">
                     
-                    <h3 class="grid__title">ID</h3>
                     <h3 class="grid__title">Nombre</h3>
                     <h3 class="grid__title">Correo</h3>
                     <h3 class="grid__title">Contraseña</h3>
@@ -61,7 +60,7 @@
         </main>
         
         <div class="add__container">
-            <a href="/proRest/administracionUsuario?accion=agregar" id="addUserBtn" class="add__button">+</a>
+            <a href="/proRest/administracionUsuario?accion=agregar&rolUsuario=<% out.print(rolUsuario); %>" id="addUserBtn" class="add__button">+</a>
             <p class="add__text">Añadir Usuario</p>       
         </div>
                 

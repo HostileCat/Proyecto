@@ -15,8 +15,7 @@ import model.Categoria;
 import model.CategoriaDAO;
 
 /**
- *
- * @author Propietario
+ * Servlet para la administración de categorías de platos.
  */
 @WebServlet("/administracionCategoria")
 public class AdministracionCategorias extends HttpServlet {
@@ -30,7 +29,8 @@ public class AdministracionCategorias extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-       String nombreCategoria = request.getParameter("nombreCategoria");
+       request.setCharacterEncoding("UTF-8");
+        String nombreCategoria = request.getParameter("nombreCategoria");
        String accion = request.getParameter("accion");
        
       
@@ -98,6 +98,7 @@ public class AdministracionCategorias extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.setCharacterEncoding("UTF-8");
         String accion = request.getParameter("accion");
         
         switch (accion){

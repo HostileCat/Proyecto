@@ -2,14 +2,16 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const userIcon = document.querySelector("#logUser__icon");
-  const logOut = document.querySelector("#logOut");
-
+  const profileOptions = document.querySelector("#profileOptions");
+  
+  console.log(profileOptions);
+  
   userIcon.addEventListener("click", function(event) {
     event.preventDefault(); // Previene el comportamiento por defecto del enlace
-    if (logOut.style.display === "none" || logOut.style.display === "") {
-      logOut.style.display = "flex";
+    if (profileOptions.style.display === "none" || profileOptions.style.display === "") {
+      profileOptions.style.display = "flex";
     } else {
-      logOut.style.display = "none";
+      profileOptions.style.display = "none";
     }
   });
 });
@@ -18,28 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener('DOMContentLoaded', function () {
   const user__icon = document.getElementById('user__icon');
   const hiddenActions = document.getElementById('hidden__actions');
-
+  console.log(user__icon);
   user__icon.addEventListener('click', function () {
       hiddenActions.classList.toggle('show');
   });
 });
-
-document.addEventListener('DOMContentLoaded', function () {
-  const mainMenu = document.getElementById('main__menu');
-  const arrow = document.getElementById('arrow');
-  const mainSelectCategory = document.getElementById('main__selectCategory');
-  const mainSelectDish = document.getElementById('main__selectDish');
-
-  arrow.addEventListener('click', function () {
-    mainSelectCategory.classList.toggle('show');
-    mainSelectDish.classList.toggle('show');
-    arrow.classList.toggle('show');
-    mainMenu.classList.toggle('show');
-  });
-});
-
-
-// menu hamburguesa
 
 document.addEventListener('DOMContentLoaded', function () {
     const hamburgerMenu = document.getElementById('hamburger-menu');

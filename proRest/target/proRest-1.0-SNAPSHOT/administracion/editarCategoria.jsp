@@ -27,8 +27,8 @@
                         
                         if (idCategoria != null){
                     %>
-                    <input type="hidden" id="categoryId" value="<% out.print(idCategoria);} %>" name="idCategoria">
-                    <input type="text" placeholder="Nombre" class="add__input" name="nombreCategoria">
+                    <input type="hidden" id="categoryId" value="<% out.print(idCategoria);} %>" name="idCategoria" >
+                    <input type="text" placeholder="Nombre" class="add__input" name="nombreCategoria" required>
                   </div>
                   <button class="section__addButton">Editar</button>
                 </form>

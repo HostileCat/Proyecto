@@ -45,15 +45,15 @@
                         </div>  
 
                         <div class="section__add addDish">
-                          <input type="text" placeholder="Descripción" class="add__input" name="descripcionPlato" value="<% out.print(descripcionPlato); %>" id="descripcionPlato">
+                          <input type="text" placeholder="Descripción" class="add__input" name="descripcionPlato" value="<% out.print(descripcionPlato); %>" id="descripcionPlato" required>
                         </div> 
 
                         <div class="section__add addDish">  
-                          <input type="text" placeholder="Precio" class="add__input" name="precioPlato" value="<% out.print(precioPlato); %>" id="precioPlato">
+                          <input type="text" placeholder="Precio" class="add__input" name="precioPlato" value="<% out.print(precioPlato); %>" id="precioPlato" required>
                         </div> 
 
                         <div class="section__add addDish">  
-                          <input type="file" accept="image/*" class="addDish__img" name="imagenPlato" id="imagenPlato">
+                          <input type="file" accept="image/*" class="addDish__img" name="imagenPlato" id="imagenPlato" required>
                         </div>
                         
                           <input type="hidden" name="idPlato" value="<% out.print(idPlato); %>">

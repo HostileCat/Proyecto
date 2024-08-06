@@ -16,8 +16,7 @@ import model.Reserva;
 import model.ReservaDAO;
 
 /**
- *
- * @author Diego
+ * Servlet para la insertar según el estado las reservas propias del usuario.
  */
 @WebServlet("/paginaMisReservas")
 public class PaginaMisReservas extends HttpServlet {
@@ -31,7 +30,7 @@ public class PaginaMisReservas extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         String opcion = request.getParameter("opcion");
         String idUsuario = request.getParameter("idUsuario");
         String titulo = "";
@@ -58,8 +57,9 @@ public class PaginaMisReservas extends HttpServlet {
                                 "<div class='grid__item actionButtons'>" +
                                 "<form action='/proRest/administracionReservas' method='post'>" +
                                 "<input type='hidden' name='accion' value='cancelarCliente'>" +
+                                "<input type='hidden' name='idUsuario' value='"+ idUsuario +"'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
-                                "<button type='submit' class='add__button'>Cancelar</button>" +
+                                "<button type='submit' class='delete__button'>Cancelar</button>" +
                                 "</form>" +
                                 "</div>";
                     }      
@@ -75,11 +75,13 @@ public class PaginaMisReservas extends HttpServlet {
                                 "<form action='/proRest/administracionReservas' method='post'>" +
                                 "<input type='hidden' name='accion' value='confirmarCliente'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
+                                "<input type='hidden' name='idUsuario' value='" + idUsuario + "'>" +
                                 "<button type='submit' class='button button--confirm'>Confirmar</button>" +
                                 "</form>" +
                                 "<form action='/proRest/administracionReservas' method='post'>" +
                                 "<input type='hidden' name='accion' value='cancelarCliente'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
+                                "<input type='hidden' name='idUsuario' value='" + idUsuario + "'>" +
                                 "<button type='submit' class='button button--cancel'>Cancelar reserva</button>" +
                                 "</form>" +
                                 "</div>" +
@@ -97,13 +99,18 @@ public class PaginaMisReservas extends HttpServlet {
                 titulo = "<h2 class='section__title'>Reservas Confirmadas</h2>";
                 for (Reserva reserva : reservas) {
                     
-                    if(reserva.getEstado() == 2){
+                    if(reserva.getEstado() == 2 && reserva.getIdCliente() == Integer.parseInt(idUsuario)){
                         fila +="<p class='grid__item'>"+ reserva.getIdReserva()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getNombreCliente()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getHora()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<p>Sin acciones</p>"+
+                               "<form action='/proRest/administracionReservas' method='post'>" +
+                                "<input type='hidden' name='accion' value='cancelarCliente'>" +
+                                "<input type='hidden' name='idUsuario' value='"+ idUsuario +"'>" +
+                                "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
+                                "<button type='submit' class='delete__button'>Cancelar</button>" +
+                                "</form>" +
                                "</div>";
                     }                            
                 }
@@ -112,7 +119,7 @@ public class PaginaMisReservas extends HttpServlet {
                 titulo = "<h2 class='section__title'>Reservas Terminadas</h2>";
                 for (Reserva reserva : reservas) {
                     
-                    if(reserva.getEstado() == 3){
+                    if(reserva.getEstado() == 3 && reserva.getIdCliente() == Integer.parseInt(idUsuario)){
                         fila +="<p class='grid__item'>"+ reserva.getIdReserva()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getNombreCliente()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
@@ -127,7 +134,7 @@ public class PaginaMisReservas extends HttpServlet {
                 titulo = "<h2 class='section__title'>Reservas Canceladas</h2>";
                 for (Reserva reserva : reservas) {
                     
-                    if(reserva.getEstado() == 4){
+                    if(reserva.getEstado() == 4 && reserva.getIdCliente() == Integer.parseInt(idUsuario)){
                         fila +="<p class='grid__item'>"+ reserva.getIdReserva()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getNombreCliente()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +

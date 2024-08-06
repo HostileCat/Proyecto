@@ -16,7 +16,7 @@
         <%@ include file="../componentes/header.jsp" %>
         
         <main class="main">
-            <h1 class="main__title">Administracion de usuarios</h1>
+            <h1 class="main__title">Administracion de Platos</h1>
             <div class="main__nav">
                 <ul class="nav__list">
                     

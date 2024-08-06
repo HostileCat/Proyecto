@@ -21,7 +21,7 @@
         <main class="main">
             <section class="main__section">
 
-                <h1 class="section__title">Agregar Categoria</h1>
+                <h1 class="section__title">Hacer reserva</h1>
                 <form id="section__form" action="/proRest/administracionReservas" class="section__form" method="post">
                   
                     <%
@@ -42,11 +42,12 @@
                     <input class="add__input" type="time" id="horaReserva" name="horaReserva" required>                  
                   </div>
                   <input type="hidden" id="category" name="accion" value="agregarSubmit">
-                  <button type="button" class="section__addButton">Agregar</button>
+                  <button type="button" class="section__addButton">Realizar</button>
                 </form>
             </section>
         </main>
-
+        
+        <script src="/proRest/js/script.js"></script>
         <script src="/proRest/js/date.js"></script>
     </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2024 a las 18:03:43
+-- Tiempo de generación: 06-08-2024 a las 17:51:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -38,11 +38,23 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`id_categoria`, `nombre_categoria`) VALUES
 (1, 'No tiene categoría'),
-(2, 'Platos Principales'),
-(3, 'Postres'),
-(4, 'Bebidas'),
-(5, 'Menú Infantil'),
-(12, 'jamon');
+(2, 'Entradas'),
+(3, 'Platos Principales'),
+(4, 'Postres'),
+(5, 'Bebidas'),
+(6, 'Hamburguesas');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_historial`
+--
+
+CREATE TABLE `detalle_historial` (
+  `id_detalle` int(11) NOT NULL,
+  `nombrePlato_detalle` varchar(255) NOT NULL,
+  `precioPlato_detalle` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -54,7 +66,6 @@ CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `id_usuario_fk` int(11) DEFAULT NULL,
   `fecha_pedido` datetime DEFAULT NULL,
-  `detalle_pedido` varchar(255) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -62,12 +73,10 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fecha_pedido`, `detalle_pedido`, `total`) VALUES
-(1, 1, '2023-11-01 18:00:00', '', 0),
-(2, 1, '2023-11-02 19:30:00', '', 0),
-(3, 3, '2023-11-03 20:00:00', '', 0),
-(4, 3, '2023-11-04 18:30:00', '', 0),
-(5, 5, '2023-11-05 17:45:00', '', 0);
+INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fecha_pedido`, `total`) VALUES
+(1, 1, '2024-08-05 10:30:16', 166000),
+(2, 1, '2024-08-05 13:14:52', 57000),
+(3, 6, '2024-08-05 16:09:38', 150000);
 
 -- --------------------------------------------------------
 
@@ -77,20 +86,33 @@ INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fecha_pedido`, `detalle_ped
 
 CREATE TABLE `pedido_platos` (
   `id_pedido_fk` int(11) DEFAULT NULL,
-  `cantidad_plato` int(11) DEFAULT NULL,
-  `id_plato_fk` int(11) DEFAULT NULL
+  `cantidad` int(11) DEFAULT NULL,
+  `id_plato_fk` int(11) DEFAULT NULL,
+  `detalle` varchar(255) NOT NULL,
+  `id_pedidoPlato` int(11) NOT NULL,
+  `id_detalleHistorial_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pedido_platos`
 --
 
-INSERT INTO `pedido_platos` (`id_pedido_fk`, `cantidad_plato`, `id_plato_fk`) VALUES
-(1, NULL, NULL),
-(1, NULL, NULL),
-(2, NULL, NULL),
-(3, NULL, NULL),
-(4, NULL, NULL);
+INSERT INTO `pedido_platos` (`id_pedido_fk`, `cantidad`, `id_plato_fk`, `detalle`, `id_pedidoPlato`, `id_detalleHistorial_fk`) VALUES
+(1, 1, 1, 'Sin cebolla', 1, 0),
+(1, 1, 5, '', 2, 0),
+(1, 2, 9, '', 3, 0),
+(1, 2, 10, '', 4, 0),
+(1, 1, 6, '', 5, 0),
+(1, 1, 3, '', 6, 0),
+(2, 1, 1, '', 7, 0),
+(2, 1, 2, '', 8, 0),
+(2, 1, 3, '', 9, 0),
+(3, 2, 3, '', 10, 0),
+(3, 1, 4, 'sin frijoles', 11, 0),
+(3, 1, 8, '', 12, 0),
+(3, 1, 10, '', 13, 0),
+(3, 1, 2, '', 14, 0),
+(3, 1, 6, '', 15, 0);
 
 -- --------------------------------------------------------
 
@@ -113,22 +135,17 @@ CREATE TABLE `platos` (
 --
 
 INSERT INTO `platos` (`id_plato`, `nombre_plato`, `descripcion_plato`, `precio_plato`, `id_categoria_fk`, `imagen_plato`, `estado`) VALUES
-(1, 'sopa', 'sopa rica', 100000, 2, 'Captura de pantalla 2024-05-25 115754.png', 1),
-(2, 'patacones', 'asdasdas', 12331, 1, 'Captura de pantalla 2024-05-25 115754.png', 1),
-(3, 'cajita feliz', 'asdasdas', 12331, 5, 'Captura de pantalla 2024-05-25 115754.png', 1),
-(4, 'cajita feliz', 'asdasdas', 12331, 5, 'Captura de pantalla 2024-05-25 115754.png', 1),
-(6, 'cajita feliz', 'asdasdas', 12331, 1, 'Captura de pantalla 2024-05-25 115754.png', 1),
-(7, 'plato', 'platillo', 12345, 3, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg', 1),
-(8, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\target\\proRest-1.0-SNAPSHOT\\\\uploads', 1),
-(9, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\uploads', 1),
-(10, 'plato', 'platillo', 12345, 3, 'C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto\\proRest\\uploads', 1),
-(11, 'plato', 'platillo', 12345, 3, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg', 1),
-(12, 'plato', 'platillo', 12345, 2, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg', 1),
-(13, 'hola', 'hello', 54321, 4, '1f1d408dddce4984a689afc06d9f42d8.webp', 1),
-(14, 'hola', 'hello', 54321, 1, 'pngtree-wolf-animals-images-wallpaper-for-pc-384x480-image_2916211.jpg', 1),
-(15, 'hola', 'hola hola', 123456, 1, 'Captura de pantalla 2024-05-25 115754.png', 1),
-(16, 'platoss', 'platilloss', 1234567, 4, 'Captura de pantalla (5).png', 1),
-(17, 'platos', 'platillos', 1234567, 1, 'RobloxScreenShot20240627_135446031.png', 1);
+(1, 'Ceviche de Camarón', 'Camarones marinados en jugo de limón con cebolla, cilantro, y tomate', 25000, 2, 'cevicheDeCamarones.jpg', 1),
+(2, 'Patacones con Hogao', 'Patacones, acompañadas con una salsa de cebolla, tomate, ajo y cilantro.', 12000, 2, 'pataconesConHogao.jpg', 1),
+(3, 'Chicharrón', 'Chicharrón de cerdo acompañado de salsa picante y limón', 20000, 2, 'chicharron.jpg', 1),
+(4, 'Bandeja Paisa', 'Arepa, carne molida, chicharrón, arepa, arroz, frijoles, plátano maduro, huevo frito, y aguacate', 40000, 3, 'bandejaPaisa.jpg', 1),
+(5, 'Posta Negra', 'Carne de res en una salsa oscura a base de panela, cebolla, y especias, arroz, patacones y aguacate.', 35000, 3, 'postaNegra.jpg', 1),
+(6, 'Sancocho', 'Sancocho de gallina con yuca, plátano, papa, y mazorca, acompañado de arroz y aguacate.', 30000, 3, 'sancocho.jpg', 0),
+(7, 'Postre de Natas', 'Postre a base de nata de leche cocida con azúcar, canela, y clavos, acompañada de frutos secos', 15000, 4, 'postreDeNatas.jpg', 1),
+(8, 'Torta de Tres Leches', 'Pastel empapado en una mezcla de tres tipos de leche (leche evaporada, leche condensada, y crema de leche)', 20000, 4, 'tortaTresLeches.jpg', 1),
+(9, 'Crème Brûlée', 'Postre con una capa de azúcar caramelizada por encima de una crema de vainilla.', 20000, 4, 'cremeBrulee.jpg', 1),
+(10, 'Jugos Naturales', 'Jugos de maracuyá, guanábana, lulo', 8000, 5, 'jugosNaturales.jpg', 1),
+(11, 'Hamburguesa Sencilla', 'carne, cebolla, queso, lechuga, tomate, salsa de tomate', 12000, 6, 'hamburguesaClasica.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -152,13 +169,11 @@ CREATE TABLE `reserva` (
 --
 
 INSERT INTO `reserva` (`id_reserva`, `id_cliente_fk`, `fecha_reserva`, `id_estadoR_fk`, `hora_reserva`, `fecha_sugerida`, `hora_sugerida`, `estado_sugerencia`) VALUES
-(11, 12, '1970-01-01', 3, '00:00:00', '1970-01-01', '00:00:00', 0),
-(12, 12, '2024-08-04', 2, '17:22:00', '2024-08-04', '17:22:00', 0),
-(13, 11, '2024-08-04', 1, '19:00:00', '2024-08-05', '15:42:00', 1),
-(14, 12, '2024-08-04', 4, '14:50:00', '1970-01-01', '00:00:00', 0),
-(15, 12, '2024-08-07', 4, '15:25:00', '2024-08-05', '15:26:00', 0),
-(16, 12, '2024-08-07', 3, '17:07:00', '2024-08-07', '17:07:00', 0),
-(17, 12, '2024-08-06', 3, '17:43:00', '2024-08-06', '17:43:00', 0);
+(1, 10, '2024-08-09', 1, '13:30:00', '1970-01-01', '00:00:00', 0),
+(2, 8, '2024-08-12', 3, '17:15:00', '2024-08-12', '17:15:00', 0),
+(3, 11, '2024-08-07', 4, '15:58:00', '1970-01-01', '00:00:00', 0),
+(4, 12, '2024-08-13', 2, '12:17:00', '2024-08-13', '12:17:00', 0),
+(5, 12, '2024-08-07', 4, '14:16:00', '2024-08-11', '13:17:00', 0);
 
 -- --------------------------------------------------------
 
@@ -214,7 +229,7 @@ CREATE TABLE `usuario` (
   `correo_usuario` varchar(255) DEFAULT NULL,
   `contrasena_usuario` varchar(255) NOT NULL,
   `id_rol_fk` int(11) DEFAULT NULL,
-  `id_estado_fk` int(11) NOT NULL
+  `id_estado_fk` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -222,16 +237,18 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `correo_usuario`, `contrasena_usuario`, `id_rol_fk`, `id_estado_fk`) VALUES
-(1, 'Juan Pérez', 'juan@example.com', 'hashed_password1', NULL, 1),
-(2, 'Ana García', 'ana@example.com', 'hashed_password2', NULL, 1),
-(3, 'María López', 'maria@example.com', 'hashed_password3', NULL, 1),
-(4, 'Pedro Rodriguez', 'pedro@example.com', 'hashed_password4', NULL, 1),
-(5, 'Sofía Martínez', 'sofia@example.com', 'hashed_password5', NULL, 1),
-(7, 'qwer', 'qwer@gmail.com', '1234', 3, 1),
-(8, 'juan', 'juan@gmail.com', '1234', 4, 1),
-(11, 'abel', 'abel@gmail.com', 'abel1234', 2, 1),
-(12, 'marquez', 'marquez@gmail.com', '1234', 1, 1),
-(13, 'daniel', 'daniel@gmail.com', '1234Daniel', 4, 1);
+(1, 'Superadmin', 'sadmin@gmail.com', '1234Sadmin', 1, 1),
+(2, 'Omar Fuentes', 'omar@gmail.com', '1234Omar', 2, 1),
+(3, 'Angela Diaz', 'angela@gmail.com', '1234Angela', 2, 1),
+(4, 'Oscar Rios', 'oscar@gmail.com', '1234Oscar', 2, 1),
+(5, 'Juan Camacho', 'juan@gmail.com', '1234Juan', 3, 1),
+(6, 'Karol Gimenez', 'karol@gmail.com', '1234Karol', 3, 1),
+(7, 'Vladimir Torres', 'vladimir@gmail.com', '1234Vladimir', 3, 1),
+(8, 'Maria Amador', 'maria@gmail.com', '1234maria', 4, 1),
+(9, 'Paula Ortega', 'paula@gmail.com', '1234Paula', 4, 2),
+(10, 'David Gomez', 'david@gmail.com', '1234David', 4, 1),
+(11, 'johan hernandez', 'johan@gmail.com', '1234Johan', 4, 1),
+(12, 'pablo fuentes', 'pablo@gmail.com', '1234Pablo', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -263,6 +280,12 @@ ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
+-- Indices de la tabla `detalle_historial`
+--
+ALTER TABLE `detalle_historial`
+  ADD PRIMARY KEY (`id_detalle`);
+
+--
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
@@ -273,6 +296,7 @@ ALTER TABLE `pedido`
 -- Indices de la tabla `pedido_platos`
 --
 ALTER TABLE `pedido_platos`
+  ADD PRIMARY KEY (`id_pedidoPlato`),
   ADD KEY `id_pedido_fk` (`id_pedido_fk`),
   ADD KEY `id_plato_fk` (`id_plato_fk`);
 
@@ -325,25 +349,37 @@ ALTER TABLE `usuario_estado`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_historial`
+--
+ALTER TABLE `detalle_historial`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `pedido_platos`
+--
+ALTER TABLE `pedido_platos`
+  MODIFY `id_pedidoPlato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `platos`
 --
 ALTER TABLE `platos`
-  MODIFY `id_plato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_plato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva_estado`
@@ -361,7 +397,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_estado`

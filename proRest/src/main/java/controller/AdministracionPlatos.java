@@ -22,8 +22,7 @@ import model.Platos;
 import model.PlatosDAO;
 
 /**
- *
- * @author Propietario
+ * Servlet para la administración de platos.
  */
 @WebServlet("/administracionPlato")
 @MultipartConfig
@@ -41,7 +40,7 @@ public class AdministracionPlatos extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-       
+       request.setCharacterEncoding("UTF-8");
        String idPlato = request.getParameter("idPlato");
        String nombrePlato = request.getParameter("nombrePlato");
        String categoriaPlato = request.getParameter("categoriaPlato");
@@ -154,6 +153,7 @@ public class AdministracionPlatos extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.setCharacterEncoding("UTF-8");
         String accion = request.getParameter("accion");
         
 
@@ -166,7 +166,7 @@ public class AdministracionPlatos extends HttpServlet {
             case "agregar":
                 
                 if (categorias != null) {
-                    for (model.Categoria categoria : categorias) {
+                    for (Categoria categoria : categorias) {
                         opciones +="<option value='" + categoria.getId() + "'>" + categoria.getNombreCategoria() + "</option>";
                     }
                     request.setAttribute("opciones", opciones);
@@ -174,10 +174,11 @@ public class AdministracionPlatos extends HttpServlet {
                 request.getRequestDispatcher("administracion/agregarPlatos.jsp").forward(request, response);
                 break;
             case "editar":
-                
+                String idCategoria = request.getParameter("idCategoria");
+                int idCategoriaInt = Integer.parseInt(idCategoria);
                 if (categorias != null) {
-                    for (model.Categoria categoria : categorias) {
-                        opciones +="<option value='" + categoria.getId() + "'>" + categoria.getNombreCategoria() + "</option>";
+                    for (Categoria categoria : categorias) {
+                        opciones +="<option value='" + categoria.getId() + "' "+ (categoria.getId() == idCategoriaInt? "selected": "") +">" + categoria.getNombreCategoria() + "</option>";
                     }
                     request.setAttribute("opciones", opciones);
                 }

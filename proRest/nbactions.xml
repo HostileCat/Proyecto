@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-mvn clean install -U</actionName>
+            <displayName>mvn clean install -U</displayName>
+            <properties>
+                <Env.JAVA_HOME>C:\Program Files\Java\jdk-22</Env.JAVA_HOME>
+            </properties>
+        </action>
+    </actions>

@@ -15,13 +15,19 @@ import javax.servlet.http.HttpServletResponse;
 import model.Usuario;
 import model.UsuarioDAO;
 
-
+/**
+ * Servlet para la insertar usuarios segun el rol.
+ */
 @WebServlet("/paginaUsuarios")
 public class PaginaUsuarios extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
         String opcion = request.getParameter("opcion");
+        String rolUsuario = request.getParameter("rolUsuario");
+        
         String titulo = "";
         String fila = "";
         
@@ -35,14 +41,15 @@ public class PaginaUsuarios extends HttpServlet {
                 for (Usuario usuario : usuarios) {
                     
                     if(usuario.getRol() == 4){
-                        fila +="<p class='grid__item'>"+ usuario.getId() +"</p>" +
-                               "<p class='grid__item'>"+ usuario.getNombreUsuario()+"</p>" +
+                        fila +="<p class='grid__item'>"+ usuario.getNombreUsuario()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getCorreoElectronico()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getContrasena()+"</p>" +
                                "<p class='grid__item'>"+ (usuario.getEstado() == 1? "Habilitado" : "Inhabilitado")+"</p>" +
                                "<div class='grid__item actionButtons'>" +
                                "<form action='/proRest/administracionUsuario' method='get'>" +
                                "<input type='hidden' name='accion' value='editar'>" +
+                               "<input type='hidden' name='rolUsuario' value='"+ rolUsuario +"'>" +
+                               "<input type='hidden' name='idRolUsuario' value='"+ usuario.getRol() +"'>" +
                                "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
                                 "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
@@ -61,14 +68,15 @@ public class PaginaUsuarios extends HttpServlet {
                 for (Usuario usuario : usuarios) {
                     
                     if(usuario.getRol() == 3){
-                        fila +="<p class='grid__item'>"+ usuario.getId() +"</p>" +
-                               "<p class='grid__item'>"+ usuario.getNombreUsuario()+"</p>" +
+                        fila +="<p class='grid__item'>"+ usuario.getNombreUsuario()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getCorreoElectronico()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getContrasena()+"</p>" +
                                "<p class='grid__item'>"+ (usuario.getEstado() == 1? "Habilitado" : "Inhabilitado")+"</p>" +
                                "<div class='grid__item actionButtons'>" +
                                "<form action='/proRest/administracionUsuario' method='get'>" +
                                "<input type='hidden' name='accion' value='editar'>" +
+                                "<input type='hidden' name='rolUsuario' value='"+ rolUsuario +"'>" +
+                                "<input type='hidden' name='idRolUsuario' value='"+ usuario.getRol() +"'>" +
                                "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
                                 "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
@@ -86,14 +94,15 @@ public class PaginaUsuarios extends HttpServlet {
                 for (Usuario usuario : usuarios) {
                     
                     if(usuario.getRol() == 2){
-                        fila +="<p class='grid__item'>"+ usuario.getId() +"</p>" +
-                               "<p class='grid__item'>"+ usuario.getNombreUsuario()+"</p>" +
+                        fila +="<p class='grid__item'>"+ usuario.getNombreUsuario()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getCorreoElectronico()+"</p>" +
                                "<p class='grid__item'>"+ usuario.getContrasena()+"</p>" +
                                "<p class='grid__item'>"+ (usuario.getEstado() == 1? "Habilitado" : "Inhabilitado")+"</p>" +
                                "<div class='grid__item actionButtons'>" +
                                "<form action='/proRest/administracionUsuario' method='get'>" +
                                "<input type='hidden' name='accion' value='editar'>" +
+                                "<input type='hidden' name='rolUsuario' value='"+ rolUsuario +"'>" +
+                                "<input type='hidden' name='idRolUsuario' value='"+ usuario.getRol() +"'>" +
                                "<input type='hidden' name='idUsuario' value='"+ usuario.getId() +"'>" +
                                 "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +

@@ -1,0 +1,249 @@
+@import url("header.css");
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    color: var(--text-color);
+}
+
+.main__title{
+    text-align: center;
+}
+
+.main__container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+}
+
+.list__grid {
+    display: grid;
+    grid-template-columns: 1fr repeat(2, auto) 1fr auto;
+    gap: 5px;
+    width: 100%;
+    padding: 20px 0;
+    overflow-x: auto;
+}
+
+.item__container{
+    display: contents;
+}
+
+.grid__title {
+    padding: 20px 10px;
+    background-color: var(--secondary-color);
+    border-radius: 17px;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.grid__item {
+    padding: 10px;
+    background-color: var(--tertiary-color);
+    border-radius: 17px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow-y: auto;
+}
+
+.remover__plato{
+    padding: 10px 24px;
+    background-color: var(--delete-button-colorD);
+    border: none;
+    color: var(--text-color);
+    font-weight: bold;
+    border-radius: 17px;
+}
+
+.remover__plato:hover{
+    background-color: var(--delete-button-hover);
+}
+
+.remover__plato:active{
+    background-color: var(--delete-button-color);
+}
+
+.detalle__plato{
+    padding: 10px 24px;
+    background-color: var(--status-button-color);
+    border: none;
+    color: var(--text-color);
+    font-weight: bold;
+    border-radius: 17px;
+    width: 115px;
+}
+
+.detalle__plato:hover{
+    background-color: var(--status-button-hover);
+}
+
+.detalle__plato:active{
+    background-color: var(--status-button-colorD);
+}
+
+.total__container{
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 30px;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    margin-top: 20px;    
+}
+
+.submit__button{
+    padding: 10px 24px;
+    background-color: var(--add-button-color);
+    border: none;
+    color: var(--text-color);
+    font-weight: bold;
+    border-radius: 17px;
+    width: 115px;
+}
+
+.total__title{
+    text-align: end;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    max-width: 600px;
+}
+
+.closeIcon {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modalTitle{
+    text-align: center;
+}
+
+.textarea{
+    width: 100%;
+    resize: none;
+    height: 100px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.acceptButton {
+    padding: 8px 16px;
+    background-color: var(--add-button-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.acceptButton:hover {
+    background-color: var(--add-button-hover);
+}
+
+.acceptButton:active {
+    background-color: var(--add-button-colorD);
+}
+
+.closeButton{
+    padding: 8px 16px;
+    background-color: var(--delete-button-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    
+}
+
+.closeButton:hover{
+    background-color: var(--delete-button-hover);
+}
+
+.closeButton:active{
+    background-color: var(--delete-button-colorD);
+}
+
+
+.scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: none; /* Oculto por defecto */
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 44px;
+    height: 44px;
+}
+
+.scrollToTopBtn svg{
+    width: 100%;
+    height: 100%;
+    fill: var(--text-color);
+}
+
+.scrollToTopBtn:hover {
+    background-color: #0056b3;
+}
+
+
+.lleno{
+    background-color: var(--add-button-color)
+}
+
+.lleno:hover{
+    background-color: var(--add-button-hover)
+}
+
+.lleno:active{
+    background-color: var(--add-button-colorD)
+}
+
+

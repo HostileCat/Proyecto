@@ -12,12 +12,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Rol;
 import model.RolDAO;
 import model.Usuario;
 import model.UsuarioDAO;
 
-
+/**
+ * Servlet para la administración de platos.
+ */
 @WebServlet("/administracionUsuario")
 public class AdministracionUsuario extends HttpServlet {
     
@@ -30,6 +33,7 @@ public class AdministracionUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String nombre = request.getParameter("nombreUsuario");
         String correo = request.getParameter("correoUsuario");
         String contraseña = request.getParameter("contrasenaUsuario");
@@ -41,7 +45,7 @@ public class AdministracionUsuario extends HttpServlet {
         switch (accion) {
             case "agregarSubmit":
                 {
-                    // Agregar un nuevo usuario
+                    String rolUsuario = request.getParameter("rol");
                     
                     int idRol = Integer.parseInt(request.getParameter("rolUsuario"));
                     Usuario usuario = new Usuario();
@@ -55,13 +59,13 @@ public class AdministracionUsuario extends HttpServlet {
                     if (accionExitosa) {
                         switch (idRol) {
                             case 2:
-                                response.sendRedirect("paginaUsuarios?opcion=administrador");
+                                response.sendRedirect("paginaUsuarios?opcion=administrador&rolUsuario="+ rolUsuario +"");
                                 break;
                             case 3:
-                                response.sendRedirect("paginaUsuarios?opcion=empleado");
+                                response.sendRedirect("paginaUsuarios?opcion=empleado&rolUsuario="+ rolUsuario +"");
                                 break;
                             case 4:
-                                response.sendRedirect("paginaUsuarios?opcion=cliente");
+                                response.sendRedirect("paginaUsuarios?opcion=cliente&rolUsuario="+ rolUsuario +"");
                                 break;
                             default:
                                 
@@ -74,6 +78,7 @@ public class AdministracionUsuario extends HttpServlet {
                 }
             case "editarSubmit":
                 {
+                    String rolUsuario = request.getParameter("rol");
                     // Editar un usuario existente
                     int idUsuario = Integer.parseInt(idUsuarioString);
                     int idRol = Integer.parseInt(request.getParameter("rolUsuario"));
@@ -88,13 +93,13 @@ public class AdministracionUsuario extends HttpServlet {
                     if (accionExitosa) {
                         switch (idRol) {
                             case 2:
-                                response.sendRedirect("paginaUsuarios?opcion=administrador");
+                                response.sendRedirect("paginaUsuarios?opcion=administrador&rolUsuario="+ rolUsuario +"");
                                 break;
                             case 3:
-                                response.sendRedirect("paginaUsuarios?opcion=empleado");
+                                response.sendRedirect("paginaUsuarios?opcion=empleado&rolUsuario="+ rolUsuario +"");
                                 break;
                             case 4:
-                                response.sendRedirect("paginaUsuarios?opcion=cliente");
+                                response.sendRedirect("paginaUsuarios?opcion=cliente&rolUsuario="+ rolUsuario +"");
                                 break;
                             default:
                                 
@@ -103,6 +108,32 @@ public class AdministracionUsuario extends HttpServlet {
                     } else {
                         response.sendRedirect("../error.jsp");
                     }       break;
+                }
+            case "editarPerfil":
+                {
+                    // Editar un usuario existente
+                    int idUsuario = Integer.parseInt(idUsuarioString);
+                    int idRol = Integer.parseInt(request.getParameter("rolUsuario"));
+                    Usuario usuario = new Usuario();
+                    usuario.setId(idUsuario);
+                    usuario.setNombreUsuario(nombre);
+                    usuario.setCorreoElectronico(correo);
+                    usuario.setContrasena(contraseña);
+                    usuario.setRol(idRol);
+                    boolean accionExitosa = usuarioDAO.actualizarUsuario(usuario);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        
+                        HttpSession session = request.getSession(false);
+                        if (session != null) {
+                            session.invalidate(); // Invalida la sesión del usuario
+                        }
+                        response.sendRedirect("login/login.jsp"); // Redirige a la página de inicio de sesión
+         
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }       
+                    break;
                 }
             case "estado":
                 {
@@ -149,6 +180,7 @@ public class AdministracionUsuario extends HttpServlet {
                         response.sendRedirect("../error.jsp");
                     }       break;
                 }
+                
             default:
                 break;
         }
@@ -163,62 +195,96 @@ public class AdministracionUsuario extends HttpServlet {
      */
     @Override
     protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String accion = request.getParameter("accion");
+        
         
         String opciones = "";
         
-        if(accion.equals("agregar")){
-            
-            
-            RolDAO rolDAO = new RolDAO();
-            
-            List<Rol> roles = rolDAO.todosLosRoles();
-            
-            for (Rol rol : roles){
-                
-                if(rol.getIdRol() == 1){
-                    continue;
+        switch (accion) {
+            case "agregar":
+                {
+                    String rolUsuario = request.getParameter("rolUsuario");
+                    RolDAO rolDAO = new RolDAO();
+                    List<Rol> roles = rolDAO.todosLosRoles();
+                    for (Rol rol : roles){
+                        
+                        if(rol.getIdRol() == 1){
+                            continue;
+                        }
+                        
+                        if(rol.getIdRol() == 2 && Integer.parseInt(rolUsuario) >= 2){
+                            continue;
+                        }
+                        
+                        opciones += "<option value='"+ rol.getIdRol() +"'>"+ rol.getNombreRol() +"</option>";
+                    }       
+                    request.setAttribute("rolUsuario", opciones);
+                    request.setAttribute("opciones", opciones);
+                    request.setAttribute("accion", "agregarSubmit");
+                    request.getRequestDispatcher("administracion/agregarUsuario.jsp").forward(request, response);
+                    break;
                 }
-                
-                opciones += "<option value='"+ rol.getIdRol() +"'>"+ rol.getNombreRol() +"</option>";
-            }
-            
-            request.setAttribute("opciones", opciones);
-            request.setAttribute("accion", "agregarSubmit");
-            request.getRequestDispatcher("administracion/agregarUsuario.jsp").forward(request, response);
-        } else if(accion.equals("editar")){
-            String idUsuarioString = request.getParameter("idUsuario");
-            String nombre = "";
-            String correo = "";
-            
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            List<Usuario> usuarios = usuarioDAO.todosLosUsuarios();
-            
-            for (Usuario usuario : usuarios){
-                if (usuario.getId() == Integer.parseInt(idUsuarioString)){
-                    nombre = usuario.getNombreUsuario();
-                    correo = usuario.getCorreoElectronico();
+            case "editar":
+                {
+                    String idRolUsuario = request.getParameter("idRolUsuario");
+                    String rolUsuario = request.getParameter("rolUsuario");
+                    String idUsuarioString = request.getParameter("idUsuario");
+                    String nombre = "";
+                    String correo = "";
+                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    List<Usuario> usuarios = usuarioDAO.todosLosUsuarios();
+                    for (Usuario usuario : usuarios){
+                        if (usuario.getId() == Integer.parseInt(idUsuarioString)){
+                            nombre = usuario.getNombreUsuario();
+                            correo = usuario.getCorreoElectronico();
+                        }
+                    }       
+                    
+                    RolDAO rolDAO = new RolDAO();
+                    List<Rol> roles = rolDAO.todosLosRoles();
+                    for (Rol rol : roles){
+                        
+                        if(rol.getIdRol() == 1){
+                            continue;
+                        }
+                        if(rol.getIdRol() == 2 && Integer.parseInt(rolUsuario) >= 2){
+                            continue;
+                        }
+                        int idRolUsuarioInt = Integer.parseInt(idRolUsuario);
+                        opciones += "<option value='"+ rol.getIdRol() +"' "+ (rol.getIdRol() == idRolUsuarioInt? "selected": "") +">"+ rol.getNombreRol() +"</option>";
+                    }       
+                    request.setAttribute("opciones", opciones);
+                    request.setAttribute("accion", "editarSubmit");
+                    request.setAttribute("id", idUsuarioString);
+                    request.setAttribute("nombre", nombre);
+                    request.setAttribute("correo", correo);
+                    request.setAttribute("idUsuario", idUsuarioString);
+                    request.getRequestDispatcher("administracion/editarUsuario.jsp").forward(request, response);
+                    break;
                 }
-            }
-            
-            RolDAO rolDAO = new RolDAO();            
-            List<Rol> roles = rolDAO.todosLosRoles();
-            
-            for (Rol rol : roles){
-                
-                if(rol.getIdRol() == 1){
-                    continue;
+            case "perfil":
+                {
+                    String idUsuarioString = request.getParameter("idUsuario");
+                    String nombre = "";
+                    String correo = "";
+                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    List<Usuario> usuarios = usuarioDAO.todosLosUsuarios();
+                    for (Usuario usuario : usuarios){
+                        if (usuario.getId() == Integer.parseInt(idUsuarioString)){
+                            nombre = usuario.getNombreUsuario();
+                            correo = usuario.getCorreoElectronico();
+                        }
+                    }       
+                    request.setAttribute("accion", "editarSubmit");
+                    request.setAttribute("nombre", nombre);
+                    request.setAttribute("correo", correo);
+                    request.setAttribute("idUsuario", idUsuarioString);
+                    request.getRequestDispatcher("administracion/editarPerfil.jsp").forward(request, response);
+                    break;
                 }
-                
-                opciones += "<option value='"+ rol.getIdRol() +"'>"+ rol.getNombreRol() +"</option>";
-            }
-            
-            request.setAttribute("opciones", opciones);
-            request.setAttribute("accion", "editarSubmit");
-            request.setAttribute("nombre", nombre);
-            request.setAttribute("correo", correo);
-            request.setAttribute("idUsuario", idUsuarioString);
-            request.getRequestDispatcher("administracion/agregarUsuario.jsp").forward(request, response);
+            default:
+                break;
         }
     }
 }

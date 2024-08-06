@@ -15,11 +15,6 @@
     <body>
         <%@ include file="../componentes/header.jsp" %>
         
-        <%
-            String nombre = (String) request.getAttribute("nombre");
-            String correo = (String) request.getAttribute("correo");
-            String idUsuario = (String) request.getAttribute("idUsuario");
-        %>
         
         <main class="register">
             <section class="register__section">
@@ -33,13 +28,7 @@
 
 
                     <div class="register__group">
-                        <input class="register__input register__input--name"
-                               value="<%
-                                   if(nombre != null){
-                                    out.print(nombre);
-                                }
-                               %>"
-                               type="text" placeholder="Ingresa el nombre" name="nombreUsuario">
+                        <input class="register__input register__input--name" type="text" placeholder="Ingresa el nombre" name="nombreUsuario" required>
 
                     </div>
 
@@ -59,40 +48,27 @@
 
                     <!-- Campo para el correo electrónico -->
                     <div class="register__group">
-                        <input class="register__input register__input--email"
-                               value="<%
-                                   if(correo != null){
-                                    out.print(correo);
-                                }
-                               %>"
-                               type="text" placeholder="Ingresa el correo electrónico" name="correoUsuario">
+                        <input class="register__input register__input--email" type="text" placeholder="Ingresa el correo electrónico" name="correoUsuario" required>
 
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--password" type="password" placeholder="Ingresa la contraseña" name="contrasenaUsuario">
+                        <input class="register__input register__input--password" type="password" placeholder="Ingresa la contraseña" name="contrasenaUsuario" required>
 
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma la contraseña" name="confirmContrasena">
+                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma la contraseña" name="confirmContrasena" required>
 
                     </div>
 
                     <!-- Botón para enviar el formulario -->
                     <div class="register__group">
-                        <input type="hidden" name="accion" 
-                               value="agregarSubmit"
-                               >                    
-                        <input type="hidden" name="idUsuario"
-                               value="<%
-                                   if(idUsuario != null){
-                                    out.print(idUsuario);
-                                }
-                               %>"
-                               > 
+                        <input type="hidden" name="accion" value="agregarSubmit"> 
+                        <input type="hidden" name="rol" value="<% out.print(rolUsuario); %>">   
+                        
                         <button class="register__button" type="submit">Agregar</button>
                     </div>
                 </form>

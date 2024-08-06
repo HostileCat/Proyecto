@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 import model.Usuario;
 import model.UsuarioDAO;
 
+/**
+ * Servlet para la autenticación de usuarios.
+ */
 @WebServlet("/autenticacionUsuario")
 public class AutenticacionUsuario extends HttpServlet {
 
@@ -30,6 +33,8 @@ public class AutenticacionUsuario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String accion = request.getParameter("accion");
+        
+        // Usuario iniciando sesión
         if(accion.equalsIgnoreCase("iniciarSesion")){
             // Obtener los parámetros del formulario de inicio de sesión
             String correoElectronico = request.getParameter("correoElectronico");
@@ -65,7 +70,9 @@ public class AutenticacionUsuario extends HttpServlet {
             }
             
             
-        } else if(accion.equalsIgnoreCase("cerrarSesion")){
+        } 
+        // Usuario cerrando sesión
+        else if(accion.equalsIgnoreCase("cerrarSesion")){
             HttpSession session = request.getSession(false);
             if (session != null) {
                 session.invalidate(); // Invalida la sesión del usuario
@@ -76,12 +83,21 @@ public class AutenticacionUsuario extends HttpServlet {
         
     }
     
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener los datos del formulario
         request.setCharacterEncoding("UTF-8");
         
         String accion = request.getParameter("accion");
+        
+        // Usuario registrandose
         if(accion.equalsIgnoreCase("registrarse")){
             String nombreUsuario = request.getParameter("nombreUsuario");
             String correoElectronico = request.getParameter("correoElectronico");
@@ -152,7 +168,7 @@ public class AutenticacionUsuario extends HttpServlet {
 
                 // Redireccionar a una página de confirmación o mostrar un mensaje de error
                 if (registroExitoso) {
-                    response.sendRedirect("main.jsp");
+                    response.sendRedirect("login/login.jsp");
                 } else {
                     response.sendRedirect("login/register.jsp");
                 }

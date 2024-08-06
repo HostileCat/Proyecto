@@ -73,7 +73,7 @@ body{
 
 .grid__container{
     display: grid;
-    grid-template-columns: 70px repeat(3, minmax(auto, 1fr)) minmax(auto, 120px) 1fr;
+    grid-template-columns: repeat(3, minmax(auto, 1fr)) minmax(auto, 120px) 1fr;
     padding: 10px 20px;
     gap: 5px;
     

@@ -18,8 +18,7 @@ import model.Reserva;
 import model.ReservaDAO;
 
 /**
- *
- * @author Diego
+ * Servlet para la administración de reservas.
  */
 @WebServlet("/administracionReservas")
 public class AdministracionReservas extends HttpServlet {
@@ -33,7 +32,7 @@ public class AdministracionReservas extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
+        request.setCharacterEncoding("UTF-8");
        String idUsuario = request.getParameter("idUsuario");
        
        
@@ -62,18 +61,15 @@ public class AdministracionReservas extends HttpServlet {
                       
                     ReservaDAO reservaDAO = new ReservaDAO();
                     
-                    if (reservaDAO.reservaExistente(reserva)){
-                        request.setAttribute("errorMessage", "<span class='errorMessage'>Ya hiciste una reserva. Para hacer otra debes cancelar la reserva en proceso.</span>");
-                        request.getRequestDispatcher("reservas/hacerReserva.jsp").forward(request, response);
-                    } else{
-                        boolean accionExitosa = reservaDAO.hacerReserva(reserva);
-                        // Redireccionar a una página de confirmación o mostrar un mensaje de error
-                        if (accionExitosa) {
-                            response.sendRedirect("paginaMisReservas?opcion=espera&idUsuario="+ idUsuario);
-                        } else {
-                            response.sendRedirect("../error.jsp");
-                        }       
-                    }
+                    
+                    boolean accionExitosa = reservaDAO.hacerReserva(reserva);
+                    // Redireccionar a una página de confirmación o mostrar un mensaje de error
+                    if (accionExitosa) {
+                        response.sendRedirect("paginaMisReservas?opcion=espera&idUsuario="+ idUsuario);
+                    } else {
+                        response.sendRedirect("../error.jsp");
+                    }       
+                    
                     
                     
                     break;
@@ -117,7 +113,7 @@ public class AdministracionReservas extends HttpServlet {
                     boolean accionExitosa = reservaDAO.confirmarSugerencia(reserva);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaMisReservas?opcion=confirmada");
+                        response.sendRedirect("paginaMisReservas?opcion=confirmada&idUsuario="+ idUsuario +"");
                     } else {
                         response.sendRedirect("../error.jsp");
                     }
@@ -156,7 +152,7 @@ public class AdministracionReservas extends HttpServlet {
                     boolean accionExitosa = reservaDAO.cancelarReserva(reserva);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
-                        response.sendRedirect("paginaMisReservas?opcion=cancelada");
+                        response.sendRedirect("paginaMisReservas?opcion=cancelada&idUsuario="+ idUsuario +"");
                     } else {
                         response.sendRedirect("../error.jsp");
                     }
@@ -216,7 +212,8 @@ public class AdministracionReservas extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-       String accion = request.getParameter("accion");
+       request.setCharacterEncoding("UTF-8");
+        String accion = request.getParameter("accion");
        String idReserva = request.getParameter("idReserva");
        
        if ("sugerir".equals(accion)){

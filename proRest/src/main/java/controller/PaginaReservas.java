@@ -16,8 +16,7 @@ import model.Reserva;
 import model.ReservaDAO;
 
 /**
- *
- * @author Propietario
+ * Servlet para la insertar las reservas de los usuarios segun el estado.
  */
 @WebServlet("/paginaReservas")
 public class PaginaReservas extends HttpServlet {
@@ -31,7 +30,7 @@ public class PaginaReservas extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         String opcion = request.getParameter("opcion");
         String titulo = "";
         String fila = "";
