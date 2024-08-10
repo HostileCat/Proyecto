@@ -43,12 +43,12 @@ public class AdministracionReservas extends HttpServlet {
             case "agregarSubmit":
                 {
                     String fechaReservaString = request.getParameter("fechaReserva");
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate fechaReserva = LocalDate.parse(fechaReservaString, formatter);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // se crea el formato para la fecha
+                    LocalDate fechaReserva = LocalDate.parse(fechaReservaString, formatter); // se parsea la fecha segun el formato
 
-                    String horaReservaString = request.getParameter("horaReserva");       
-                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-                    LocalTime horaReserva = LocalTime.parse(horaReservaString, timeFormatter);
+                    String horaReservaString = request.getParameter("horaReserva");      
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm"); // se crea el formato para la hora  
+                    LocalTime horaReserva = LocalTime.parse(horaReservaString, timeFormatter); // se parsea la hora segun el formato
                     
                     String estadoReserva = "1";
 
@@ -78,12 +78,12 @@ public class AdministracionReservas extends HttpServlet {
                 {
                     int idReserva = Integer.parseInt(request.getParameter("idReserva"));
                     String nuevaFechaString = request.getParameter("fechaReserva");
-                    DateTimeFormatter newDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate nuevaFecha = LocalDate.parse(nuevaFechaString, newDateFormatter);
+                    DateTimeFormatter newDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // se crea el formato para la fecha
+                    LocalDate nuevaFecha = LocalDate.parse(nuevaFechaString, newDateFormatter); // se parsea la fecha segun el formato
 
                     String nuevaHoraString = request.getParameter("horaReserva");       
-                    DateTimeFormatter NewtimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-                    LocalTime nuevaHora = LocalTime.parse(nuevaHoraString, NewtimeFormatter);
+                    DateTimeFormatter NewtimeFormatter = DateTimeFormatter.ofPattern("HH:mm"); // se crea el formato para la hora  
+                    LocalTime nuevaHora = LocalTime.parse(nuevaHoraString, NewtimeFormatter); // se parsea la hora segun el formato
                     
                     Reserva reserva = new Reserva();
                     reserva.setIdReserva(idReserva);
@@ -101,7 +101,8 @@ public class AdministracionReservas extends HttpServlet {
                     }      
                     break;
                 }
-            case "confirmarCliente":
+            case "confirmarCliente": // el cliente confirma la fecha sugerida
+                
                 {
                     int idReserva = Integer.parseInt(request.getParameter("idReserva"));
                     
@@ -120,7 +121,7 @@ public class AdministracionReservas extends HttpServlet {
                     
                     break;
                 }
-            case "confirmar":
+            case "confirmar": // el administrador confirma la reserva
                 {
                     int idReserva = Integer.parseInt(request.getParameter("idReserva"));
                     
@@ -140,7 +141,7 @@ public class AdministracionReservas extends HttpServlet {
                     break;
                 }   
                 
-            case "cancelarCliente":
+            case "cancelarCliente": // el cliente cancela la fecha sugerida
                 {
                     int idReserva = Integer.parseInt(request.getParameter("idReserva"));
                     
@@ -159,7 +160,7 @@ public class AdministracionReservas extends HttpServlet {
                     
                     break;
                 }
-            case "cancelar":
+            case "cancelar": // el administrador cancela la reserva
                 {
                     int idReserva = Integer.parseInt(request.getParameter("idReserva"));
                     
@@ -178,7 +179,7 @@ public class AdministracionReservas extends HttpServlet {
                     
                     break;
                 }
-            case "terminar":
+            case "terminar": 
                 {
                     int idReserva = Integer.parseInt(request.getParameter("idReserva"));
                     

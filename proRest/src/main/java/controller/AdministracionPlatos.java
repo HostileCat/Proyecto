@@ -29,7 +29,7 @@ import model.PlatosDAO;
 public class AdministracionPlatos extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final String UPLOAD_DIR = "uploads";
+    private static final String UPLOAD_DIR = "uploads"; // se crea el nombre de la carpeta
     
     /**
      *
@@ -55,19 +55,19 @@ public class AdministracionPlatos extends HttpServlet {
         switch (accion) {
             case "agregarSubmit":
                 {
-                    String contextPath = getServletContext().getRealPath("/");
-                    String alteredFilePath = contextPath.replace("\\target\\proRest-1.0-SNAPSHOT\\", "\\src\\main\\webapp");
-                    String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR;
+                    String contextPath = getServletContext().getRealPath("/"); // genera la ruta hacia el contexto del servlet
+                    String alteredFilePath = contextPath.replace("\\target\\proRest-1.0-SNAPSHOT\\", "\\src\\main\\webapp"); // se intercambia una parte de la ruta por la ruta deseada
+                    String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR; // se concatena el nombre del archivo con la ruta
 
                      File uploadDir = new File(uploadFilePath);
                      if (!uploadDir.exists()) {
                          uploadDir.mkdirs();
                      }
 
-                     Part filePart = request.getPart("imagenPlato");
-                     String fileName = filePart.getSubmittedFileName();
-                     String filePath = uploadFilePath + File.separator + fileName;
-                     filePart.write(filePath);
+                     Part filePart = request.getPart("imagenPlato"); 
+                     String fileName = filePart.getSubmittedFileName(); 
+                     String filePath = uploadFilePath + File.separator + fileName; 
+                     filePart.write(filePath); // inserta el contenido de la imagen
                     
                     Platos plato = new Platos();
                     plato.setNombrePlato(nombrePlato);
@@ -88,9 +88,9 @@ public class AdministracionPlatos extends HttpServlet {
                 }
             case "editarSubmit":
                 {
-                    String contextPath = getServletContext().getRealPath("/");
-                    String alteredFilePath = contextPath.replace("\\target\\proRest-1.0-SNAPSHOT\\", "\\src\\main\\webapp");
-                    String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR;
+                    String contextPath = getServletContext().getRealPath("/"); // genera la ruta hacia el contexto del servlet
+                    String alteredFilePath = contextPath.replace("\\target\\proRest-1.0-SNAPSHOT\\", "\\src\\main\\webapp"); // se intercambia una parte de la ruta por la ruta deseada
+                    String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR; // se concatena el nombre del archivo con la ruta
 
                      File uploadDir = new File(uploadFilePath);
                      if (!uploadDir.exists()) {
@@ -100,7 +100,7 @@ public class AdministracionPlatos extends HttpServlet {
                      Part filePart = request.getPart("imagenPlato");
                      String fileName = filePart.getSubmittedFileName();
                      String filePath = uploadFilePath + File.separator + fileName;
-                     filePart.write(filePath);
+                     filePart.write(filePath);// inserta el contenido de la imagen
                     
                     Platos plato = new Platos();
                     plato.setId(Integer.parseInt(idPlato));

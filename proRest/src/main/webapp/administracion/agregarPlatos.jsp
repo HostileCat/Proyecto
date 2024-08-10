@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Agregar Platos</title>
         <link rel="stylesheet" href="/proRest/css/inventario.css">        
     </head>
     <body>

@@ -12,7 +12,7 @@ public class main {
 
     public static void main(String[] args) {
         try {
-            Connection connection = conexion.getConnection();
+            Connection connection = Conexion.getConnection();
             if (connection != null) {
                 System.out.println("Conexión exitosa");
                 connection.close();

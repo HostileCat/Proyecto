@@ -52,8 +52,8 @@ public class AutenticacionUsuario extends HttpServlet {
 
                 if (accionExitosa) {
                     // Usuario autenticado correctamente
-                    HttpSession session = request.getSession();
-                    session.setAttribute("usuario", usuario);
+                    HttpSession session = request.getSession(); // se inicia una sesion
+                    session.setAttribute("usuario", usuario); // se establece el objeto a la sesion
 
 
                     response.sendRedirect("main.jsp");

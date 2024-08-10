@@ -1,5 +1,6 @@
 package model;
 
+import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ public class PedidoDAO {
      * Si la conexión es nula, se informa del error en la conexión.
      */
     public PedidoDAO() {
-        conexion = config.conexion.getConnection(); // Obtener la conexión a la base de datos
+        conexion = config.Conexion.getConnection(); // Obtener la conexión a la base de datos
         if (conexion == null) {
             System.err.println("Error al conectar a la base de datos");
         }
@@ -32,59 +33,75 @@ public class PedidoDAO {
      * @return true si el pedido y los platos asociados se guardaron exitosamente, false en caso contrario.
      */
     public boolean guardarPedido(Pedido pedido) {
-        String sqlPedido = "INSERT INTO pedido (id_usuario_fk, fecha_pedido, total) VALUES (?, ?, ?)";
-        String sqlPlato = "INSERT INTO pedido_platos (id_plato_fk, nombre, cantidad, detalle, precio, id_pedido_fk) VALUES (?, ?, ?, ?, ?, ?)";
+    String sqlPedido = "INSERT INTO pedido (id_usuario_fk, fecha_pedido, total) VALUES (?, ?, ?)";
+    String sqlDetalleHistorial = "INSERT INTO detalle_historial (nombrePlato_detalle, precioPlato_detalle) VALUES (?, ?)";
+    String sqlPlato = "INSERT INTO pedido_platos (id_pedido_fk, cantidad, id_plato_fk, detalle, id_detalleHistorial_fk) VALUES (?, ?, ?, ?, ?)";
 
-        try {
-            conexion.setAutoCommit(false); // Iniciar transacción
+    try {
+        conexion.setAutoCommit(false); // Permite agrupar consultas en una sola transaccion
 
-            try (PreparedStatement psPedido = conexion.prepareStatement(sqlPedido, Statement.RETURN_GENERATED_KEYS)) {
-                psPedido.setInt(1, pedido.getIdEmpleado());
-                psPedido.setObject(2, java.sql.Timestamp.valueOf(pedido.getFecha()));
-                psPedido.setInt(3, pedido.getTotal());
+        try (PreparedStatement psPedido = conexion.prepareStatement(sqlPedido, Statement.RETURN_GENERATED_KEYS)) { // Se asigna la operacion de consulta y se obtiene las claves generadas automaticamente
+            psPedido.setInt(1, pedido.getIdEmpleado());
+            psPedido.setObject(2, java.sql.Timestamp.valueOf(pedido.getFecha())); // Se convierte la fecha a un formato timestamp
+            psPedido.setInt(3, pedido.getTotal());
 
-                psPedido.executeUpdate();
+            psPedido.executeUpdate();
 
-                try (ResultSet generatedKeys = psPedido.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int idPedido = generatedKeys.getInt(1);
+            try (ResultSet generatedKeys = psPedido.getGeneratedKeys()) { // obtener las llaves automaticas generadas
+                if (generatedKeys.next()) {
+                    int idPedido = generatedKeys.getInt(1);
 
-                        try (PreparedStatement psPlato = conexion.prepareStatement(sqlPlato)) {
-                            for (PedidoPlato plato : pedido.getPlatos()) {
-                                psPlato.setInt(1, plato.getId());
-                                psPlato.setString(2, plato.getNombre());
-                                psPlato.setInt(3, plato.getCantidad());
-                                psPlato.setString(4, plato.getDetalle());
-                                psPlato.setInt(5, plato.getPrecio());
-                                psPlato.setInt(6, idPedido);
-                                psPlato.addBatch();
+                    try (PreparedStatement psDetalleHistorial = conexion.prepareStatement(sqlDetalleHistorial, Statement.RETURN_GENERATED_KEYS);
+                         PreparedStatement psPlato = conexion.prepareStatement(sqlPlato)) {
+
+                        for (PedidoPlato plato : pedido.getPlatos()) {
+                            // Insertar en detalle_historial y obtener el ID generado
+                            psDetalleHistorial.setString(1, plato.getNombre());
+                            psDetalleHistorial.setInt(2, plato.getPrecio());
+                            psDetalleHistorial.executeUpdate();
+
+                            try (ResultSet generatedDetalleKeys = psDetalleHistorial.getGeneratedKeys()) { // obtener las llaves automaticas generadas
+                                if (generatedDetalleKeys.next()) {
+                                    int idDetalle = generatedDetalleKeys.getInt(1);
+
+                                    // Insertar en pedido_platos
+                                    psPlato.setInt(1, idPedido);
+                                    psPlato.setInt(2, plato.getCantidad());
+                                    psPlato.setInt(3, plato.getId());
+                                    psPlato.setString(4, plato.getDetalle());
+                                    psPlato.setInt(5, idDetalle);
+                                    psPlato.addBatch();
+                                } else {
+                                    throw new SQLException("No se pudo obtener el ID del detalle del historial.");
+                                }
                             }
-                            psPlato.executeBatch();
                         }
-                    } else {
-                        throw new SQLException("No se pudo obtener el ID del pedido.");
+                        psPlato.executeBatch();
                     }
+                } else {
+                    throw new SQLException("No se pudo obtener el ID del pedido.");
                 }
             }
-
-            conexion.commit(); // Confirmar transacción
-            return true;
-        } catch (SQLException e) {
-            try {
-                conexion.rollback(); // Revertir transacción en caso de error
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                conexion.setAutoCommit(true); // Restaurar auto-commit
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
+
+        conexion.commit(); // Confirma la trasaccion ejecutando todas las consultas
+        return true;
+    } catch (SQLException e) {
+        try {
+            conexion.rollback(); // Revertir transacción en caso de error, impidiendo ejecutar las consultas
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        e.printStackTrace();
+        return false;
+    } finally {
+        try {
+            conexion.setAutoCommit(true); // Restaurar la trasaccion individual
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
     }
+}
     
     /**
      * Obtiene todos los pedidos de la base de datos.
@@ -94,7 +111,7 @@ public class PedidoDAO {
         List<Pedido> pedidos = new ArrayList<>();
         String sql = "SELECT id_pedido, id_usuario_fk, fecha_pedido, total, nombre_usuario " +
                      "FROM pedido " +
-                     "JOIN usuario ON id_usuario_fk = id_usuario " +
+                     "INNER JOIN usuario ON id_usuario_fk = id_usuario " +
                      "ORDER BY fecha_pedido DESC";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql);
@@ -113,7 +130,7 @@ public class PedidoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             // Manejo de excepciones según tu aplicación
-        }
+        } 
 
         return pedidos;
     }
@@ -125,9 +142,10 @@ public class PedidoDAO {
      */
     public List<PedidoPlato> obtenerPlatosPorPedido(Pedido pedido) {
         List<PedidoPlato> platos = new ArrayList<>();
-        String sql = "SELECT id_plato_fk, nombre, precio, cantidad, detalle " +
-                     "FROM pedido_platos " +
-                     "WHERE id_pedido_fk = ?";
+        String sql = "SELECT id_plato_fk, nombrePlato_detalle, precioPlato_detalle, cantidad, detalle "
+                + "FROM pedido_platos "
+                + "INNER JOIN detalle_historial ON id_detalleHistorial_fk = id_detalle "
+                + "WHERE id_pedido_fk = ?";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setInt(1, pedido.getIdPedido());
@@ -135,8 +153,8 @@ public class PedidoDAO {
                 while (rs.next()) {
                     PedidoPlato plato = new PedidoPlato();
                     plato.setId(rs.getInt("id_plato_fk"));
-                    plato.setNombre(rs.getString("nombre"));
-                    plato.setPrecio(rs.getInt("precio"));
+                    plato.setNombre(rs.getString("nombrePlato_detalle"));
+                    plato.setPrecio(rs.getInt("precioPlato_detalle"));
                     plato.setCantidad(rs.getInt("cantidad"));
                     plato.setDetalle(rs.getString("detalle"));
 
@@ -145,7 +163,7 @@ public class PedidoDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
 
         return platos;
     }

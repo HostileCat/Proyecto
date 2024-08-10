@@ -4,6 +4,7 @@
  */
 package model;
 
+import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class RolDAO {
      * Si la conexión es nula, se informa del error en la conexión.
      */
     public RolDAO() {
-        conexion = config.conexion.getConnection(); // Obtener la conexión a la base de datos
+        conexion = config.Conexion.getConnection(); // Obtener la conexión a la base de datos
         if (conexion == null) {
             System.err.println("Error al conectar a la base de datos");
         }
@@ -52,7 +53,7 @@ public class RolDAO {
         }
         catch (SQLException e){
             e.printStackTrace();
-        }
+        } 
         return roles;
     }
 }

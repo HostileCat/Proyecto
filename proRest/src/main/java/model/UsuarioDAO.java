@@ -1,5 +1,6 @@
 package model;
 
+import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ public class UsuarioDAO {
      * Constructor que establece la conexión a la base de datos.
      */
     public UsuarioDAO() {
-        conexion = config.conexion.getConnection(); // Obtener la conexión a la base de datos
+        conexion = config.Conexion.getConnection(); // Obtener la conexión a la base de datos
         if (conexion == null) {
             System.err.println("Error al conectar a la base de datos");
         }
@@ -39,7 +40,7 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
     
     /**
@@ -55,13 +56,13 @@ public class UsuarioDAO {
              
             ps.setString(1, usuario.getCorreoElectronico());
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next() && rs.getInt(1) > 0) {
+                if (rs.next() && rs.getInt(1) > 0) { // verifica si resultSet obtubo algun dato y se verifica si dato es mayor a 0
                     correoExistente = true;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
         
         return correoExistente;
     }
@@ -80,14 +81,14 @@ public class UsuarioDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     int estado = rs.getInt("id_estado_fk");
-                    if (estado == 1){
+                    if (estado == 1){ // verifica si el usuario esta habilitado
                         return true;
                     }
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
         
         return false;
     }
@@ -114,7 +115,7 @@ public class UsuarioDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
 
         return false; 
     }
@@ -156,7 +157,7 @@ public class UsuarioDAO {
         }
         catch (SQLException e){
             e.printStackTrace();
-        }
+        } 
         return usuarios;
     }
     /**
@@ -179,7 +180,7 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
     /**
      * Cambia el estado de un usuario en la base de datos.
@@ -196,7 +197,7 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
 }
         

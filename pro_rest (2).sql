@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-08-2024 a las 17:51:10
+-- Tiempo de generación: 10-08-2024 a las 04:34:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -56,6 +56,16 @@ CREATE TABLE `detalle_historial` (
   `precioPlato_detalle` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detalle_historial`
+--
+
+INSERT INTO `detalle_historial` (`id_detalle`, `nombrePlato_detalle`, `precioPlato_detalle`) VALUES
+(4, 'Chicharrón', 20000),
+(5, 'Sancocho', 30000),
+(6, 'Crème Brûlée', 20000),
+(7, 'Jugos Naturales', 8000);
+
 -- --------------------------------------------------------
 
 --
@@ -65,7 +75,7 @@ CREATE TABLE `detalle_historial` (
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `id_usuario_fk` int(11) DEFAULT NULL,
-  `fecha_pedido` datetime DEFAULT NULL,
+  `fecha_pedido` timestamp NULL DEFAULT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -74,9 +84,7 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fecha_pedido`, `total`) VALUES
-(1, 1, '2024-08-05 10:30:16', 166000),
-(2, 1, '2024-08-05 13:14:52', 57000),
-(3, 6, '2024-08-05 16:09:38', 150000);
+(5, 5, '2024-08-07 22:51:37', 78000);
 
 -- --------------------------------------------------------
 
@@ -98,21 +106,10 @@ CREATE TABLE `pedido_platos` (
 --
 
 INSERT INTO `pedido_platos` (`id_pedido_fk`, `cantidad`, `id_plato_fk`, `detalle`, `id_pedidoPlato`, `id_detalleHistorial_fk`) VALUES
-(1, 1, 1, 'Sin cebolla', 1, 0),
-(1, 1, 5, '', 2, 0),
-(1, 2, 9, '', 3, 0),
-(1, 2, 10, '', 4, 0),
-(1, 1, 6, '', 5, 0),
-(1, 1, 3, '', 6, 0),
-(2, 1, 1, '', 7, 0),
-(2, 1, 2, '', 8, 0),
-(2, 1, 3, '', 9, 0),
-(3, 2, 3, '', 10, 0),
-(3, 1, 4, 'sin frijoles', 11, 0),
-(3, 1, 8, '', 12, 0),
-(3, 1, 10, '', 13, 0),
-(3, 1, 2, '', 14, 0),
-(3, 1, 6, '', 15, 0);
+(5, 1, 3, '', 19, 4),
+(5, 1, 6, 'sin mazorca', 20, 5),
+(5, 1, 9, '', 21, 6),
+(5, 1, 10, '', 22, 7);
 
 -- --------------------------------------------------------
 
@@ -140,7 +137,7 @@ INSERT INTO `platos` (`id_plato`, `nombre_plato`, `descripcion_plato`, `precio_p
 (3, 'Chicharrón', 'Chicharrón de cerdo acompañado de salsa picante y limón', 20000, 2, 'chicharron.jpg', 1),
 (4, 'Bandeja Paisa', 'Arepa, carne molida, chicharrón, arepa, arroz, frijoles, plátano maduro, huevo frito, y aguacate', 40000, 3, 'bandejaPaisa.jpg', 1),
 (5, 'Posta Negra', 'Carne de res en una salsa oscura a base de panela, cebolla, y especias, arroz, patacones y aguacate.', 35000, 3, 'postaNegra.jpg', 1),
-(6, 'Sancocho', 'Sancocho de gallina con yuca, plátano, papa, y mazorca, acompañado de arroz y aguacate.', 30000, 3, 'sancocho.jpg', 0),
+(6, 'Sancocho', 'Sancocho de gallina con yuca, plátano, papa, y mazorca, acompañado de arroz y aguacate.', 30000, 3, 'sancocho.jpg', 1),
 (7, 'Postre de Natas', 'Postre a base de nata de leche cocida con azúcar, canela, y clavos, acompañada de frutos secos', 15000, 4, 'postreDeNatas.jpg', 1),
 (8, 'Torta de Tres Leches', 'Pastel empapado en una mezcla de tres tipos de leche (leche evaporada, leche condensada, y crema de leche)', 20000, 4, 'tortaTresLeches.jpg', 1),
 (9, 'Crème Brûlée', 'Postre con una capa de azúcar caramelizada por encima de una crema de vainilla.', 20000, 4, 'cremeBrulee.jpg', 1),
@@ -172,8 +169,9 @@ INSERT INTO `reserva` (`id_reserva`, `id_cliente_fk`, `fecha_reserva`, `id_estad
 (1, 10, '2024-08-09', 1, '13:30:00', '1970-01-01', '00:00:00', 0),
 (2, 8, '2024-08-12', 3, '17:15:00', '2024-08-12', '17:15:00', 0),
 (3, 11, '2024-08-07', 4, '15:58:00', '1970-01-01', '00:00:00', 0),
-(4, 12, '2024-08-13', 2, '12:17:00', '2024-08-13', '12:17:00', 0),
-(5, 12, '2024-08-07', 4, '14:16:00', '2024-08-11', '13:17:00', 0);
+(4, 12, '2024-08-13', 3, '12:17:00', '2024-08-13', '12:17:00', 0),
+(5, 12, '2024-08-07', 4, '14:16:00', '2024-08-11', '13:17:00', 0),
+(6, 13, '2024-08-13', 4, '21:20:00', '2024-08-13', '21:20:00', 0);
 
 -- --------------------------------------------------------
 
@@ -248,7 +246,8 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `correo_usuario`, `contra
 (9, 'Paula Ortega', 'paula@gmail.com', '1234Paula', 4, 2),
 (10, 'David Gomez', 'david@gmail.com', '1234David', 4, 1),
 (11, 'johan hernandez', 'johan@gmail.com', '1234Johan', 4, 1),
-(12, 'pablo fuentes', 'pablo@gmail.com', '1234Pablo', 4, 1);
+(12, 'pablo fuentes', 'pablo@gmail.com', '1234Pablo', 4, 1),
+(13, 'abel', 'abel@gmail.com', '1234Abel', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -355,19 +354,19 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `detalle_historial`
 --
 ALTER TABLE `detalle_historial`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_platos`
 --
 ALTER TABLE `pedido_platos`
-  MODIFY `id_pedidoPlato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pedidoPlato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `platos`
@@ -379,7 +378,7 @@ ALTER TABLE `platos`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva_estado`
@@ -397,7 +396,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_estado`

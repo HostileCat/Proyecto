@@ -1,5 +1,6 @@
 package model;
 
+import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ public class PlatosDAO {
      * Si la conexión es nula, se informa del error en la conexión.
      */
     public PlatosDAO() {
-        conexion = config.conexion.getConnection(); // Obtener la conexión a la base de datos
+        conexion = config.Conexion.getConnection(); // Obtener la conexión a la base de datos
         if (conexion == null) {
             System.err.println("Error al conectar a la base de datos");
         }
@@ -45,7 +46,7 @@ public class PlatosDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
-        }
+        } 
     }
     /**
      * Obtiene todos los platos de la base de datos, incluyendo información de la categoría.
@@ -67,7 +68,7 @@ public class PlatosDAO {
                 plato.setNombrePlato(rs.getString("nombre_plato"));
                 plato.setDescripcionPlato(rs.getString("descripcion_plato"));
                 plato.setPrecioPlato(rs.getInt("precio_plato"));
-                plato.setIdCategoria(rs.getInt("id_categoria_fk")); // Ajustar según tu esquema de base de datos
+                plato.setIdCategoria(rs.getInt("id_categoria_fk")); 
                 plato.setImagenPlato(rs.getString("imagen_plato"));
                 plato.setEstado(rs.getBoolean("estado"));
                 plato.setNombreCategoria(rs.getString("nombre_categoria"));
@@ -78,7 +79,7 @@ public class PlatosDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
 
         return platos;
     }
@@ -111,7 +112,7 @@ public class PlatosDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
 
         return platos;
     }
@@ -137,7 +138,7 @@ public class PlatosDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
         
         return false;
     }
@@ -162,7 +163,7 @@ public class PlatosDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
     /**
      * Cambia el estado de un plato (habilitado o inhabilitado).
@@ -179,6 +180,6 @@ public class PlatosDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
 }

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Registrarse</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
     </head>
     <body>

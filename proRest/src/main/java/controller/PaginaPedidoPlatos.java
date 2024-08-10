@@ -34,9 +34,12 @@ public class PaginaPedidoPlatos extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String idPedido = request.getParameter("idPedido");
         String totalPedido = request.getParameter("totalPedido");
+        String nombreEmpleado = request.getParameter("nombreEmpleado");
+        String fechaPedido = request.getParameter("fechaPedido");
         
         String fila = "";
         String total = "";
+        String info = "";
         
         PedidoDAO pedidoDAO = new PedidoDAO(); 
         
@@ -46,19 +49,26 @@ public class PaginaPedidoPlatos extends HttpServlet {
         List<PedidoPlato> platos = pedidoDAO.obtenerPlatosPorPedido(pedido);
         
         
+        info += "<div class='invoice__info'>" +
+"                <p><strong>Fecha: </strong>"+ fechaPedido +"</p>" +
+"                <p><strong>Atendido por: </strong>"+ nombreEmpleado +"</p>" +
+"            </div>";
+        
         for (PedidoPlato plato : platos) {
 
             fila += "<p class='grid__item'>" + plato.getNombre()+ "</p>" +
-                    "<p class='grid__item'>" + plato.getPrecio()+ "</p>" +
-                    "<p class='grid__item'>" + plato.getCantidad()+ "</p>" +
+                    "<p class='grid__item grid__item--center'>" + plato.getPrecio()+ "</p>" +
+                    "<p class='grid__item grid__item--center'>" + plato.getCantidad()+ "</p>" +
                     "<p class='grid__item'>" + plato.getDetalle() + "</p>" +
                     "<p class='grid__item'>" + plato.getPrecio() * plato.getCantidad()+ "</p>";
             
-            total = "<h3 class='total__title'>Total del Pedido: "+ totalPedido +"</h3>";
+            
         }
         
+        total += "<h3 class='total__title'>Total del Pedido: "+ totalPedido +"</h3>";
         
         
+        request.setAttribute("info", info);
         request.setAttribute("fila", fila);
         request.setAttribute("total", total);
         

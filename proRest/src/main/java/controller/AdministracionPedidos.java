@@ -37,14 +37,14 @@ public class AdministracionPedidos extends HttpServlet {
             {
                 // Obtener los datos del pedido del formulario
                 String totalStr = request.getParameter("total");
-                String platosJson = request.getParameter("platos");
+                String platosJson = request.getParameter("platos"); // se obtiene un JSON
                 int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
-                LocalDateTime fechaHoraActual = LocalDateTime.now();
+                LocalDateTime fechaHoraActual = LocalDateTime.now(); // se crea la fecha y hora actual
 
                 // Convertir el JSON de platos a una lista de objetos Plato
                 Gson gson = new Gson();
-                java.lang.reflect.Type listType = new TypeToken<List<PedidoPlato>>() {}.getType();
-                List<PedidoPlato> platos = gson.fromJson(platosJson, listType);
+                java.lang.reflect.Type listType = new TypeToken<List<PedidoPlato>>() {}.getType(); // permite especificar a que tipo de datos se desea convertir.
+                List<PedidoPlato> platos = gson.fromJson(platosJson, listType); // el json se convierte a una lista de objetos de la clase PedidoPlato
 
                 // Convertir el total a un valor entero
                 int total = Integer.parseInt(totalStr);

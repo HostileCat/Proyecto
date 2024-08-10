@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Historial de pedido</title>
         <link rel="stylesheet" href="/proRest/css/historialPedidos.css">        
     </head>
     <body>

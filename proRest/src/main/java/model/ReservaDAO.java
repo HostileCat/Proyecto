@@ -1,5 +1,6 @@
 package model;
 
+import config.Conexion;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ public class ReservaDAO {
      */
     
     public ReservaDAO() {
-        conexion = config.conexion.getConnection(); // Obtener la conexión a la base de datos
+        conexion = config.Conexion.getConnection(); // Obtener la conexión a la base de datos
         if (conexion == null) {
             System.err.println("Error al conectar a la base de datos");
         }
@@ -45,7 +46,7 @@ public class ReservaDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
         
         return reservaExistente;
     }
@@ -60,8 +61,8 @@ public class ReservaDAO {
 
             try (PreparedStatement ps = conexion.prepareStatement(sql)) { 
                 ps.setInt(1, reserva.getIdCliente());
-                ps.setDate(2, Date.valueOf(reserva.getFecha()));
-                ps.setTime(3, Time.valueOf(reserva.getHora()));
+                ps.setDate(2, Date.valueOf(reserva.getFecha())); // Se convierte la fecha a un formato Date
+                ps.setTime(3, Time.valueOf(reserva.getHora())); // Se convierte la fecha a un formato Time
                 ps.setInt(4, reserva.getEstado());
                 
                 int filasAfectadas = ps.executeUpdate();
@@ -71,7 +72,7 @@ public class ReservaDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
-        }
+            } 
         
     }
     /**
@@ -82,8 +83,8 @@ public class ReservaDAO {
     public boolean sugerirNuevaFechaHora(Reserva reserva) {
         String sql = "UPDATE reserva SET fecha_sugerida = ?, hora_sugerida = ?, estado_sugerencia = 1 WHERE id_reserva = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-            ps.setDate(1, Date.valueOf(reserva.getNuevaFecha()));
-            ps.setTime(2, Time.valueOf(reserva.getNuevaHora()));
+            ps.setDate(1, Date.valueOf(reserva.getNuevaFecha())); // Se convierte la fecha a un formato Date
+            ps.setTime(2, Time.valueOf(reserva.getNuevaHora())); // Se convierte la fecha a un formato Time
             ps.setInt(3, reserva.getIdReserva());
 
             int filasAfectadas = ps.executeUpdate();
@@ -92,7 +93,7 @@ public class ReservaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
     /**
      * Confirma una sugerencia de nueva fecha y hora para una reserva.
@@ -108,7 +109,7 @@ public class ReservaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
     /**
      * Confirma una reserva existente.
@@ -124,7 +125,7 @@ public class ReservaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
     /**
      * Cancela una reserva existente.
@@ -140,7 +141,7 @@ public class ReservaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
     /**
      * Marca una reserva como terminada.
@@ -156,7 +157,7 @@ public class ReservaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
     }
     /**
      * Obtiene todas las reservas de la base de datos, incluyendo información del cliente.
@@ -177,13 +178,13 @@ public class ReservaDAO {
                 
                 reserva.setIdReserva(rs.getInt("id_reserva"));
                 reserva.setIdCliente(rs.getInt("id_cliente_fk"));
-                reserva.setFecha(rs.getDate("fecha_reserva").toLocalDate());
-                reserva.setHora(rs.getTime("hora_reserva").toLocalTime());
+                reserva.setFecha(rs.getDate("fecha_reserva").toLocalDate()); // Se convierte la fecha a un formato LocalDate
+                reserva.setHora(rs.getTime("hora_reserva").toLocalTime());// Se convierte la fecha a un formato LocalTime
                 reserva.setEstado(rs.getInt("id_estadoR_fk"));
                 reserva.setNombreCliente(rs.getString("nombre_usuario"));
                 
-                reserva.setNuevaFecha(rs.getDate("fecha_sugerida").toLocalDate());
-                reserva.setNuevaHora(rs.getTime("hora_sugerida").toLocalTime());
+                reserva.setNuevaFecha(rs.getDate("fecha_sugerida").toLocalDate());// Se convierte la fecha a un formato LocalDate
+                reserva.setNuevaHora(rs.getTime("hora_sugerida").toLocalTime());// Se convierte la fecha a un formato LocalTime
                 reserva.setSugerir(rs.getInt("estado_sugerencia"));
                 
                 reservas.add(reserva);
@@ -191,7 +192,7 @@ public class ReservaDAO {
         }
         catch (SQLException e){
             e.printStackTrace();
-        }
+        } 
         return reservas;
     }
 }

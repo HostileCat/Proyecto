@@ -6,15 +6,17 @@ package config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 /**
  * Clase para gestionar la conexión a la base de datos MySQL.
  * 
- * documentar, validacion
+ * 
  */
-public class conexion {
+public class Conexion {
     
     private static final String URL = "jdbc:mysql://localhost:3306/pro_rest";
     private static final String USER = "root";
@@ -37,6 +39,7 @@ public class conexion {
         return connection;
     }
 
+    
 }
 
 

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Editar Perfil</title>
         <link rel="stylesheet" href="/proRest/css/administracionUsuario.css">        
     </head>
     <body>

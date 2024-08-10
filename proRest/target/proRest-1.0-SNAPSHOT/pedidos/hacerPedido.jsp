@@ -3,8 +3,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Carrito de Compras</title>
-    <link rel="stylesheet" href="/proRest/css/pedidos.css"> <!-- Ajusta la ruta según tu estructura -->
+    <title>Hacer pedido</title>
+    <link rel="stylesheet" href="/proRest/css/pedidos.css"> 
 </head>
 <body>
     

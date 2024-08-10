@@ -76,7 +76,7 @@ public class AdministracionUsuario extends HttpServlet {
                         response.sendRedirect("../error.jsp");
                     }       break;
                 }
-            case "editarSubmit":
+            case "editarSubmit": // el administrado edita un usuario
                 {
                     String rolUsuario = request.getParameter("rol");
                     // Editar un usuario existente
@@ -109,7 +109,7 @@ public class AdministracionUsuario extends HttpServlet {
                         response.sendRedirect("../error.jsp");
                     }       break;
                 }
-            case "editarPerfil":
+            case "editarPerfil": // el usuario edita su propio perfil
                 {
                     // Editar un usuario existente
                     int idUsuario = Integer.parseInt(idUsuarioString);
@@ -225,7 +225,7 @@ public class AdministracionUsuario extends HttpServlet {
                     request.getRequestDispatcher("administracion/agregarUsuario.jsp").forward(request, response);
                     break;
                 }
-            case "editar":
+            case "editar": // se insertan los datos en la pagina (administrador)
                 {
                     String idRolUsuario = request.getParameter("idRolUsuario");
                     String rolUsuario = request.getParameter("rolUsuario");
@@ -263,7 +263,7 @@ public class AdministracionUsuario extends HttpServlet {
                     request.getRequestDispatcher("administracion/editarUsuario.jsp").forward(request, response);
                     break;
                 }
-            case "perfil":
+            case "perfil": // se insertan los datos en la pagina (cualquier usuario)
                 {
                     String idUsuarioString = request.getParameter("idUsuario");
                     String nombre = "";

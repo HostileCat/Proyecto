@@ -4,6 +4,7 @@
  */
 package model;
 
+import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class CategoriaDAO {
      * Si la conexión es nula, se informa del error en la conexión.
      */
     public CategoriaDAO() {
-        conexion = config.conexion.getConnection(); // Obtener la conexión a la base de datos
+        conexion = config.Conexion.getConnection(); // Obtener la conexión a la base de datos
         if (conexion == null) {
             System.err.println("Error al conectar a la base de datos");
         }
@@ -33,6 +34,8 @@ public class CategoriaDAO {
      */
     public boolean agregarCategoria(Categoria categoria){
         String sql = "INSERT INTO categoria (nombre_categoria) VALUES (?)";
+        
+        
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setString(1, categoria.getNombreCategoria());
             int filasAfectadas = ps.executeUpdate();
@@ -66,7 +69,7 @@ public class CategoriaDAO {
             
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
 
         return categorias;
     }
@@ -96,7 +99,7 @@ public class CategoriaDAO {
             
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
 
         return categorias;
     }
@@ -116,7 +119,7 @@ public class CategoriaDAO {
             psUpdate.setInt(1, categoria.getId());
             psUpdate.executeUpdate();
 
-            // Elimina la categoría si se actualizaron las filas correspondientes
+            // Elimina la categoría cuando se actualicen las filas correspondientes
             
             psDelete.setInt(1, categoria.getId());
             int filasBorradas = psDelete.executeUpdate();
@@ -142,7 +145,7 @@ public class CategoriaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
    }
 }
 

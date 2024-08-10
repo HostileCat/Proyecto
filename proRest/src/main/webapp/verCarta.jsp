@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Carrito de Compras</title>
+    <title>Carta</title>
     <link rel="stylesheet" href="/proRest/css/carta.css"> <!-- Ajusta la ruta según tu estructura -->
 </head>
 <body>
