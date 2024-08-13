@@ -20,8 +20,8 @@
     <body>
         <main class="login">
             <section class="login__section">
-                <form class="login__form" action="${pageContext.request.contextPath}/autenticacionUsuario" method="get">
-                    <img src="${pageContext.request.contextPath}/img/logoHigh.png" alt="Descripción de la imagen" class="logo">
+                <form class="login__form" action="/proRest/autenticacionUsuario" method="get">
+                    <img src="/proRest/img/logoHigh.png" alt="Descripción de la imagen" class="logo">
                     <h2 class="login__title">Inicia Sesión</h2> 
 
                     <%

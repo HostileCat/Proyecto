@@ -126,7 +126,6 @@ a{
     margin: 4px 0;
 }
 
-/* Menú móvil */
 .mobile-nav {
     display: none;
     flex-direction: column;
@@ -189,6 +188,9 @@ a{
     z-index: 50;
     min-width: 150px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.navbar__sublist.show{
+    display: block;
 }
 
 .navbar__subitem {
@@ -319,16 +321,14 @@ a{
   
 }
 
-
-/* Media Queries */
-@media (max-width: 1045px) {
-    .navigation__navbar {
-        display: none;
-    }
-
-    
+.profileOptions{
+    display: none;
 }
 
+.profileOptions.show{
+    display: flex;
+    z-index: 30;
+}
 
 @media (max-width: 768px) {
 

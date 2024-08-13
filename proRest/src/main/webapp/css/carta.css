@@ -1,6 +1,5 @@
 @import url("header.css");
 
-/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -9,7 +8,7 @@ body {
 }
 
 .main {
-    max-width: 1400px;
+
     margin: 20px auto;
     padding: 20px;
     background-color: var(--primary-color);
@@ -30,19 +29,24 @@ body {
 
 .category {
     margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
 }
 
 .category__title {
     text-align: center;
     font-size: 24px;
+    
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 360px);
-    gap: 5px;
-    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); /* Ajusta el número de columnas automáticamente según el tamaño del contenedor */
+    gap: 10px; 
+    justify-content: center; 
+    max-width: 100%;
 }
 
 .view__card {
@@ -51,7 +55,7 @@ body {
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 320px; /* Fijar el ancho de la tarjeta */
+    width: 320px; 
 }
 
 .view__img {
@@ -77,33 +81,21 @@ body {
 }
 
 
+@media (max-width: 460px) {
 
-.scrollToTopBtn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    padding: 10px 10px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    display: none; /* Oculto por defecto */
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 44px;
-    height: 44px;
-}
-
-.scrollToTopBtn svg{
-    width: 100%;
-    height: 100%;
-    fill: var(--text-color);
-}
-
-.scrollToTopBtn:hover {
-    background-color: #0056b3;
+    .category__container{
+        overflow-x: auto;
+    }
+    
+    .category__title{
+        width: 100%;
+        text-align: center;
+    }
+    
+    .category{
+        align-items: flex-start;
+        width: 360px;
+    }
 }
 
 

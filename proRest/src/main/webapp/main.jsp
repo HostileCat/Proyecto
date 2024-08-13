@@ -21,12 +21,12 @@
                     <h1 class="intro__title">Bocado Esencial: Donde Cada Sabor Cuenta</h1>
                     <p class="intro__description">Descubre la Esencia de la Gastronomía en Cada Delicioso Bocado</p>
                     <div class="intro__actions">
-                        <a href="/proRest/paginaCarta" class="actions__login">Ver Carta</a>
+                        <a href="/proRest/paginaCarta" class="actions__menu">Ver Carta</a>
                     </div>
                 </div>
             </section>
 
         </main>
-        <script src="js/script.js"></script>                
+        <script src="js/script.js" type="module"></script>                
     </body>
 </html>
