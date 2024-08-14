@@ -40,7 +40,6 @@ public class AutenticacionUsuario extends HttpServlet {
             String correoElectronico = request.getParameter("correoElectronico");
             String contrasena = request.getParameter("contrasena");
 
-            // Implementar la lógica de autenticación
             Usuario usuario = new Usuario();
 
             usuario.setCorreoElectronico(correoElectronico);
@@ -104,47 +103,15 @@ public class AutenticacionUsuario extends HttpServlet {
             String contrasena = request.getParameter("contrasena");
             String confirmContrasena = request.getParameter("confirmContrasena");
 
-            // Patrón para validar el nombre (solo letras)
-            String namePattern = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
-            // Patrón para validar el correo electrónico
-            String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-            // Patrón para validar la contraseña
-            String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$";
-            
-            String errorMessage = null;
-            String errorNombre = null;
-            String errorCorreo = null;
-            String errorContrasena = null;
-            String errorConfirmContrasena = null;
-            boolean validacion = true;
-            
-
-            if (!Pattern.matches(namePattern, nombreUsuario)) {
-                errorNombre = "El nombre solo puede contener letras y espacios.";
-                request.setAttribute("errorNombre", errorNombre);
-                validacion = false;
-            } 
-            if (!Pattern.matches(emailPattern, correoElectronico)) {
-                errorCorreo = "El correo electrónico no es válido.";
-                request.setAttribute("errorCorreo", errorCorreo);
-                validacion = false;
-            } 
-            if (!Pattern.matches(passwordPattern, contrasena)) {
-                errorContrasena = "La contraseña debe tener al menos 6 caracteres, incluyendo una mayúscula, una minúscula y un número.";
-                request.setAttribute("errorContrasena", errorContrasena);
-                validacion = false;
-            } 
-            if (!contrasena.equals(confirmContrasena)) {
-                errorConfirmContrasena = "Las contraseñas no coinciden.";
-                request.setAttribute("errorConfirmContrasena", errorConfirmContrasena);
-                validacion = false;
-            } 
             
             Usuario correoUsuario = new Usuario();
             correoUsuario.setCorreoElectronico(correoElectronico);
             UsuarioDAO usuariodao = new UsuarioDAO();
+            
+            boolean validacion = true;
+            
             if (usuariodao.correoRepetido(correoUsuario)) {
-                errorMessage = "El correo electrónico ya está registrado.";
+                String errorMessage = "El correo electrónico ya está registrado.";
                 request.setAttribute("errorMessage", errorMessage);
                 validacion = false;
             }

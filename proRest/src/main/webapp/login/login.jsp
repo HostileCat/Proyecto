@@ -15,7 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Iniciar Sesión</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+        <link rel="stylesheet" href="/proRest/css/login.css">
     </head>
     <body>
         <main class="login">
@@ -34,7 +34,7 @@
 
                     <!-- Campo para el correo electrónico -->
                     <div class="login__group">
-                        <input class="login__input login__input--email" type="email" placeholder="Ingresa tu correo electrónico" name="correoElectronico">
+                        <input class="login__input login__input--email" type="email" placeholder="Ingresa tu correo electrónico" name="correoElectronico" au>
                     </div>
 
                     <!-- Campo para la contraseña -->
