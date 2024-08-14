@@ -20,31 +20,31 @@
     <body>
         <main class="login">
             <section class="login__section">
-                <form class="login__form" action="/proRest/autenticacionUsuario" method="get">
+                <form class="login__form" id="loginForm" action="/proRest/autenticacionUsuario" method="get" novalidate>
                     <img src="/proRest/img/logoHigh.png" alt="Descripción de la imagen" class="logo">
                     <h2 class="login__title">Inicia Sesión</h2> 
 
                     <%
                         String error = (String) request.getAttribute("errorMessage");
                         if(error != null){
-                            out.print("<span class='loginError'>"+ error +"</span>");
+                            out.print(error);
                         }
                     %>
 
 
                     <!-- Campo para el correo electrónico -->
                     <div class="login__group">
-                        <input class="login__input login__input--email" type="email" placeholder="Ingresa tu correo electrónico" name="correoElectronico" au>
+                        <input class="login__input login__input--email" type="email" placeholder="Ingresa tu correo electrónico" id="emailInput" name="correoElectronico" >
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="login__group">
-                        <input class="login__input login__input--password" type="password" placeholder="Ingresa tu contraseña" name="contrasena">
+                        <input class="login__input login__input--password" type="password" placeholder="Ingresa tu contraseña" id="passwordInput" name="contrasena">
                     </div>
 
                     <div class="login__group">
                         <input type="hidden" name="accion" value="iniciarSesion">
-                        <button class="login__button" type="submit">Iniciar Sesión</button>
+                        <button class="login__button" id="submitButton" type="submit">Iniciar Sesión</button>
                     </div>
                     <p class="login__registerText">¿No tienes cuenta? Regístrate</p>
                     <!-- Enlace para registrarse -->
@@ -54,5 +54,7 @@
                 </form>
             </section>
         </main>
+                    
+        <script src="/proRest/js/loginValidation.js" type="module"></script>
     </body>
 </html>

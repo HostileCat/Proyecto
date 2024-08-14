@@ -71,7 +71,7 @@ public class UsuarioDAO {
      * @param usuario El objeto Usuario con el correo electrónico para verificar el estado.
      * @return true si el usuario está habilitado (estado 1), false en caso contrario.
      */
-    public boolean usuarioHabilitado(Usuario usuario) {
+    public boolean usuarioInhabilitado(Usuario usuario) {
         
         String sql = "SELECT id_estado_fk FROM usuario WHERE correo_usuario = ?";
         
@@ -81,7 +81,7 @@ public class UsuarioDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     int estado = rs.getInt("id_estado_fk");
-                    if (estado == 1){ // verifica si el usuario esta habilitado
+                    if (estado == 2){ // verifica si el usuario esta inhabilitado
                         return true;
                     }
                 }

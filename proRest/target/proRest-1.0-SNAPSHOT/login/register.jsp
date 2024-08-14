@@ -12,10 +12,7 @@
         <title>Registrarse</title>
         <link rel="stylesheet" href="/proRest/css/register.css">
     </head>
-    <body>
-        <%
-            String errorMessage = (String) request.getAttribute("errorMessage");
-        %>
+
         <main class="register">
             
             <section class="register__section">
@@ -23,40 +20,46 @@
                     <img src="/proRest/img/logoHigh.png" alt="Descripción de la imagen" class="logo">
                     <h2 class="register__title">Registrate</h2>
 
-
+                    <%
+                        String errorMessage = (String) request.getAttribute("errorMessage");
+                    
+                        if(errorMessage != null){
+                            out.print(errorMessage);
+                        }
+                    %>
 
                     <div class="register__group">
-                        <input class="register__input register__input--name" type="text" placeholder="Ingresa tu nombre" id="letterInput" name="nombreUsuario">
+                        <input class="register__input register__input--name" type="text" placeholder="Ingresa tu nombre" id="letterInput" name="nombreUsuario" autocomplete="off">
                         
                     </div>
 
                     <!-- Campo para el correo electrónico -->
                     <div class="register__group">
-                        <input class="register__input register__input--email" type="text" placeholder="Ingresa tu correo electrónico" id="emailInput" name="correoElectronico">
+                        <input class="register__input register__input--email" type="text" placeholder="Ingresa tu correo electrónico" id="emailInput" name="correoElectronico" autocomplete="off">
                         
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--password" type="password" placeholder="Ingresa tu contraseña" id="passwordInput" name="contrasena">
+                        <input class="register__input register__input--password" type="password" placeholder="Ingresa tu contraseña" id="passwordInput" name="contrasena" autocomplete="off">
                         
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma tu contraseña" id="confirmInput" name="confirmContrasena">
+                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma tu contraseña" id="confirmInput" name="confirmContrasena" autocomplete="off">
                         
                     </div>
-
+                   
                     <!-- Botón para enviar el formulario -->
                     <div class="register__group">
                         <input type="hidden" name="accion" value="registrarse">                    
-                        <button class="register__button" type="submit">Registrarse</button>
+                        <button class="register__button" id="submitButton" type="submit">Registrarse</button>
                     </div>
                 </form>
             </section> 
         </main>
         
-        <script src="/proRest/js/validation.js" type="module"></script>
+        <script src="/proRest/js/registerValidation.js" type="module"></script>
     </body>
 </html>

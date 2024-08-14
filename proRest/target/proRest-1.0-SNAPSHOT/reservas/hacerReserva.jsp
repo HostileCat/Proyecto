@@ -47,7 +47,7 @@
             </section>
         </main>
         
-        <script src="/proRest/js/script.js"></script>
-        <script src="/proRest/js/date.js"></script>
+        <script src="/proRest/js/script.js" type="module"></script>
+        <script src="/proRest/js/dateValidation.js"></script>
     </body>
 </html>

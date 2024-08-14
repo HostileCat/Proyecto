@@ -46,8 +46,13 @@ public class AutenticacionUsuario extends HttpServlet {
             usuario.setContrasena(contrasena);
             UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-            if(usuarioDAO.usuarioHabilitado(usuario)){
-               boolean accionExitosa = usuarioDAO.autenticarUsuario(usuario);
+            if(usuarioDAO.usuarioInhabilitado(usuario)){
+                request.setAttribute("errorMessage", "<span id='errorCorreo' class='mensajeError--envio'>El usuario esta inhabilitado.</span>");
+                request.getRequestDispatcher("login/login.jsp").forward(request, response);
+                
+                
+            } else{
+                boolean accionExitosa = usuarioDAO.autenticarUsuario(usuario);
 
                 if (accionExitosa) {
                     // Usuario autenticado correctamente
@@ -60,12 +65,9 @@ public class AutenticacionUsuario extends HttpServlet {
 
 
                 } else {
-                    request.setAttribute("errorMessage", "Usuario o Contraseña incorrectos");
+                    request.setAttribute("errorMessage", "<span id='errorCorreo' class='mensajeError--envio'>El usuario o la contraseña son incorrectos.</span>");
                     request.getRequestDispatcher("login/login.jsp").forward(request, response);
                 } 
-            } else{
-                request.setAttribute("errorMessage", "El usuario esta inhabilitado");
-                request.getRequestDispatcher("login/login.jsp").forward(request, response);
             }
             
             
@@ -101,7 +103,6 @@ public class AutenticacionUsuario extends HttpServlet {
             String nombreUsuario = request.getParameter("nombreUsuario");
             String correoElectronico = request.getParameter("correoElectronico");
             String contrasena = request.getParameter("contrasena");
-            String confirmContrasena = request.getParameter("confirmContrasena");
 
             
             Usuario correoUsuario = new Usuario();
@@ -111,7 +112,7 @@ public class AutenticacionUsuario extends HttpServlet {
             boolean validacion = true;
             
             if (usuariodao.correoRepetido(correoUsuario)) {
-                String errorMessage = "El correo electrónico ya está registrado.";
+                String errorMessage = "<span id='errorCorreo' class='mensajeError--envio'>El correo ya esta registrado.</span>";
                 request.setAttribute("errorMessage", errorMessage);
                 validacion = false;
             }

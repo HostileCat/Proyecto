@@ -63,6 +63,6 @@
                 
        
         
-        <script src="/proRest/js/script.js"></script>
+        <script src="/proRest/js/script.js" type="module"></script>
     </body>
 </html>

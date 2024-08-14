@@ -41,6 +41,6 @@
             </section>
         </main>
 
-        <script src="/proRest/js/date.js"></script>
+        <script src="/proRest/js/date.js" type="module"></script>
     </body>
 </html>

@@ -124,3 +124,24 @@ login__goRegister{
     background-color: var(--secondary-color);
 }
 
+
+
+.mensajeError{
+    color: red;
+    font-size: 12px;
+}
+.mensajeError--envio{
+    color: red;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.input__error{
+    border: 1px solid var(--delete-button-color);
+}
+
+.input__error:hover{
+    border: 1px solid var(--delete-button-colorD);
+}
+
