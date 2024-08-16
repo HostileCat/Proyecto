@@ -36,7 +36,7 @@
                                     out.print(nombre);
                                 }
                                %>"
-                               type="text" placeholder="Ingresa el nombre" name="nombreUsuario" required>
+                               type="text" placeholder="Ingresa el nombre" name="nombreUsuario" autocomplete="off">
 
                     </div>
 
@@ -51,19 +51,19 @@
                                     out.print(correo);
                                 }
                                %>"
-                               type="text" placeholder="Ingresa el correo electrónico" name="correoUsuario" required>
+                               type="text" placeholder="Ingresa el correo electrónico" name="correoUsuario" autocomplete="off">
 
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--password" type="password" placeholder="Ingresa la contraseña" name="contrasenaUsuario" required>
+                        <input class="register__input register__input--password" type="password" placeholder="Ingresa la contraseña" name="contrasenaUsuario" autocomplete="off">
 
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma la contraseña" name="confirmContrasena" required>
+                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma la contraseña" name="confirmContrasena" autocomplete="off">
 
                     </div>
 

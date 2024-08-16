@@ -37,7 +37,7 @@
                                     out.print(nombre);
                                 }
                                %>"
-                               type="text" placeholder="Ingresa el nombre" id="letterInput" name="nombreUsuario">
+                               type="text" placeholder="Ingresa el nombre" id="letterInput" name="nombreUsuario" autocomplete="off">
 
                     </div>
 
@@ -63,7 +63,7 @@
                                     out.print(correo);
                                 }
                                %>"
-                               type="text" placeholder="Ingresa el correo electrónico" id="emailInput" name="correoUsuario">
+                               type="text" placeholder="Ingresa el correo electrónico" id="emailInput" name="correoUsuario" autocomplete="off">
 
                     </div>
 

@@ -22,7 +22,7 @@
                 <form action="/proRest/administracionCategoria?accion=agregarSubmit" id="categoryForm" class="section__form section__form--category" method="post">
                   <div class="section__add addCategory">
                     <input type="hidden" id="category" name="accion" value="agregar">
-                    <input type="text" placeholder="Nombre" class="add__input" name="nombreCategoria" id="letterInput">
+                    <input type="text" placeholder="Nombre" class="add__input" name="nombreCategoria" id="letterInput" autocomplete="off">
                   </div>
                   <div class="section__add addCategory">
                     <button class="section__addButton" id="submitButton">Agregar</button>

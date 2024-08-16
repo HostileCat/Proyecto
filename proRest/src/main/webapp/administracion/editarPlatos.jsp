@@ -30,7 +30,7 @@
                         %>
                         
                         <div class="section__add addDish">
-                            <input type="text" placeholder="Nombre" class="add__input" name="nombrePlato" id="nombrePlato" value="<% out.print(nombrePlato); %>">
+                            <input type="text" placeholder="Nombre" class="add__input" name="nombrePlato" id="nombrePlato" value="<% out.print(nombrePlato); %>" autocomplete="off">
                         </div> 
 
                         <div class="section__add addDish">
@@ -45,11 +45,11 @@
                         </div>  
 
                         <div class="section__add addDish">
-                          <input type="text" placeholder="Descripción" class="add__input" name="descripcionPlato" value="<% out.print(descripcionPlato); %>" id="descripcionPlato">
+                          <input type="text" placeholder="Descripción" class="add__input" name="descripcionPlato" value="<% out.print(descripcionPlato); %>" id="descripcionPlato" autocomplete="off">
                         </div> 
 
                         <div class="section__add addDish">  
-                          <input type="text" placeholder="Precio" class="add__input" name="precioPlato" value="<% out.print(precioPlato); %>" id="precioPlato">
+                          <input type="text" placeholder="Precio" class="add__input" name="precioPlato" value="<% out.print(precioPlato); %>" id="precioPlato" autocomplete="off">
                         </div> 
 
                         <div class="section__add addDish">  

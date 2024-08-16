@@ -24,7 +24,7 @@
                 <form class="register__form" action="/proRest/administracionUsuario" id="userForm" method="post">
 
                     <div class="register__group">
-                        <input class="register__input register__input--name" type="text" placeholder="Ingresa el nombre" id="letterInput" name="nombreUsuario">
+                        <input class="register__input register__input--name" type="text" placeholder="Ingresa el nombre" id="letterInput" name="nombreUsuario" autocomplete="off">
 
                     </div>
 
@@ -44,19 +44,19 @@
 
                     <!-- Campo para el correo electrónico -->
                     <div class="register__group">
-                        <input class="register__input register__input--email" type="text" placeholder="Ingresa el correo electrónico" id="emailInput" name="correoUsuario">
+                        <input class="register__input register__input--email" type="text" placeholder="Ingresa el correo electrónico" id="emailInput" name="correoUsuario" autocomplete="off">
 
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--password" type="password" placeholder="Ingresa la contraseña" id="passwordInput" name="contrasenaUsuario">
+                        <input class="register__input register__input--password" type="password" placeholder="Ingresa la contraseña" id="passwordInput" name="contrasenaUsuario" autocomplete="off">
 
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma la contraseña" id="confirmInput" name="confirmContrasena">
+                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma la contraseña" id="confirmInput" name="confirmContrasena" autocomplete="off">
 
                     </div>
 

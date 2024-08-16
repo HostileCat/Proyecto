@@ -21,7 +21,7 @@
                 <h1 class="section__title">Añadir Plato</h1>
                     <form action="/proRest/administracionPlato?accion=agregarSubmit" method="post" enctype="multipart/form-data" id="dishForm" class="section__form section__form--dish">
                         <div class="section__add addDish">
-                          <input type="text" placeholder="Nombre" class="add__input" name="nombrePlato" id="nombrePlato">
+                          <input type="text" placeholder="Nombre" class="add__input" name="nombrePlato" id="nombrePlato" autocomplete="off">
                         </div> 
 
                         <div class="section__add addDish">
@@ -36,11 +36,11 @@
                         </div>  
 
                         <div class="section__add addDish">
-                          <input type="text" placeholder="Descripción" class="add__input" name="descripcionPlato" id="descripcionPlato">
+                          <input type="text" placeholder="Descripción" class="add__input" name="descripcionPlato" id="descripcionPlato" autocomplete="off">
                         </div> 
 
                         <div class="section__add addDish">  
-                          <input type="text" placeholder="Precio" class="add__input" name="precioPlato" id="precioPlato">
+                          <input type="text" placeholder="Precio" class="add__input" name="precioPlato" id="precioPlato" autocomplete="off">
                         </div> 
 
                         <div class="section__add addDish">  

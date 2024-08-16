@@ -28,7 +28,7 @@
                         if (idCategoria != null){
                     %>
                     <input type="hidden" id="categoryId" value="<% out.print(idCategoria);} %>" name="idCategoria" >
-                    <input type="text" placeholder="Nombre" class="add__input" id="letterInput" name="nombreCategoria">
+                    <input type="text" placeholder="Nombre" class="add__input" id="letterInput" name="nombreCategoria" autocomplete="off">
                   </div>
                   <div class="section__add addCategory">
                     <button class="section__addButton" id="submitButton">Editar</button>

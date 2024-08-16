@@ -41,6 +41,7 @@
                 sb.append("<li class='mobile-nav__item'><p class='menu-link'>Reservas</p>"
                     + "<ul class='navbar__sublist'>"
                     + "<li class='navbar__subitem'><a href='/proRest/paginaReservas?opcion=espera'>Administrar Reservas</a></li>"
+                    
                     + "</ul></li>");
                 sb.append("<li class='mobile-nav__item'><p class='menu-link'>Pedido</p>"
                     + "<ul class='navbar__sublist'>"

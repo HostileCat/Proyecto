@@ -34,12 +34,12 @@
 
                     <!-- Campo para el correo electrónico -->
                     <div class="login__group">
-                        <input class="login__input login__input--email" type="email" placeholder="Ingresa tu correo electrónico" id="emailInput" name="correoElectronico" >
+                        <input class="login__input login__input--email" type="email" placeholder="Ingresa tu correo electrónico" id="emailInput" name="correoElectronico" autocomplete="off">
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="login__group">
-                        <input class="login__input login__input--password" type="password" placeholder="Ingresa tu contraseña" id="passwordInput" name="contrasena">
+                        <input class="login__input login__input--password" type="password" placeholder="Ingresa tu contraseña" id="passwordInput" name="contrasena" autocomplete="off">
                     </div>
 
                     <div class="login__group">
