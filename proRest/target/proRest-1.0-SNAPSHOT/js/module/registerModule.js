@@ -141,7 +141,7 @@ const validarEnvio = (event, submitButton) => {
     const contenedor = submitButton.parentElement;
     let errorExistente = document.querySelector("#errorEnviar");
     
-    console.log(contenedor);
+
     if(campoVacio){
         if (errorExistente === null) {
             contenedor.prepend(mensajeError);

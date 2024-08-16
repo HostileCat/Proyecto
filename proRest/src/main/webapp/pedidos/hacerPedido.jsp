@@ -51,14 +51,15 @@
                     
                 </div>
                 <div class="total__container">
+                    <h3 class="total__title">Total del Pedido: $<span id="totalPedido">0</span></h3>
                     <form action="/proRest/administracionPedidos" method="post" id="pedidoForm">
                         <input type="hidden" name="idEmpleado" value="<% out.print(idUsuario); %>">
-                        <input type="hidden" name="platos" id="platos-input" required>
+                        <input type="hidden" name="platos" id="platos-input" value="" required>
                         <input type="hidden" name="total" id="total-input">
                         <input type="hidden" name="accion" value="registrar">
                         <button type="submit" class="submit__button">Enviar</button>
                     </form>
-                    <h3 class="total__title">Total del Pedido: $<span id="totalPedido">0</span></h3>
+                    
                 </div>
                 
             </div>
@@ -87,7 +88,7 @@
         </svg>
     </button>
     
-    <script src="/proRest/js/script.js"></script> 
+    <script src="/proRest/js/script.js" type="module"></script> 
     <script src="/proRest/js/orderList.js" type="module"></script> 
 </body>
 </html>

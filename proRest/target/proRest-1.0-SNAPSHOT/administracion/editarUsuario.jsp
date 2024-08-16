@@ -24,7 +24,7 @@
         <main class="register">
             <section class="register__section">
             
-                <form class="register__form" action="/proRest/administracionUsuario" method="post">
+                <form class="register__form" action="/proRest/administracionUsuario" id="userForm" method="post">
 
                     <h2 class="register__title">Editar Usuario </h2>
 
@@ -37,12 +37,12 @@
                                     out.print(nombre);
                                 }
                                %>"
-                               type="text" placeholder="Ingresa el nombre" name="nombreUsuario" required>
+                               type="text" placeholder="Ingresa el nombre" id="letterInput" name="nombreUsuario">
 
                     </div>
 
                     <div class="register__group">
-                        <select class="register__input" id="rol" name="rolUsuario" required>
+                        <select class="register__input" id="rol" name="rolUsuario">
                             <option value="">Seleccione el rol de Usuario</option>
                             <%
                                 String opciones = (String) request.getAttribute("opciones");
@@ -63,19 +63,7 @@
                                     out.print(correo);
                                 }
                                %>"
-                               type="text" placeholder="Ingresa el correo electrónico" name="correoUsuario" required>
-
-                    </div>
-
-                    <!-- Campo para la contraseña -->
-                    <div class="register__group">
-                        <input class="register__input register__input--password" type="password" placeholder="Ingresa la contraseña" name="contrasenaUsuario" required>
-
-                    </div>
-
-                    <!-- Campo para la contraseña -->
-                    <div class="register__group">
-                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma la contraseña" name="confirmContrasena" required>
+                               type="text" placeholder="Ingresa el correo electrónico" id="emailInput" name="correoUsuario">
 
                     </div>
 
@@ -84,14 +72,15 @@
                         <input type="hidden" name="accion"value="editarSubmit">         
                         <input type="hidden" name="rol" value="<% out.print(rolUsuario); %>"> 
                         <input type="hidden" name="idUsuario"value="<%out.print(id);%>"> 
-                        <button class="register__button" type="submit">Editar</button>
+                        <button class="register__button" id="submitButton" type="submit">Editar</button>
                     </div>
                 </form>
             </section>               
         </main>
         
         
-        <script src="/proRest/js/script.js"></script>
+        <script src="/proRest/js/script.js" type="module"></script>
+        <script src="/proRest/js/userValidation.js" type="module"></script>
     </body>
 </html>
 

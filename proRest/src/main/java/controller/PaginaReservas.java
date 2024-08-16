@@ -53,7 +53,7 @@ public class PaginaReservas extends HttpServlet {
                           
                         if(reserva.getSugerir() == 0){
                             fila += "<div class='grid__item actionButtons'>" +
-                                "<form action='/proRest/administracionReservas' method='post'>" +
+                                "<form action='/proRest/administracionReservas' id='confirmarReserva' method='post'>" +
                                 "<input type='hidden' name='accion' value='confirmar'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
                                 "<button type='submit' class='add__button'>Confirmar</button>" +
@@ -68,7 +68,7 @@ public class PaginaReservas extends HttpServlet {
                             fila += "<div class='grid__item actionButtons'>" +
                                 "<p>Fecha sugerida:</p>"+
                                 "<p>"+ reserva.getNuevaFecha() +" "+ reserva.getNuevaHora() +"</p>"
-                                    + "<form action='/proRest/administracionReservas' method='post'>" +
+                                    + "<form action='/proRest/administracionReservas' id='cancelarReserva' method='post'>" +
                                 "<input type='hidden' name='accion' value='cancelar'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
                                 "<button type='submit' class='delete__button'>Cancelar</button>" +
@@ -90,12 +90,12 @@ public class PaginaReservas extends HttpServlet {
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getHora()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='/proRest/administracionReservas' method='post'>" +
+                               "<form action='/proRest/administracionReservas' id='formTerminar' method='post'>" +
                                "<input type='hidden' name='accion' value='terminar'>" +
                                "<input type='hidden' name='idReserva' value='"+ reserva.getIdReserva() +"'>" +
                                 "<button type='submit' class='add__button'>Terminar</button>" +
                                "</form>" +
-                               "<form action='/proRest/administracionReservas' method='post'>" +
+                               "<form action='/proRest/administracionReservas' id='cancelarReserva' method='post'>" +
                                "<input type='hidden' name='accion' value='cancelar'>" +
                                 "<input type='hidden' name='idReserva' value='"+ reserva.getIdReserva() +"'>"+
                                 "<button type='submit' class='delete__button'>Cancelar</button>" +

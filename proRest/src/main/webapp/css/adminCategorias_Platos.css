@@ -13,7 +13,8 @@ body{
 }
 
 .main__title{
-    color: var(--text-colorD)
+    color: var(--text-colorD);
+    text-align: center;
 }
 
 .main__nav{
@@ -34,7 +35,8 @@ body{
     display: flex;   
     gap: 5px;
     margin: 0;    
-    padding: 0;
+    padding: 10px 20px;
+    overflow-x: auto;
 }
 
 .nav__item a{
@@ -46,7 +48,7 @@ body{
     text-align: center;
     margin: 0;
     align-content: center;
-    white-space: normal;
+    white-space: nowrap;
 }
 
 .nav__item a:hover{
@@ -56,6 +58,12 @@ body{
 .nav__item a:active{
     background-color: var(--tertiary-color);
     
+}
+
+.nav__item a{
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .nav__item a{
@@ -86,7 +94,7 @@ body{
 }
 .grid__containerDish{
     display: grid;
-    grid-template-columns: repeat(2, minmax(auto, 1fr)) 120px repeat(3, 200px) 120px;
+    grid-template-columns: repeat(2, minmax(auto, 1fr)) 120px repeat(3, auto) 120px;
     padding: 10px 20px;
     gap: 5px;
     
@@ -116,7 +124,6 @@ body{
     margin: 0;
     align-content: center;
     white-space: normal;
-    overflow: hidden; /* Oculta el contenido que se desborda */
 }
 
 .grid_item--img{
@@ -188,7 +195,7 @@ body{
 
 .delete__button{
     padding: 10px 24px;
-    background-color: var(--delete-button-colorD);
+    background-color: var(--delete-button-color);
     border: none;
     color: var(--text-color);
     font-weight: bold;
@@ -201,7 +208,7 @@ body{
 }
 
 .delete__button:active{
-    background-color: var(--delete-button-color);
+    background-color: var(--delete-button-colorD);
 }
 
 .add__container{
@@ -243,6 +250,79 @@ body{
 
 .add__button:active{
     background-color: var(--add-button-colorD);
+}
+
+
+/* Estilos para la opción de confirmar */
+.confirm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;  
+}
+.confirm.show{
+    display: block;
+}
+
+.confirm__content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 17px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 500px;
+    width: 100%;
+    color: white;
+}
+
+.confirm__content p{
+    text-align: center;
+}
+
+/* Estilo para los botones */
+
+.btn__container{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 17px; 
+    margin: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-yes { 
+    background-color: var(--add-button-color); 
+}
+.btn-yes:hover { 
+    background-color: var(--add-button-hover); 
+}
+.btn-yes:active { 
+    background-color: var(--add-button-colorD); 
+}
+
+
+.btn-no { 
+    background-color: var(--delete-button-color); 
+}     
+.btn-no:hover { 
+    background-color: var(--delete-button-hover); 
+}   
+.btn-no:active { 
+    background-color: var(--delete-button-colorD); 
 }
 
 

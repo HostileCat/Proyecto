@@ -20,7 +20,7 @@ body{
     display: flex;
     justify-content: center;
     margin-top: 30px;
-    padding: 10px 0 10px 0;
+    
     width: 100%;
     background-color: var(--primary-color);
     border-bottom: 3px solid var(--tertiary-color);
@@ -34,7 +34,8 @@ body{
     display: flex;   
     gap: 5px;
     margin: 0;    
-    padding: 0;
+    padding: 10px 20px;
+    overflow-x: auto;
 }
 
 .nav__item a{
@@ -46,7 +47,7 @@ body{
     text-align: center;
     margin: 0;
     align-content: center;
-    white-space: normal;
+    white-space: nowrap;
 }
 
 .nav__item a:hover{
@@ -68,10 +69,12 @@ body{
     background-color: var(--primary-color);
     color: var(--text-color);
     width: 100%;
+    overflow-x: auto;
 }
 
 .section__title{
     text-align: center;
+    overflow-x: hidden;
 }
 
 .grid__container{
@@ -82,7 +85,7 @@ body{
     
     margin: 20px auto;
     color: var(--text-color);
-    overflow-x: auto;
+    
     
 }
 
@@ -142,7 +145,7 @@ body{
 
 .delete__button{
     padding: 10px 24px;
-    background-color: var(--delete-button-colorD);
+    background-color: var(--delete-button-color);
     border: none;
     color: var(--text-color);
     font-weight: bold;
@@ -155,7 +158,7 @@ body{
 }
 
 .delete__button:active{
-    background-color: var(--delete-button-color);
+    background-color: var(--delete-button-colorD);
 }
 
 
@@ -266,4 +269,76 @@ body{
 }
 
 
+/* Estilos para la opción de confirmar */
+.confirm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;  
+}
+.confirm.show{
+    display: block;
+}
+
+.confirm__content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 17px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 500px;
+    width: 100%;
+    color: white;
+}
+
+.confirm__content p{
+    text-align: center;
+}
+
+/* Estilo para los botones */
+
+.btn__container{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 17px; 
+    margin: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-yes { 
+    background-color: var(--add-button-color); 
+}
+.btn-yes:hover { 
+    background-color: var(--add-button-hover); 
+}
+.btn-yes:active { 
+    background-color: var(--add-button-colorD); 
+}
+
+
+.btn-no { 
+    background-color: var(--delete-button-color); 
+}     
+.btn-no:hover { 
+    background-color: var(--delete-button-hover); 
+}   
+.btn-no:active { 
+    background-color: var(--delete-button-colorD); 
+}   
+                   
 

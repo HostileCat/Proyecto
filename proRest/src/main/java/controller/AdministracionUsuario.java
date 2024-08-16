@@ -36,7 +36,6 @@ public class AdministracionUsuario extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String nombre = request.getParameter("nombreUsuario");
         String correo = request.getParameter("correoUsuario");
-        String contraseña = request.getParameter("contrasenaUsuario");
         String idUsuarioString = request.getParameter("idUsuario");
         String accion = request.getParameter("accion");
 
@@ -46,6 +45,7 @@ public class AdministracionUsuario extends HttpServlet {
             case "agregarSubmit":
                 {
                     String rolUsuario = request.getParameter("rol");
+                    String contraseña = request.getParameter("contrasenaUsuario");
                     
                     int idRol = Integer.parseInt(request.getParameter("rolUsuario"));
                     Usuario usuario = new Usuario();
@@ -86,7 +86,6 @@ public class AdministracionUsuario extends HttpServlet {
                     usuario.setId(idUsuario);
                     usuario.setNombreUsuario(nombre);
                     usuario.setCorreoElectronico(correo);
-                    usuario.setContrasena(contraseña);
                     usuario.setRol(idRol);
                     boolean accionExitosa = usuarioDAO.actualizarUsuario(usuario);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
@@ -114,13 +113,15 @@ public class AdministracionUsuario extends HttpServlet {
                     // Editar un usuario existente
                     int idUsuario = Integer.parseInt(idUsuarioString);
                     int idRol = Integer.parseInt(request.getParameter("rolUsuario"));
+                    String contraseña = request.getParameter("contrasenaUsuario");
+                    
                     Usuario usuario = new Usuario();
                     usuario.setId(idUsuario);
                     usuario.setNombreUsuario(nombre);
                     usuario.setCorreoElectronico(correo);
                     usuario.setContrasena(contraseña);
                     usuario.setRol(idRol);
-                    boolean accionExitosa = usuarioDAO.actualizarUsuario(usuario);
+                    boolean accionExitosa = usuarioDAO.actualizarPerfil(usuario);
                     // Redireccionar a una página de confirmación o mostrar un mensaje de error
                     if (accionExitosa) {
                         

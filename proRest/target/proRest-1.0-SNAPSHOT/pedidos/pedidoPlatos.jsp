@@ -62,8 +62,7 @@
                 
     </main>
             
-    <script src="/proRest/js/script.js"></script> 
-    <script src="/proRest/js/orderList.js" type="module"></script> 
+    <script src="/proRest/js/script.js" type="module"></script> 
     <script src="/proRest/js/invoice.js"></script> 
 </body>
 </html>

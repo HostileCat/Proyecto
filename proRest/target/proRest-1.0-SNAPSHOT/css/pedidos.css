@@ -88,6 +88,7 @@ body {
     width: fit-content;
     color: var(--text-color);
     width: 100px;
+    outline: none;
 }
 
 .agregar__plato {
@@ -100,7 +101,7 @@ body {
 }
 
 .agregar-plato:hover {
-    background-color: #45a049;
+    background-color: var(--add-button-hover);
 }
 
 .list__container {
@@ -125,7 +126,7 @@ body {
 
 .remover__plato{
     padding: 10px 24px;
-    background-color: var(--delete-button-colorD);
+    background-color: var(--delete-button-color);
     border: none;
     color: var(--text-color);
     font-weight: bold;
@@ -137,7 +138,7 @@ body {
 }
 
 .remover__plato:active{
-    background-color: var(--delete-button-color);
+    background-color: var(--delete-button-colorD);
 }
 
 .detalle__plato{
@@ -160,10 +161,11 @@ body {
 
 .total__container{
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
     column-gap: 30px;
     align-items: center;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     margin-top: 20px;    
 }
 
@@ -193,6 +195,10 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
+}
+
+.modal.show{
+    display: flex;
 }
 
 .modal-content {
@@ -305,5 +311,25 @@ body {
 
 .lleno:active{
     background-color: var(--add-button-colorD)
+}
+
+
+.mensajeError{
+    color: var(--delete-button-color);
+    font-size: 12px;
+}
+.mensajeError--envio{
+    color: var(--delete-button-color);
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.input__error{
+    border: 1px solid var(--delete-button-color);
+}
+
+.input__error:hover{
+    border: 1px solid var(--delete-button-colorD);
 }
 

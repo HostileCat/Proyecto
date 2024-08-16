@@ -66,9 +66,20 @@
                 out.print(modal);
             }
         %>        
+        
+        <div id="confirm" class="confirm">
+            <div class="confirm__content">
+                <p id="question">¿Estás seguro de que quieres continuar?</p>
+                <div class="btn__container">
+                    <button id="yesBtn" class="btn btn-yes">Sí</button>
+                    <button id="noBtn" class="btn btn-no">No</button>
+                </div>
                 
+            </div>
+        </div>
        
         
         <script src="/proRest/js/script.js" type="module"></script>
+        <script src="/proRest/js/confirmAction.js" type="module"></script>
     </body>
 </html>

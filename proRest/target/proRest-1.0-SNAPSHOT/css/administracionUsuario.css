@@ -35,7 +35,8 @@ body{
     display: flex;   
     gap: 5px;
     margin: 0;    
-    padding: 0;
+    padding: 10px 20px;
+    overflow-x: auto;
 }
 
 .nav__item a{
@@ -47,10 +48,7 @@ body{
     text-align: center;
     margin: 0;
     align-content: center;
-    white-space: normal;
-    color: var(--text-color);
-    font-weight: bold;
-    font-size: 24px;
+    white-space: nowrap;
 }
 
 .nav__item a:hover{
@@ -59,6 +57,13 @@ body{
 
 .nav__item a:active{
     background-color: var(--tertiary-color);
+    
+}
+
+.nav__item a{
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .section__container{

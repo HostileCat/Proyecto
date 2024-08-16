@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-08-2024 a las 04:34:21
+-- Tiempo de generación: 16-08-2024 a las 17:09:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -64,7 +64,10 @@ INSERT INTO `detalle_historial` (`id_detalle`, `nombrePlato_detalle`, `precioPla
 (4, 'Chicharrón', 20000),
 (5, 'Sancocho', 30000),
 (6, 'Crème Brûlée', 20000),
-(7, 'Jugos Naturales', 8000);
+(7, 'Jugos Naturales', 8000),
+(8, 'Ceviche de Camarón', 25000),
+(9, 'Ceviche de Camarón', 25000),
+(10, 'Ceviche de Camarón', 25000);
 
 -- --------------------------------------------------------
 
@@ -84,7 +87,10 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id_pedido`, `id_usuario_fk`, `fecha_pedido`, `total`) VALUES
-(5, 5, '2024-08-07 22:51:37', 78000);
+(5, 5, '2024-08-07 22:51:37', 78000),
+(6, 12, '2024-08-16 14:39:05', 25000),
+(7, 12, '2024-08-16 14:52:51', 25000),
+(8, 12, '2024-08-16 14:55:16', 25000);
 
 -- --------------------------------------------------------
 
@@ -109,7 +115,10 @@ INSERT INTO `pedido_platos` (`id_pedido_fk`, `cantidad`, `id_plato_fk`, `detalle
 (5, 1, 3, '', 19, 4),
 (5, 1, 6, 'sin mazorca', 20, 5),
 (5, 1, 9, '', 21, 6),
-(5, 1, 10, '', 22, 7);
+(5, 1, 10, '', 22, 7),
+(6, 1, 1, '', 23, 8),
+(7, 1, 1, '', 24, 9),
+(8, 1, 1, '', 25, 10);
 
 -- --------------------------------------------------------
 
@@ -171,7 +180,8 @@ INSERT INTO `reserva` (`id_reserva`, `id_cliente_fk`, `fecha_reserva`, `id_estad
 (3, 11, '2024-08-07', 4, '15:58:00', '1970-01-01', '00:00:00', 0),
 (4, 12, '2024-08-13', 3, '12:17:00', '2024-08-13', '12:17:00', 0),
 (5, 12, '2024-08-07', 4, '14:16:00', '2024-08-11', '13:17:00', 0),
-(6, 13, '2024-08-13', 4, '21:20:00', '2024-08-13', '21:20:00', 0);
+(6, 13, '2024-08-13', 4, '21:20:00', '2024-08-13', '21:20:00', 0),
+(7, 12, '2024-08-18', 3, '12:06:00', '2024-08-18', '12:06:00', 0);
 
 -- --------------------------------------------------------
 
@@ -246,8 +256,9 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `correo_usuario`, `contra
 (9, 'Paula Ortega', 'paula@gmail.com', '1234Paula', 4, 2),
 (10, 'David Gomez', 'david@gmail.com', '1234David', 4, 1),
 (11, 'johan hernandez', 'johan@gmail.com', '1234Johan', 4, 1),
-(12, 'pablo fuentes', 'pablo@gmail.com', '1234Pablo', 4, 1),
-(13, 'abel', 'abel@gmail.com', '1234Abel', 4, 1);
+(12, 'Pablo Fuentes', 'pablo@gmail.com', '1234Pablo', 1, 1),
+(13, 'abel', 'abel@gmail.com', '1234Abel', 4, 1),
+(14, 'Carmen', 'Carmen@gmail.com', '1234Carmen', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -297,7 +308,8 @@ ALTER TABLE `pedido`
 ALTER TABLE `pedido_platos`
   ADD PRIMARY KEY (`id_pedidoPlato`),
   ADD KEY `id_pedido_fk` (`id_pedido_fk`),
-  ADD KEY `id_plato_fk` (`id_plato_fk`);
+  ADD KEY `id_plato_fk` (`id_plato_fk`),
+  ADD KEY `fk_detalleHistorial` (`id_detalleHistorial_fk`);
 
 --
 -- Indices de la tabla `platos`
@@ -348,37 +360,37 @@ ALTER TABLE `usuario_estado`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_historial`
 --
 ALTER TABLE `detalle_historial`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_platos`
 --
 ALTER TABLE `pedido_platos`
-  MODIFY `id_pedidoPlato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_pedidoPlato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `platos`
 --
 ALTER TABLE `platos`
-  MODIFY `id_plato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_plato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva_estado`
@@ -396,7 +408,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_estado`
@@ -418,6 +430,7 @@ ALTER TABLE `pedido`
 -- Filtros para la tabla `pedido_platos`
 --
 ALTER TABLE `pedido_platos`
+  ADD CONSTRAINT `fk_detalleHistorial` FOREIGN KEY (`id_detalleHistorial_fk`) REFERENCES `detalle_historial` (`id_detalle`),
   ADD CONSTRAINT `pedido_platos_ibfk_1` FOREIGN KEY (`id_pedido_fk`) REFERENCES `pedido` (`id_pedido`),
   ADD CONSTRAINT `pedido_platos_ibfk_2` FOREIGN KEY (`id_plato_fk`) REFERENCES `platos` (`id_plato`);
 

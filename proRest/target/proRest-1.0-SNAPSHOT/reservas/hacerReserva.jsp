@@ -36,18 +36,21 @@
                       <input class="add__input" type="text" id="nombreUsuario" name="nombreUsuario" value="<% out.print(nombreUsuario); %>" disabled>
                   </div>
                   <div class="section__add">
-                    <input class="add__input" type="date" id="fechaReserva" name="fechaReserva" required>                  
+                    <input class="add__input" type="date" id="fechaReserva" name="fechaReserva">                  
                   </div>
                   <div class="section__add">
-                    <input class="add__input" type="time" id="horaReserva" name="horaReserva" required>                  
+                    <input class="add__input" type="time" id="horaReserva" name="horaReserva">                  
                   </div>
-                  <input type="hidden" id="category" name="accion" value="agregarSubmit">
-                  <button type="button" class="section__addButton">Realizar</button>
+                  
+                  <div class="section__add">
+                    <input type="hidden" id="category" name="accion" value="agregarSubmit">
+                    <button class="section__addButton">Realizar</button>
+                  </div>
                 </form>
             </section>
         </main>
         
         <script src="/proRest/js/script.js" type="module"></script>
-        <script src="/proRest/js/dateValidation.js"></script>
+        <script src="/proRest/js/dateValidation.js" type="module"></script>
     </body>
 </html>

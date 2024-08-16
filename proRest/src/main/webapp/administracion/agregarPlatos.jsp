@@ -19,13 +19,13 @@
         <main class="main">
             <section class="main__section">
                 <h1 class="section__title">Añadir Plato</h1>
-                    <form action="/proRest/administracionPlato?accion=agregarSubmit" method="post" enctype="multipart/form-data" class="section__form section__form--dish">
+                    <form action="/proRest/administracionPlato?accion=agregarSubmit" method="post" enctype="multipart/form-data" id="dishForm" class="section__form section__form--dish">
                         <div class="section__add addDish">
-                          <input type="text" placeholder="Nombre" class="add__input" name="nombrePlato" id="nombrePlato" value="" required>
+                          <input type="text" placeholder="Nombre" class="add__input" name="nombrePlato" id="nombrePlato">
                         </div> 
 
                         <div class="section__add addDish">
-                          <select class="add__input" id="category" name="categoriaPlato" required>
+                          <select class="add__input" id="category" name="categoriaPlato">
                                     <option value="">Seleccione una categoría</option>
                                     <% 
                                         String opciones = (String) request.getAttribute("opciones");
@@ -36,19 +36,21 @@
                         </div>  
 
                         <div class="section__add addDish">
-                          <input type="text" placeholder="Descripción" class="add__input" name="descripcionPlato" id="descripcionPlato" required>
+                          <input type="text" placeholder="Descripción" class="add__input" name="descripcionPlato" id="descripcionPlato">
                         </div> 
 
                         <div class="section__add addDish">  
-                          <input type="text" placeholder="Precio" class="add__input" name="precioPlato" id="precioPlato" required>
+                          <input type="text" placeholder="Precio" class="add__input" name="precioPlato" id="precioPlato">
                         </div> 
 
                         <div class="section__add addDish">  
-                          <input type="file" accept="image/*" class="addDish__img" name="imagenPlato" id="imagenPlato" required>
+                          <input type="file" accept="image/*" class="addDish__img add__input" name="imagenPlato" id="imagenPlato">
                         </div>
-
-                        <button class="section__addButton">Añadir</button>
-                      </form>
+                        
+                        <div class="section__add addDish">  
+                            <button class="section__addButton" id="submitButton">Añadir</button>
+                        </div>
+                    </form>
                 
                 
                 <div class="section__view">
@@ -63,7 +65,8 @@
               </section>
         </main>
 
-        <script src="/proRest/js/script.js"></script>
+        <script src="/proRest/js/script.js" type="module"></script>
+        <script src="/proRest/js/dishValidation.js" type="module"></script>
         <script src="/proRest/js/showView.js"></script>
     </body>
 </html>

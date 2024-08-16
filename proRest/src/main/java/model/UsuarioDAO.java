@@ -166,6 +166,27 @@ public class UsuarioDAO {
      * @return true si la actualización fue exitosa, false en caso contrario.
      */
     public boolean actualizarUsuario(Usuario usuario) {
+        String sql = "UPDATE usuario SET nombre_usuario = ?, correo_usuario = ?, id_rol_fk = ? WHERE id_usuario = ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setString(1, usuario.getNombreUsuario());
+            ps.setString(2, usuario.getCorreoElectronico());
+            ps.setInt(3, usuario.getRol());
+            ps.setInt(4, usuario.getId());
+
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } 
+    }
+    /**
+     * Actualiza la información de un usuario en la base de datos.
+     * @param usuario El objeto Usuario con la nueva información.
+     * @return true si la actualización fue exitosa, false en caso contrario.
+     */
+    public boolean actualizarPerfil(Usuario usuario) {
         String sql = "UPDATE usuario SET nombre_usuario = ?, correo_usuario = ?, contrasena_usuario = ?, id_rol_fk = ? WHERE id_usuario = ?";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {

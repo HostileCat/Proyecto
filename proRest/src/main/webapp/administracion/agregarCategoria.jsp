@@ -19,16 +19,19 @@
             <section class="main__section">
 
                 <h1 class="section__title">Agregar Categoria</h1>
-                <form action="/proRest/administracionCategoria?accion=agregarSubmit" class="section__form section__form--category" method="post">
+                <form action="/proRest/administracionCategoria?accion=agregarSubmit" id="categoryForm" class="section__form section__form--category" method="post">
                   <div class="section__add addCategory">
                     <input type="hidden" id="category" name="accion" value="agregar">
-                    <input type="text" placeholder="Nombre" class="add__input" name="nombreCategoria" required>
+                    <input type="text" placeholder="Nombre" class="add__input" name="nombreCategoria" id="letterInput">
                   </div>
-                  <button class="section__addButton">Agregar</button>
+                  <div class="section__add addCategory">
+                    <button class="section__addButton" id="submitButton">Agregar</button>
+                  </div>
                 </form>
             </section>
         </main>
 
-        <script src="/proRest/js/script.js"></script>
+        <script src="/proRest/js/script.js" type="module"></script>
+        <script src="/proRest/js/categoryValidation.js" type="module"></script>
     </body>
 </html>

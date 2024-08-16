@@ -83,7 +83,7 @@ public class PaginaPlatos extends HttpServlet {
                                "<input type='hidden' name='nombreCategoria' value='"+ categoria.getNombreCategoria() +"'>" +
                                 "<button type='submit' class='edit__button'>Editar</button>" +
                                "</form>" +
-                               "<form action='/proRest/administracionCategoria' method='post'>" +
+                               "<form action='/proRest/administracionCategoria' id='formEliminar' method='post'>" +
                                "<input type='hidden' name='accion' value='eliminar'>" +
                                 "<input type='hidden' name='idCategoria' value='"+ categoria.getId() +"'>" +
                                "<button type='submit' class='delete__button'>Eliminar</button>" +

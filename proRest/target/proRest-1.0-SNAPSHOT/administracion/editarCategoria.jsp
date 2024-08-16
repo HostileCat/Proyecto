@@ -19,7 +19,7 @@
             <section class="main__section">
 
                 <h1 class="section__title">Editar Categoria</h1>
-                <form action="/proRest/administracionCategoria?accion=editarSubmit" class="section__form section__form--category" method="post">
+                <form action="/proRest/administracionCategoria?accion=editarSubmit" class="section__form section__form--category" id="categoryForm" method="post">
                   <div class="section__add addCategory">
                     <input type="hidden" id="category" name="accion" value="agregar">
                     <%
@@ -28,13 +28,16 @@
                         if (idCategoria != null){
                     %>
                     <input type="hidden" id="categoryId" value="<% out.print(idCategoria);} %>" name="idCategoria" >
-                    <input type="text" placeholder="Nombre" class="add__input" name="nombreCategoria" required>
+                    <input type="text" placeholder="Nombre" class="add__input" id="letterInput" name="nombreCategoria">
                   </div>
-                  <button class="section__addButton">Editar</button>
+                  <div class="section__add addCategory">
+                    <button class="section__addButton" id="submitButton">Editar</button>
+                  </div>
                 </form>
             </section>
         </main>
 
-        <script src="/proRest/js/script.js"></script>
+        <script src="/proRest/js/script.js" type="module"></script>
+        <script src="/proRest/js/categoryValidation.js" type="module"></script>
     </body>
 </html>

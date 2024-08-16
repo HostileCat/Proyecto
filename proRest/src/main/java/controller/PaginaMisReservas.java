@@ -55,7 +55,7 @@ public class PaginaMisReservas extends HttpServlet {
                                 "<p class='grid__item'>" + reserva.getFecha() + "</p>" +
                                 "<p class='grid__item'>" + reserva.getHora() + "</p>" +
                                 "<div class='grid__item actionButtons'>" +
-                                "<form action='/proRest/administracionReservas' method='post'>" +
+                                "<form action='/proRest/administracionReservas' id='cancelarReserva' method='post'>" +
                                 "<input type='hidden' name='accion' value='cancelarCliente'>" +
                                 "<input type='hidden' name='idUsuario' value='"+ idUsuario +"'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
@@ -70,7 +70,8 @@ public class PaginaMisReservas extends HttpServlet {
                                 "<h1 class='modal__title'>Fecha de reserva: "+ reserva.getFecha()+" "+ reserva.getHora() +"</h1>"
                                 + "<p>Este horario no está disponible. El administrador sugiere una nueva fecha y hora:</p>" +
                                 "<p>Fecha: " + reserva.getNuevaFecha() + "</p>" +
-                                "<p>Hora: " + reserva.getNuevaHora() + "</p>" +
+                                "<p>Hora: " + reserva.getNuevaHora() + "</p>"
+                                + "<p>¿Desea confirmar la nueva fecha?" +
                                 "<div class='form__container'>" +
                                 "<form action='/proRest/administracionReservas' method='post'>" +
                                 "<input type='hidden' name='accion' value='confirmarCliente'>" +
@@ -78,7 +79,7 @@ public class PaginaMisReservas extends HttpServlet {
                                 "<input type='hidden' name='idUsuario' value='" + idUsuario + "'>" +
                                 "<button type='submit' class='button button--confirm'>Confirmar</button>" +
                                 "</form>" +
-                                "<form action='/proRest/administracionReservas' method='post'>" +
+                                "<form action='/proRest/administracionReservas' id='cancelarReserva' method='post'>" +
                                 "<input type='hidden' name='accion' value='cancelarCliente'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
                                 "<input type='hidden' name='idUsuario' value='" + idUsuario + "'>" +
@@ -105,7 +106,7 @@ public class PaginaMisReservas extends HttpServlet {
                                "<p class='grid__item'>"+ reserva.getFecha()+"</p>" +
                                "<p class='grid__item'>"+ reserva.getHora()+"</p>" +
                                "<div class='grid__item actionButtons'>" +
-                               "<form action='/proRest/administracionReservas' method='post'>" +
+                               "<form action='/proRest/administracionReservas' id='cancelarReserva' method='post'>" +
                                 "<input type='hidden' name='accion' value='cancelarCliente'>" +
                                 "<input type='hidden' name='idUsuario' value='"+ idUsuario +"'>" +
                                 "<input type='hidden' name='idReserva' value='" + reserva.getIdReserva() + "'>" +
