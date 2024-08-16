@@ -1,17 +1,27 @@
 <%@page import="model.Usuario"%>
 <%@ page session="true" %>
 
-
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
+%>
+<%
+    if (session == null || session.getAttribute("usuario") == null) {
+        response.sendRedirect("/proRest/login/login.jsp");
+        return;
+    }
+%>
 
 <header class="header">
             <%
-                //Usuario usuario = (Usuario) session.getAttribute("usuario");
-                //String nombreUsuario = usuario.getNombreUsuario();
-                //int idUsuario = usuario.getId();
-                //int rolUsuario = usuario.getRol();
-                int rolUsuario = 1;
-                int idUsuario = 12;
-                String nombreUsuario = "marquez";
+                Usuario usuario = (Usuario) session.getAttribute("usuario");
+                String nombreUsuario = usuario.getNombreUsuario();
+                int idUsuario = usuario.getId();
+                int rolUsuario = usuario.getRol();
+                //int rolUsuario = 1;
+                //int idUsuario = 12;
+                //String nombreUsuario = "marquez";
             %>
           <div class="hamburger-menu" id="hamburger-menu">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -31,8 +41,6 @@
                 sb.append("<li class='mobile-nav__item'><p class='menu-link'>Reservas</p>"
                     + "<ul class='navbar__sublist'>"
                     + "<li class='navbar__subitem'><a href='/proRest/paginaReservas?opcion=espera'>Administrar Reservas</a></li>"
-                    + "<li class='navbar__subitem'><a href='/proRest/reservas/hacerReserva.jsp'>Hacer Reserva</a></li>"
-                    + "<li class='navbar__subitem'><a href='/proRest/paginaMisReservas?opcion=espera&idUsuario=" + idUsuario + "'>Mis Reservas</a></li>"
                     + "</ul></li>");
                 sb.append("<li class='mobile-nav__item'><p class='menu-link'>Pedido</p>"
                     + "<ul class='navbar__sublist'>"
