@@ -12,7 +12,11 @@ public class Pedido {
     private String nombreEmpleado;
     private LocalDateTime fecha;
     private int total;
-    private List<PedidoPlato> platos; // Lista de platos incluidos en el pedido
+    /**
+     * Lista de platos incluidos en el pedido
+     * El pedido puede tener múltiples platos asociados a él
+     */
+    private List<PedidoPlato> platos; 
 
     // Getters y Setters
     /**

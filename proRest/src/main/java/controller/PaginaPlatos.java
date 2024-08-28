@@ -21,7 +21,9 @@ import model.PlatosDAO;
 /**
  * Servlet para la insertar categorias a la pagina de administración.
  */
-@WebServlet("/paginaPlatos")
+@WebServlet("/paginaPlatos") // Define la URL en la que el servlet estará disponible.
+
+// extends HttpServlet en Java se utiliza para definir que la clase es un servlet
 public class PaginaPlatos extends HttpServlet {
     
     /**

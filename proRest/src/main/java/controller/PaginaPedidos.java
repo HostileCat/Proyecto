@@ -20,7 +20,9 @@ import model.PedidoDAO;
 /**
  * Servlet para la insertar categorias a la pagina de administración.
  */
-@WebServlet("/paginaPedidos")
+@WebServlet("/paginaPedidos") // Define la URL en la que el servlet estará disponible.
+
+// extends HttpServlet en Java se utiliza para definir que la clase es un servlet
 public class PaginaPedidos extends HttpServlet {
 
     /**

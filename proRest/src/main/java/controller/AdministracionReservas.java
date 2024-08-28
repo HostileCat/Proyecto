@@ -20,7 +20,9 @@ import model.ReservaDAO;
 /**
  * Servlet para la administración de reservas.
  */
-@WebServlet("/administracionReservas")
+@WebServlet("/administracionReservas") // Define la URL en la que el servlet estará disponible.
+
+// extends HttpServlet en Java se utiliza para definir que la clase es un servlet
 public class AdministracionReservas extends HttpServlet {
 
     /**

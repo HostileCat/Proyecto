@@ -125,7 +125,7 @@
                     <input type="hidden" name="idUsuario" value="<% out.print(idUsuario);%>">
                     <button class="profile__button" href="administracionUsuario">Editar Perfil</button> 
                 </form>
-              <a class="profile__button" href="autenticacionUsuario?accion=cerrarSesion">Cerrar Sesión</a>
+              <a class="profile__button" href="/proRest/autenticacionUsuario?accion=cerrarSesion">Cerrar Sesión</a>
             </div>
           </div>
 

@@ -29,7 +29,7 @@ const validarContrasena = (event, passwordInput) => {
     let mensajeError = document.createElement("span");
     mensajeError.setAttribute("id", "errorContrasena");
     mensajeError.setAttribute("class", "mensajeError");
-    mensajeError.textContent = "La contraseña debe tener al menor una letra mayúscula, una letra minúscula y un número.";
+    mensajeError.textContent = "La contraseña debe tener mínimo 8 caracteres, tener al menos una letra mayúscula, una letra minúscula y un número.";
     const padre = passwordInput.parentElement;
 
     let errorExistente = document.querySelector("#errorContrasena");

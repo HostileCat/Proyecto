@@ -23,7 +23,7 @@
         <main class="register">
             <section class="register__section">
             
-                <form class="register__form" action="/proRest/administracionUsuario" method="post">
+                <form class="register__form" action="/proRest/administracionUsuario" id="userForm" method="post">
 
                     <h2 class="register__title">Editar Perfil</h2>
 
@@ -36,7 +36,7 @@
                                     out.print(nombre);
                                 }
                                %>"
-                               type="text" placeholder="Ingresa el nombre" name="nombreUsuario" autocomplete="off">
+                               type="text" placeholder="Ingresa el nombre" id="letterInput" name="nombreUsuario" autocomplete="off">
 
                     </div>
 
@@ -51,19 +51,19 @@
                                     out.print(correo);
                                 }
                                %>"
-                               type="text" placeholder="Ingresa el correo electrónico" name="correoUsuario" autocomplete="off">
+                               type="text" placeholder="Ingresa el correo electrónico" id="emailInput" name="correoUsuario" autocomplete="off">
 
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--password" type="password" placeholder="Ingresa la contraseña" name="contrasenaUsuario" autocomplete="off">
+                        <input class="register__input register__input--password" type="password" id="passwordInput" placeholder="Ingresa la contraseña" name="contrasenaUsuario" autocomplete="off">
 
                     </div>
 
                     <!-- Campo para la contraseña -->
                     <div class="register__group">
-                        <input class="register__input register__input--confirmPassword" type="password" placeholder="Confirma la contraseña" name="confirmContrasena" autocomplete="off">
+                        <input class="register__input register__input--confirmPassword" type="password" id="confirmInput" placeholder="Confirma la contraseña" name="confirmContrasena" autocomplete="off">
 
                     </div>
 
@@ -72,7 +72,7 @@
                         <input type="hidden" name="accion"value="editarPerfil">                    
                         <input type="hidden" name="idUsuario"value="<%out.print(idUsuario);%>"> 
                         <input type="hidden" name="rolUsuario"value="<%out.print(rolUsuario);%>"> 
-                        <button class="register__button" type="submit">Editar</button>
+                        <button class="register__button" id="submitButton" type="submit">Editar</button>
                     </div>
                 </form>
             </section>               
@@ -80,6 +80,7 @@
         
         
         <script src="/proRest/js/script.js" type="module"></script>
+        <script src="/proRest/js/userValidation.js" type="module"></script>
     </body>
 </html>
 

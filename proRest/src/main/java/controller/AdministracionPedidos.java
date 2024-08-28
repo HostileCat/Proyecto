@@ -17,7 +17,9 @@ import model.PedidoPlato;
 /**
  * Servlet para la administración de pedidos.
  */
-@WebServlet("/administracionPedidos")
+@WebServlet("/administracionPedidos")// Define la URL en la que el servlet estará disponible.
+
+// extends HttpServlet en Java se utiliza para definir que la clase es un servlet
 public class AdministracionPedidos extends HttpServlet {
 
     /**
@@ -27,6 +29,7 @@ public class AdministracionPedidos extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -43,8 +46,10 @@ public class AdministracionPedidos extends HttpServlet {
 
                 // Convertir el JSON de platos a una lista de objetos Plato
                 Gson gson = new Gson();
-                java.lang.reflect.Type listType = new TypeToken<List<PedidoPlato>>() {}.getType(); // permite especificar a que tipo de datos se desea convertir.
-                List<PedidoPlato> platos = gson.fromJson(platosJson, listType); // el json se convierte a una lista de objetos de la clase PedidoPlato
+                // permite especificar a que tipo de datos se desea convertir.
+                java.lang.reflect.Type listType = new TypeToken<List<PedidoPlato>>() {}.getType(); 
+                // el json se convierte a una lista de objetos de la clase PedidoPlato
+                List<PedidoPlato> platos = gson.fromJson(platosJson, listType); 
 
                 // Convertir el total a un valor entero
                 int total = Integer.parseInt(totalStr);

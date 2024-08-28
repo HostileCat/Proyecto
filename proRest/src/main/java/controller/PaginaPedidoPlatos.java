@@ -19,7 +19,9 @@ import model.PedidoPlato;
 /**
  * Servlet para la insertar los detalles del pedido según el pedido seleccionado.
  */
-@WebServlet("/paginaPedidoPlatos")
+@WebServlet("/paginaPedidoPlatos") // Define la URL en la que el servlet estará disponible.
+
+// extends HttpServlet en Java se utiliza para definir que la clase es un servlet
 public class PaginaPedidoPlatos extends HttpServlet {
 
     /**

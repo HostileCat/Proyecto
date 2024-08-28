@@ -24,11 +24,12 @@ import model.PlatosDAO;
 /**
  * Servlet para la administración de platos.
  */
-@WebServlet("/administracionPlato")
+@WebServlet("/administracionPlato") // Define la URL en la que el servlet estará disponible.
+
+// extends HttpServlet en Java se utiliza para definir que la clase es un servlet
 @MultipartConfig
 public class AdministracionPlatos extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
     private static final String UPLOAD_DIR = "uploads"; // se crea el nombre de la carpeta
     
     /**
@@ -55,19 +56,29 @@ public class AdministracionPlatos extends HttpServlet {
         switch (accion) {
             case "agregarSubmit":
                 {
-                    String contextPath = getServletContext().getRealPath("/"); // genera la ruta hacia el contexto del servlet
-                    String alteredFilePath = contextPath.replace("\\target\\proRest-1.0-SNAPSHOT\\", "\\src\\main\\webapp"); // se intercambia una parte de la ruta por la ruta deseada
-                    String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR; // se concatena el nombre del archivo con la ruta
-
+                    // Obtiene la ruta absoluta del contexto del servlet. La ruta apunta al directorio raíz de la aplicación web.
+                    String contextPath = getServletContext().getRealPath("/");
+                    // Se intercambia una parte de la ruta por la ruta deseada
+                    String alteredFilePath = contextPath.replace("\\target\\proRest-1.0-SNAPSHOT\\", "\\src\\main\\webapp"); 
+                    // Se concatena el nombre del archivo con la ruta
+                    String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR; 
+                    
+                    // Crea un objeto `File` que representa el directorio de destino para las cargas de archivos.
                      File uploadDir = new File(uploadFilePath);
+                     
+                     // Verifica si el directorio de destino no existe; si no existe, lo crea.
                      if (!uploadDir.exists()) {
                          uploadDir.mkdirs();
                      }
-
+                     
+                     // Obtiene el contenido del archivo enviado en el formulario.
                      Part filePart = request.getPart("imagenPlato"); 
+                     // Obtiene el nombre original del archivo cargado desde el campo del formulario.
                      String fileName = filePart.getSubmittedFileName(); 
+                     // Construye la ruta completa para guardar el archivo concatenando la ruta del directorio de carga con el nombre del archivo.
                      String filePath = uploadFilePath + File.separator + fileName; 
-                     filePart.write(filePath); // inserta el contenido de la imagen
+                     // Escribe el contenido del archivo en la ruta especificada en el sistema de archivos.
+                     filePart.write(filePath); 
                     
                     Platos plato = new Platos();
                     plato.setNombrePlato(nombrePlato);
@@ -88,19 +99,29 @@ public class AdministracionPlatos extends HttpServlet {
                 }
             case "editarSubmit":
                 {
-                    String contextPath = getServletContext().getRealPath("/"); // genera la ruta hacia el contexto del servlet
-                    String alteredFilePath = contextPath.replace("\\target\\proRest-1.0-SNAPSHOT\\", "\\src\\main\\webapp"); // se intercambia una parte de la ruta por la ruta deseada
-                    String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR; // se concatena el nombre del archivo con la ruta
-
+                    // Obtiene la ruta absoluta del contexto del servlet. La ruta apunta al directorio raíz de la aplicación web.
+                    String contextPath = getServletContext().getRealPath("/");
+                    // Se intercambia una parte de la ruta por la ruta deseada
+                    String alteredFilePath = contextPath.replace("\\target\\proRest-1.0-SNAPSHOT\\", "\\src\\main\\webapp"); 
+                    // Se concatena el nombre del archivo con la ruta
+                    String uploadFilePath = alteredFilePath + File.separator + UPLOAD_DIR; 
+                    
+                    // Crea un objeto `File` que representa el directorio de destino para las cargas de archivos.
                      File uploadDir = new File(uploadFilePath);
+                     
+                     // Verifica si el directorio de destino no existe; si no existe, lo crea.
                      if (!uploadDir.exists()) {
                          uploadDir.mkdirs();
                      }
-
-                     Part filePart = request.getPart("imagenPlato");
-                     String fileName = filePart.getSubmittedFileName();
-                     String filePath = uploadFilePath + File.separator + fileName;
-                     filePart.write(filePath);// inserta el contenido de la imagen
+                     
+                     // Obtiene el contenido del archivo enviado en el formulario.
+                     Part filePart = request.getPart("imagenPlato"); 
+                     // Obtiene el nombre original del archivo cargado desde el campo del formulario.
+                     String fileName = filePart.getSubmittedFileName(); 
+                     // Construye la ruta completa para guardar el archivo concatenando la ruta del directorio de carga con el nombre del archivo.
+                     String filePath = uploadFilePath + File.separator + fileName; 
+                     // Escribe el contenido del archivo en la ruta especificada en el sistema de archivos.
+                     filePart.write(filePath);
                     
                     Platos plato = new Platos();
                     plato.setId(Integer.parseInt(idPlato));

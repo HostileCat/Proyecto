@@ -18,7 +18,9 @@ import model.UsuarioDAO;
 /**
  * Servlet para la insertar usuarios segun el rol.
  */
-@WebServlet("/paginaUsuarios")
+@WebServlet("/paginaUsuarios") // Define la URL en la que el servlet estará disponible.
+
+// extends HttpServlet en Java se utiliza para definir que la clase es un servlet
 public class PaginaUsuarios extends HttpServlet {
 
     @Override
